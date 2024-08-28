@@ -1,9 +1,10 @@
+import { Button } from '@/components/ui/button';
 import { FC } from 'react';
 
 const HomePage: FC = () => {
     return (
         <div>
-            HomePage
+            <Button>Button</Button>
         </div>
     );
 };
