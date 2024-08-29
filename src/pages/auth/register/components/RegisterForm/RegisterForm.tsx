@@ -6,6 +6,7 @@ import { useRegisterMutation } from '@/redux/features/auth/authApi';
 import { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
 
 interface IRegisterInputs {
     name: string
@@ -24,6 +25,8 @@ const RegisterForm: FC = () => {
 
     const { toast } = useToast();
 
+    const navigate = useNavigate();
+
     const onSubmit: SubmitHandler<IRegisterInputs> = (data) => {
         const reqData = {
             name: data.name,
@@ -32,7 +35,6 @@ const RegisterForm: FC = () => {
             password: data.password,
             role: "user"
         }
-        console.log(reqData);
 
         registerUser(reqData).unwrap().then((res) => {
 
@@ -40,6 +42,7 @@ const RegisterForm: FC = () => {
                 title: res.message,
                 description: "You have successfully registered! Now login first!",
             })
+            navigate("/login", { replace: true })
         }).catch((err) => {
             toast({
                 title: err.data.message,
