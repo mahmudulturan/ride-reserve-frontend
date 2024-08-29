@@ -1,0 +1,8 @@
+
+.active{
+    @apply text-primaryColor;
+}
+
+.default{
+    @apply hover:text-primaryColor;
+}
