@@ -1,8 +1,9 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 // import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 
 interface IRegisterInputs {
     name: string
@@ -14,6 +15,7 @@ interface IRegisterInputs {
 
 const RegisterForm: FC = () => {
     // const [role, setRole] = useState("");
+    const [isVisible, setIsVisible] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm<IRegisterInputs>()
 
     const onSubmit: SubmitHandler<IRegisterInputs> = (data) => {
@@ -46,7 +48,17 @@ const RegisterForm: FC = () => {
             </div>
             <div className='space-y-1'>
                 <label htmlFor="password">Password</label>
-                <Input {...register('password', { required: true })} className='w-full' type="password" name='password' placeholder='Type your passsword...' />
+                <div className='relative'>
+                    <Input {...register('password', { required: true })} className='w-full' type={isVisible ? "text" : "password"} name='password' placeholder='Type your passsword...' />
+                    <div className='absolute h-full top-0 right-2 flex items-center justify-center'>
+                        <span onClick={() => setIsVisible(!isVisible)} className='cursor-pointer text-black'>
+
+                            {
+                                isVisible ? <IoMdEyeOff className='size-6' /> : <IoMdEye className='size-5' />
+                            }
+                        </span>
+                    </div>
+                </div>
                 {errors.password && <span>Password is required</span>}
             </div>
             {/* <div className='space-y-1'>
