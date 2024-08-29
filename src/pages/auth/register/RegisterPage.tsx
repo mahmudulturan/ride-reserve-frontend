@@ -9,10 +9,10 @@ const RegisterPage: FC = () => {
                 <div className='flex items-center justify-center wrapper' >
                     <div className='max-w-xl w-full bg-black/25 p-8 rounded-lg'>
                         <div>
-                            <h1 className='text-3xl text-center font-semibold uppercase'>Register Here</h1>
+                            <h1 className='text-3xl text-center font-semibold uppercase'>Register</h1>
                         </div>
                         <RegisterForm />
-                        <p className='text-sm text-center'>Already have an account? <Link to="/login" className='text-primaryColor underline font-medium'>Login</Link></p>
+                        <p className='text-sm text-center'>Already have an account? <Link to="/login" className='text-primaryColor underline font-medium'>Login Here..</Link></p>
                     </div>
                 </div>
             </div>
