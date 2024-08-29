@@ -23,6 +23,7 @@ module.exports = {
       colors: {
         "primaryColor": "#F5B754",
         "Grayish": "#999999",
+        "blackColor": "#1B1B1B"
       },
       keyframes: {
         "accordion-down": {
