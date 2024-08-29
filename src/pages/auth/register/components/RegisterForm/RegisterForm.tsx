@@ -1,5 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useToast } from '@/components/ui/use-toast';
+import { useRegisterMutation } from '@/redux/features/auth/authApi';
 // import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -16,7 +18,11 @@ interface IRegisterInputs {
 const RegisterForm: FC = () => {
     // const [role, setRole] = useState("");
     const [isVisible, setIsVisible] = useState(false);
-    const { register, handleSubmit, formState: { errors } } = useForm<IRegisterInputs>()
+    const { register, handleSubmit, formState: { errors } } = useForm<IRegisterInputs>();
+
+    const [registerUser, { isLoading }] = useRegisterMutation();
+
+    const { toast } = useToast();
 
     const onSubmit: SubmitHandler<IRegisterInputs> = (data) => {
         const reqData = {
@@ -27,6 +33,19 @@ const RegisterForm: FC = () => {
             role: "user"
         }
         console.log(reqData);
+
+        registerUser(reqData).unwrap().then((res) => {
+
+            toast({
+                title: res.message,
+                description: "You have successfully registered! Now login first!",
+            })
+        }).catch((err) => {
+            toast({
+                title: err.data.message,
+                description: "Something went wrong",
+            })
+        })
     }
 
     return (
@@ -74,8 +93,7 @@ const RegisterForm: FC = () => {
                 </Select>
             </div> */}
             <div className='py-3'>
-
-                <Button type='submit' className='w-full'>Register</Button>
+                <Button disabled={isLoading} type='submit' className='w-full'>Register</Button>
             </div>
         </form>
     );
