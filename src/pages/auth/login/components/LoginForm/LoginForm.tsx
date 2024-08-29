@@ -1,8 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useToast } from '@/components/ui/use-toast';
+import { useLoginMutation } from '@/redux/features/auth/authApi';
 import { FC, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { IoMdEyeOff, IoMdEye } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
 
 
 interface ILoginInputs {
@@ -12,7 +15,13 @@ interface ILoginInputs {
 
 const LoginForm: FC = () => {
     const [isVisible, setIsVisible] = useState(false);
-    const { register, handleSubmit, formState: { errors } } = useForm<ILoginInputs>()
+    const { register, handleSubmit, formState: { errors } } = useForm<ILoginInputs>();
+
+    const [loginUser, { isLoading }] = useLoginMutation();
+
+    const { toast } = useToast();
+
+    const navigate = useNavigate();
 
     const onSubmit: SubmitHandler<ILoginInputs> = (data) => {
         const reqData = {
@@ -20,6 +29,18 @@ const LoginForm: FC = () => {
             password: data.password,
 
         }
+        loginUser(reqData).unwrap().then((res) => {
+            toast({
+                title: res.message,
+                description: 'You have successfully logged in.'
+            });
+            navigate('/', { replace: true })
+        }).catch((err) => {
+            toast({
+                title: err.data.message,
+                description: err.data.message === 'Incorrect password' ? 'Try with correct password' : 'Something went wrong'
+            });
+        })
         console.log(reqData);
     }
 
@@ -47,7 +68,7 @@ const LoginForm: FC = () => {
                 {errors.password && <span>Password is required</span>}
             </div>
             <div className='py-3'>
-                <Button type='submit' className='w-full'>Login</Button>
+                <Button disabled={isLoading} type='submit' className='w-full'>Login</Button>
             </div>
         </form>
     );
