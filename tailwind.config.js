@@ -17,6 +17,9 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        "outfit": ["Outfit", "sans-serif"]
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

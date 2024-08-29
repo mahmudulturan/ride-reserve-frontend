@@ -4,7 +4,7 @@ import { FC } from 'react';
 const HomePage: FC = () => {
     return (
         <div>
-            <Button>Button</Button>
+            <Button className='font-outfit'>Button</Button>
         </div>
     );
 };
