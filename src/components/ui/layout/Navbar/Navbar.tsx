@@ -18,7 +18,7 @@ const navlinks = [
 const Navbar: FC = () => {
 
     return (
-        <div className='wrapper py-6 flex items-center justify-between'>
+        <div className='wrapper py-6 flex items-center justify-between sticky bg-black/70'>
             <div>
                 <h3 className='uppercase font-bold text-3xl'><span className='text-primaryColor'>Ride</span> Reserve</h3>
             </div>
