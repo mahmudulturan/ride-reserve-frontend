@@ -20,6 +20,10 @@ module.exports = {
       fontFamily: {
         "outfit": ["Outfit", "sans-serif"]
       },
+      colors: {
+        "primaryColor": "#F5B754",
+        "Grayish": "#999999",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
