@@ -1,23 +1,50 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { FC } from 'react';
+import { FC, useState } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { IoMdEyeOff, IoMdEye } from 'react-icons/io';
 
+
+interface ILoginInputs {
+    email: string
+    password: string
+}
 
 const LoginForm: FC = () => {
+    const [isVisible, setIsVisible] = useState(false);
+    const { register, handleSubmit, formState: { errors } } = useForm<ILoginInputs>()
 
-    const handleFormSubmit = () => {
+    const onSubmit: SubmitHandler<ILoginInputs> = (data) => {
+        const reqData = {
+            email: data.email,
+            password: data.password,
 
+        }
+        console.log(reqData);
     }
+
     return (
-        <form className='max-w-xl w-full mx-auto space-y-2' onSubmit={handleFormSubmit}>
+        <form className='max-w-xl w-full mx-auto space-y-2' onSubmit={handleSubmit(onSubmit)}>
 
             <div className='space-y-1'>
                 <label htmlFor="email">Email</label>
-                <Input className='w-full' type="email" name='email' placeholder='Type your email...' />
+                <Input {...register('email', { required: true })} className='w-full' type="email" name='email' placeholder='Type your email...' />
+                {errors.email && <span>Email is required</span>}
             </div>
             <div className='space-y-1'>
-                <label htmlFor="passsword">Password</label>
-                <Input className='w-full' type="password" name='passsword' placeholder='Type your passsword...' />
+                <label htmlFor="password">Password</label>
+                <div className='relative'>
+                    <Input {...register('password', { required: true })} className='w-full' type={isVisible ? "text" : "password"} name='password' placeholder='Type your passsword...' />
+                    <div className='absolute h-full top-0 right-2 flex items-center justify-center'>
+                        <span onClick={() => setIsVisible(!isVisible)} className='cursor-pointer text-black'>
+
+                            {
+                                isVisible ? <IoMdEyeOff className='size-5' /> : <IoMdEye className='size-5' />
+                            }
+                        </span>
+                    </div>
+                </div>
+                {errors.password && <span>Password is required</span>}
             </div>
             <div className='py-3'>
                 <Button type='submit' className='w-full'>Login</Button>

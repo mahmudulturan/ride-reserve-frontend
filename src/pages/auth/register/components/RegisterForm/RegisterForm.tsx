@@ -54,7 +54,7 @@ const RegisterForm: FC = () => {
                         <span onClick={() => setIsVisible(!isVisible)} className='cursor-pointer text-black'>
 
                             {
-                                isVisible ? <IoMdEyeOff className='size-6' /> : <IoMdEye className='size-5' />
+                                isVisible ? <IoMdEyeOff className='size-5' /> : <IoMdEye className='size-5' />
                             }
                         </span>
                     </div>
