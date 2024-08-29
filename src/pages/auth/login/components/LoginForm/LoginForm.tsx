@@ -2,6 +2,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 import { useLoginMutation } from '@/redux/features/auth/authApi';
+import { saveUser } from '@/redux/features/auth/authSlice';
+import { useAppDispatch } from '@/redux/hook';
 import { FC, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { IoMdEyeOff, IoMdEye } from 'react-icons/io';
@@ -16,6 +18,8 @@ interface ILoginInputs {
 const LoginForm: FC = () => {
     const [isVisible, setIsVisible] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm<ILoginInputs>();
+
+    const dipatch = useAppDispatch();
 
     const [loginUser, { isLoading }] = useLoginMutation();
 
@@ -34,6 +38,7 @@ const LoginForm: FC = () => {
                 title: res.message,
                 description: 'You have successfully logged in.'
             });
+            dipatch(saveUser({ user: res.user, isAuthenticate: true, isLoading: false }));
             navigate('/', { replace: true })
         }).catch((err) => {
             toast({
