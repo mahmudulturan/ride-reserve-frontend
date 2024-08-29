@@ -1,4 +1,4 @@
-import Navbar from '@/components/ui/layout/Navbar/Navbar';
+import Navbar from '@/components/layout/Navbar/Navbar';
 import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 
