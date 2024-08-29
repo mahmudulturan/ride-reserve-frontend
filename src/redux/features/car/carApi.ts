@@ -17,7 +17,7 @@ interface ICar {
 const carApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         getCars: build.query<ICar[], void>({
-            query: () => "/car",
+            query: () => "/cars",
         })
     })
 })
