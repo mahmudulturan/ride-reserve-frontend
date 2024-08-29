@@ -4,6 +4,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { useLoginMutation } from '@/redux/features/auth/authApi';
 import { saveUser } from '@/redux/features/auth/authSlice';
 import { useAppDispatch } from '@/redux/hook';
+import { storeToken } from '@/utils/tokenStorage';
 import { FC, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { IoMdEyeOff, IoMdEye } from 'react-icons/io';
@@ -39,7 +40,8 @@ const LoginForm: FC = () => {
                 description: 'You have successfully logged in.'
             });
             dipatch(saveUser({ user: res.user, isAuthenticate: true, isLoading: false }));
-            navigate('/', { replace: true })
+            navigate('/', { replace: true });
+            storeToken(res.token);
         }).catch((err) => {
             toast({
                 title: err.data.message,

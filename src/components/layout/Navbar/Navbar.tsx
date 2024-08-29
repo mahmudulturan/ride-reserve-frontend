@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import styles from './navbar.module.css';
-import { Button } from '../../button';
+import { Button } from '@/components/ui/button';
 const navlinks = [
     {
         name: 'Home',
