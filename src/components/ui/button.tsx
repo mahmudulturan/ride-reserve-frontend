@@ -6,15 +6,15 @@ import { cn } from "../../lib/utils"
 import { GoArrowUpRight } from "react-icons/go"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-light ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-slate-950 dark:focus-visible:ring-slate-300 gap-2 translate-y-0 hover:-translate-y-1 transition-all duration-200",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-light ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-slate-950 dark:focus-visible:ring-slate-300 gap-2 transition-all duration-200",
   {
     variants: {
       variant: {
-        default: "bg-primaryColor text-blackColor hover:bg-slate-100 dark:bg-slate-50 dark:text-white dark:hover:bg-slate-50/90",
+        default: "bg-primaryColor text-blackColor hover:bg-slate-100 dark:bg-slate-50 dark:text-white dark:hover:bg-slate-50/90 translate-y-0 hover:-translate-y-1",
         destructive:
           "bg-red-500 text-slate-50 hover:bg-red-500/90 dark:bg-red-900 dark:text-slate-50 dark:hover:bg-red-900/90",
         outline:
-          "border border-slate-200 bg-white hover:bg-slate-100 hover:text-slate-900 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50",
+          "border border-primaryColor hover:bg-primaryColor hover:text-black",
         secondary:
           "bg-slate-100 text-blackColor hover:bg-primaryColor dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80",
         ghost: "hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50",
@@ -24,7 +24,7 @@ const buttonVariants = cva(
         default: "px-[42px] py-[14px] rounded-full",
         sm: "h-9 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
+        icon: "p-3 rounded-full",
       },
     },
     defaultVariants: {
@@ -37,11 +37,12 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
   VariantProps<typeof buttonVariants> {
-  asChild?: boolean
+  asChild?: boolean;
+  isArrowIcon?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, isArrowIcon = true, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
@@ -50,7 +51,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {props.children}
-        <GoArrowUpRight />
+        {
+          isArrowIcon && <GoArrowUpRight />
+        }
       </Comp>
     )
   }
