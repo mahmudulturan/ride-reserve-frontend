@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import styles from './navbar.module.css';
 import { Button } from '@/components/ui/button';
+import Logo from '@/components/shared/Logo';
 const navlinks = [
     {
         name: 'Home',
@@ -22,9 +23,7 @@ const Navbar: FC = () => {
         <div className='sticky backdrop-blur-xl z-50 bg-black/60'>
             <div className='wrapper py-6 flex items-center justify-between'>
                 <div>
-                    <Link to={'/'}>
-                        <h3 className='uppercase font-bold text-3xl'><span className='text-primaryColor'>Ride</span> Reserve</h3>
-                    </Link>
+                    <Logo />
                 </div>
                 <div className='flex items-center gap-6'>
                     {
