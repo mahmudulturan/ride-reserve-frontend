@@ -22,7 +22,6 @@ const Navbar: FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const manuToggler = () => setIsMenuOpen(!isMenuOpen);
-
     return (
         <div className='sticky backdrop-blur-xl z-50 bg-black/60'>
             <div className='wrapper py-6 flex items-center justify-between overflow-hidden'>
@@ -43,7 +42,7 @@ const Navbar: FC = () => {
                     </Link>
                 </div>
                 <MenuButton manuToggler={manuToggler} className='md:hidden' />
-                <div className={`flex flex-col absolute top-[96px] right-0 backdrop-blur-2xl bg-black/90 rounded-b-md px-3 w-3/4 gap-3 py-3 md:hidden ${isMenuOpen ? ' translate-x-0' : 'translate-x-full'} transition-all duration-300`}>
+                <div className={`flex flex-col absolute top-[96px] right-0 backdrop-blur-2xl bg-black/90 rounded-b-md px-3 w-3/4 gap-3 py-3 md:hidden ${isMenuOpen ? ' scale-x-100' : 'scale-x-0'} origin-right transition-all duration-300`}>
                     {
                         navlinks.map((link, index) => (
                             <NavLink key={index}
