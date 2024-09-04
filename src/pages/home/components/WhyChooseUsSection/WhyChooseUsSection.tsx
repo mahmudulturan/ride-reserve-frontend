@@ -6,7 +6,7 @@ import { FaRegCreditCard } from 'react-icons/fa6';
 
 const WhyChooseUsSection: FC = () => {
     return (
-        <div className='wrapper my-20 flex items-center justify-between gap-6'>
+        <div className='wrapper my-20 flex flex-col-reverse md:flex-row items-center justify-between gap-6'>
             <div className='flex-1'>
                 <SectionHeading subHeading='Why Choose Us' heading='Why you will choose us' align='left' className='my-0' />
                 <p className='text-Grayish max-w-xl'>At our car rental company, we pride ourselves on providing an exceptional experience that sets us apart from the competition. From our wide selection of well-maintained vehicles to our unparalleled customer service, we're dedicated to making your rental experience seamless and enjoyable.</p>
