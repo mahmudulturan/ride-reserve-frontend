@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import styles from './navbar.module.css';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/shared/Logo';
+import MenuButton from './MenuButton';
 const navlinks = [
     {
         name: 'Home',
@@ -38,6 +39,7 @@ const Navbar: FC = () => {
                         <Button variant={"secondary"}>Login</Button>
                     </Link>
                 </div>
+                <MenuButton className='md:hidden' />
             </div>
         </div>
     );
