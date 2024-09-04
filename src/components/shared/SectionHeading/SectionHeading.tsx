@@ -1,14 +1,16 @@
 import { FC } from 'react';
 import sectionHeadingStyles from './sectionHeading.module.css';
+import { cn } from '@/lib/utils';
 
-interface ISectionHeadingProps {
+interface ISectionHeadingProps extends React.HTMLAttributes<HTMLDivElement> {
     subHeading: string;
     heading: string;
+    align?: 'left' | 'center' | 'right';
 }
 
-const SectionHeading: FC<ISectionHeadingProps> = ({ subHeading, heading }) => {
+const SectionHeading: FC<ISectionHeadingProps> = ({ subHeading, heading, align = "center", className, ...props }) => {
     return (
-        <div className='flex items-center justify-center flex-col my-6'>
+        <div className={cn(`flex flex-col ${align === "left" ? "items-start justify-start" : align === "right" ? "items-end justify-end" : align === "center" ? "items-center justify-center" : ""}  my-6`, className)} {...props}>
             <div className={sectionHeadingStyles.subHeading}>
                 {subHeading}
             </div>
