@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import styles from './navbar.module.css';
 import { Button } from '@/components/ui/button';
@@ -19,10 +19,13 @@ const navlinks = [
     }
 ];
 const Navbar: FC = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const manuToggler = () => setIsMenuOpen(!isMenuOpen);
 
     return (
         <div className='sticky backdrop-blur-xl z-50 bg-black/60'>
-            <div className='wrapper py-6 flex items-center justify-between'>
+            <div className='wrapper py-6 flex items-center justify-between overflow-hidden'>
                 <div>
                     <Logo />
                 </div>
@@ -39,7 +42,17 @@ const Navbar: FC = () => {
                         <Button variant={"secondary"}>Login</Button>
                     </Link>
                 </div>
-                <MenuButton className='md:hidden' />
+                <MenuButton manuToggler={manuToggler} className='md:hidden' />
+                <div className={`flex flex-col absolute top-[96px] right-0 backdrop-blur-2xl bg-black/90 rounded-b-md px-3 w-3/4 gap-3 py-3 md:hidden ${isMenuOpen ? ' translate-x-0' : 'translate-x-full'} transition-all duration-300`}>
+                    {
+                        navlinks.map((link, index) => (
+                            <NavLink key={index}
+                                className={({ isActive }) => isActive ? styles.active : styles.default} to={link.path}>
+                                {link.name}
+                            </NavLink>
+                        ))
+                    }
+                </div>
             </div>
         </div>
     );
