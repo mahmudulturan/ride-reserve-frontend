@@ -25,7 +25,7 @@ const Navbar: FC = () => {
                 <div>
                     <Logo />
                 </div>
-                <div className='flex items-center gap-6'>
+                <div className='md:flex items-center gap-6 hidden'>
                     {
                         navlinks.map((link, index) => (
                             <NavLink key={index}

@@ -14,7 +14,7 @@ const Footer: FC = () => {
                 <div>
 
                 </div>
-                <div className='my-6 flex items-start justify-between'>
+                <div className='my-6 flex items-start justify-between flex-col md:flex-row gap-6'>
                     <div className='space-y-3'>
                         <Logo />
                         <p className='text-sm max-w-xs font-light text-slate-200'>Rent a car imperdiet sapien porttito the bibenum ellentesue the commodo erat nesuen.</p>
