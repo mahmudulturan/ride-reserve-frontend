@@ -49,8 +49,14 @@ const WhyChooseUsSection: FC = () => {
                     </div>
                 </div>
             </div>
-            <div className='flex-1'>
+            <div className='flex-1 flex items-end justify-end'>
+                <div className='rounded-[20px] overflow-hidden relative'>
+                    <img
+                        className='hover:scale-110 transition-all duration-500'
+                        src="https://i.ibb.co/WkNYc4m/satisfied-male-customer-holding-car-key-auto-repair-shop-looking-camera-1.jpg"
+                        alt="" />
 
+                </div>
             </div>
         </div>
     );
