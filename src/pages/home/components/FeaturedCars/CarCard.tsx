@@ -8,11 +8,11 @@ import { Link } from 'react-router-dom';
 const CarCard: FC = () => {
     return (
         <div className='group relative mb-[50px]'>
-            <div className='rounded-[20px] overflow-hidden'>
+            <div className='rounded-[20px] rounded-b-none lg:rounded-b-[20px] overflow-hidden'>
                 <img src="https://webredox.net/demo/wp/renax/demo12/wp-content/uploads/sites/12/2024/04/7.jpg" alt="" className=' group-hover:scale-110 transition duration-500 ease-in-out' />
             </div>
-            <div className='absolute w-full flex items-center justify-center z-10 -bottom-10'>
-                <div className='w-10/12 mx-auto rounded-[20px] bg-[#222222]  -mt-10 py-[30px] px-[25px] flex items-center justify-between'>
+            <div className='lg:absolute w-full flex items-center justify-center z-10 -bottom-10'>
+                <div className='lg:w-10/12 mx-auto rounded-[20px] rounded-t-none lg:rounded-t-[20px] bg-[#222222] py-[30px] px-[25px] flex items-stretch sm:items-center justify-between w-full flex-col sm:flex-row gap-4'>
                     <div className=''>
                         <Link to={"/car-details"}>
                             <h2 className='text-[21px] font-bold'>Bently Bentayga</h2>
