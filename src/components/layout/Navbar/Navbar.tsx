@@ -1,14 +1,19 @@
 import { FC, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import styles from './navbar.module.css';
 import { Button } from '@/components/ui/button';
+import ModeToggle from './ModeToggle';
 import Logo from '@/components/shared/Logo';
 import MenuButton from './MenuButton';
-import ModeToggle from './ModeToggle';
+import styles from './navbar.module.css';
+
 const navlinks = [
     {
         name: 'Home',
         path: '/'
+    },
+    {
+        name: 'All Cars',
+        path: '/cars'
     },
     {
         name: 'About',
@@ -33,7 +38,7 @@ const Navbar: FC = () => {
                     {
                         navlinks.map((link, index) => (
                             <NavLink key={index}
-                                className={({ isActive }) => isActive ? styles.active : styles.default} to={link.path}>
+                                className={({ isActive }) => isActive ? 'text-primaryColorLight dark:text-primaryColor' : 'hover:text-primaryColorLight dark:hover:text-primaryColor'} to={link.path}>
                                 {link.name}
                             </NavLink>
                         ))
