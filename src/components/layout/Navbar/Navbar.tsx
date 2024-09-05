@@ -4,6 +4,7 @@ import styles from './navbar.module.css';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/shared/Logo';
 import MenuButton from './MenuButton';
+import ModeToggle from './ModeToggle';
 const navlinks = [
     {
         name: 'Home',
@@ -40,6 +41,7 @@ const Navbar: FC = () => {
                     <Link to={'/login'}>
                         <Button variant={"secondary"}>Login</Button>
                     </Link>
+                    <ModeToggle />
                 </div>
                 <MenuButton manuToggler={manuToggler} className='md:hidden' />
                 <div className={`flex flex-col absolute top-[96px] right-0 backdrop-blur-2xl bg-black/90 rounded-b-md px-3 w-3/4 gap-3 py-3 md:hidden ${isMenuOpen ? ' scale-x-100' : 'scale-x-0'} origin-right transition-all duration-300`}>
