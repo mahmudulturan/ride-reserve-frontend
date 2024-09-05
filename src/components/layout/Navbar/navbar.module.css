@@ -1,8 +1,8 @@
 
 .active{
-    @apply text-primaryColor;
+    @apply text-primaryColorLight dark:text-primaryColor;
 }
 
 .default{
-    @apply hover:text-primaryColor;
+    @apply hover:text-primaryColorLight dark:hover:text-primaryColor ;
 }

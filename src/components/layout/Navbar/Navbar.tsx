@@ -24,7 +24,7 @@ const Navbar: FC = () => {
 
     const manuToggler = () => setIsMenuOpen(!isMenuOpen);
     return (
-        <div className='sticky top-0 backdrop-blur-xl z-50 bg-black/60'>
+        <div className='sticky top-0 backdrop-blur-xl z-50 bg-white/60 dark:bg-black/60'>
             <div className='wrapper py-6 flex items-center justify-between overflow-hidden'>
                 <div>
                     <Logo />
