@@ -14,7 +14,9 @@ const CarCardSecondary: FC = () => {
                     className='group-hover:brightness-[0.8] group-hover:scale-110 transition duration-500 ease-in-out max-w-[356px] object-cover' />
             </div>
             <div className="rounded-[20px] rounded-t-none bg-gray-100 dark:bg-[#222222] p-[30px]">
-                <h3 className="text-[21px] font-bold">Lamborghini Urus</h3>
+                <Link to={'#'}>
+                    <h3 className="text-[21px] font-bold">Lamborghini Urus</h3>
+                </Link>
                 <div className="space-y-3 my-4">
                     <div className='flex items-center justify-between gap-3 text-primaryColorLight dark:text-primaryColor text-sm '>
                         <div className="flex items-center justify-between gap-3">
