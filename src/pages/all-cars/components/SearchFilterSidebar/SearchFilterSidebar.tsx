@@ -5,7 +5,7 @@ import { IoSearchOutline } from 'react-icons/io5';
 
 const SearchFilterSidebar: FC = () => {
     return (
-        <div className=''>
+        <div className='sticky top-[139px] -mt-[139px]  rounded-[20px]' >
             <div className='rounded-[20px] rounded-b-none overflow-hidden bg-primaryColorLight dark:bg-primaryColor p-[30px]'>
                 <div className='relative group'>
                     <Input className='bg-transparent border-primaryColorLight dark:border-primaryColor focus-visible:ring-transparent  focus-visible:ring-offset-0 border-2 dark:placeholder:text-Grayish placeholder:text-slate-500 text-slate-500 dark:text-Grayish bg-white dark:bg-[#1B1B1B] py-7 pr-[42px] rounded-full' placeholder='Search Cars...' />
@@ -20,7 +20,8 @@ const SearchFilterSidebar: FC = () => {
                 </div>
 
             </div>
-            <div className='rounded-[20px] rounded-t-none bg-gray-100 dark:bg-[#222222] p-[30px] space-y-8'>
+            <div className='rounded-[20px] rounded-t-none bg-gray-100 dark:bg-[#222222] p-[30px] space-y-8 overflow-y-auto thin-scrollbar'
+                style={{ height: "calc(100vh - 275px)" }}>
                 <div>
                     <h3 className='text-[17px] font-bold'>Categories</h3>
                     <div className='my-4 space-y-3'>
