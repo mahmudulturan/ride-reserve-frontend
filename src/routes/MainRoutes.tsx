@@ -6,11 +6,13 @@ import RegisterPage from "@/pages/auth/register/RegisterPage";
 import AllCarsPage from "@/pages/all-cars/AllCarsPage";
 import CarDetailsPage from "@/pages/car-details/CarDetailsPage";
 import AboutPage from "@/pages/about/AboutPage";
+import ErrorPage from "@/pages/error/ErrorPage";
 
 const MainRoutes = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: "/",
