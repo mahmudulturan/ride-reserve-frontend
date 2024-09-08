@@ -5,6 +5,7 @@ import ModeToggle from './ModeToggle';
 import Logo from '@/components/shared/Logo';
 import MenuButton from './MenuButton';
 import styles from './navbar.module.css';
+import { useAppSelector } from '@/redux/hook';
 
 const navlinks = [
     {
@@ -27,6 +28,8 @@ const navlinks = [
 const Navbar: FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+    const { isAuthenticate } = useAppSelector((state) => state.authSlice);
+
     const manuToggler = () => setIsMenuOpen(!isMenuOpen);
     return (
         <div className='sticky top-0 backdrop-blur-xl z-50 bg-white/60 dark:bg-black/60'>
@@ -43,12 +46,24 @@ const Navbar: FC = () => {
                             </NavLink>
                         ))
                     }
-                    <Link to={'/login'}>
-                        <Button variant={"secondary"}>Login</Button>
-                    </Link>
+                    {
+                        isAuthenticate ?
+                            <NavLink
+                                className={({ isActive }) => isActive ? 'text-primaryColorLight dark:text-primaryColor' : 'hover:text-primaryColorLight dark:hover:text-primaryColor'} to={'/dashboard'}>
+                                Dashboard
+                            </NavLink>
+                            :
+                            <Link to={'/login'}>
+                                <Button variant={"secondary"}>Login</Button>
+                            </Link>
+
+                    }
                     <ModeToggle />
                 </div>
-                <MenuButton manuToggler={manuToggler} className='md:hidden' />
+                <div className='flex items-center gap-3 md:hidden'>
+                    <ModeToggle />
+                    <MenuButton manuToggler={manuToggler} className='md:hidden' />
+                </div>
                 <div className={`flex flex-col absolute top-[96px] right-0 backdrop-blur-2xl bg-black/90 rounded-b-md px-3 w-3/4 gap-3 py-3 md:hidden ${isMenuOpen ? ' scale-x-100' : 'scale-x-0'} origin-right transition-all duration-300`}>
                     {
                         navlinks.map((link, index) => (
