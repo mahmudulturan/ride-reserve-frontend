@@ -1,0 +1,7 @@
+.subHeading {
+    @apply text-[10px] leading-[10px] font-light text-primaryColorLight dark:text-[#F5B754] relative mb-[15px] inline-block z-[1] uppercase tracking-[6px];
+}
+
+.heading {
+    @apply text-[42px] dark:text-white relative mb-[15px] leading-[1.25em] font-bold;
+}
