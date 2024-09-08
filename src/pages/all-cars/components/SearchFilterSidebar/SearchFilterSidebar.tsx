@@ -20,8 +20,82 @@ const SearchFilterSidebar: FC = () => {
                 </div>
 
             </div>
-            <div className='rounded-[20px] rounded-t-none bg-gray-100 dark:bg-[#222222] p-[30px]'>
-                SearchFilterSidebar
+            <div className='rounded-[20px] rounded-t-none bg-gray-100 dark:bg-[#222222] p-[30px] space-y-8'>
+                <div>
+                    <h3 className='text-[17px] font-bold'>Categories</h3>
+                    <div className='my-4 space-y-3'>
+                        <div className='flex items-center gap-2'>
+                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
+                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Convertible</button>
+                        </div>
+                        <div className='flex items-center gap-2'>
+                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
+                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Luxury Cars</button>
+                        </div>
+                        <div className='flex items-center gap-2'>
+                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
+                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Sedan</button>
+                        </div>
+                        <div className='flex items-center gap-2'>
+                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
+                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Small Cars</button>
+                        </div>
+                        <div className='flex items-center gap-2'>
+                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
+                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Sport Cars</button>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 className='text-[17px] font-bold'>Pickup Locations</h3>
+                    <div className='my-4 space-y-3'>
+                        <div className='flex items-center gap-2'>
+                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
+                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Convertible</button>
+                        </div>
+                        <div className='flex items-center gap-2'>
+                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
+                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Luxury Cars</button>
+                        </div>
+                        <div className='flex items-center gap-2'>
+                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
+                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Sedan</button>
+                        </div>
+                        <div className='flex items-center gap-2'>
+                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
+                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Small Cars</button>
+                        </div>
+                        <div className='flex items-center gap-2'>
+                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
+                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Sport Cars</button>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 className='text-[17px] font-bold'>Dropoff Locations</h3>
+                    <div className='my-4 space-y-3'>
+                        <div className='flex items-center gap-2'>
+                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
+                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Convertible</button>
+                        </div>
+                        <div className='flex items-center gap-2'>
+                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
+                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Luxury Cars</button>
+                        </div>
+                        <div className='flex items-center gap-2'>
+                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
+                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Sedan</button>
+                        </div>
+                        <div className='flex items-center gap-2'>
+                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
+                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Small Cars</button>
+                        </div>
+                        <div className='flex items-center gap-2'>
+                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
+                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Sport Cars</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );
