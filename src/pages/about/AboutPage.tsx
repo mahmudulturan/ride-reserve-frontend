@@ -1,9 +1,12 @@
+import PageHeading from '@/components/shared/PageHeading/PageHeading';
 import { FC } from 'react';
 
 const AboutPage: FC = () => {
     return (
         <div>
-            AboutPage
+            <PageHeading subHeading='Ride Reserve' align='left'>
+                About  <span className='text-primaryColor'>Us</span>
+            </PageHeading>
         </div>
     );
 };
