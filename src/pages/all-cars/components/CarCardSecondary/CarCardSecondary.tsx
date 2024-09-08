@@ -48,7 +48,7 @@ const CarCardSecondary: FC = () => {
                             <span className='text-sm text-slate-800 dark:text-slate-200 font-thin ml-1'>/day</span>
                         </h2>
                     </div>
-                    <Link to={"/car-details"}>
+                    <Link to={"/cars/id"}>
                         <Button className='bg-primaryColorLight hover:bg-slate-800 hover:text-white dark:bg-primaryColor dark:hover:bg-slate-100 dark:hover:text-black' variant={"secondary"} isArrowIcon={false} >Details</Button>
                     </Link>
                 </div>

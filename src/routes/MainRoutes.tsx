@@ -4,6 +4,7 @@ import HomePage from "../pages/home/HomePage";
 import LoginPage from "@/pages/auth/login/LoginPage";
 import RegisterPage from "@/pages/auth/register/RegisterPage";
 import AllCarsPage from "@/pages/all-cars/AllCarsPage";
+import CarDetailsPage from "@/pages/car-details/CarDetailsPage";
 
 const MainRoutes = createBrowserRouter([
     {
@@ -17,6 +18,10 @@ const MainRoutes = createBrowserRouter([
             {
                 path: "/cars",
                 element: <AllCarsPage />
+            },
+            {
+                path: "/cars/:id",
+                element: <CarDetailsPage />
             },
             {
                 path: "/login",

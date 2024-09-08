@@ -30,7 +30,7 @@ const CarCard: FC = () => {
                         </div>
                     </div>
                     <div className='flex items-center justify-end gap-3'>
-                        <Link to={"/car-details"}>
+                        <Link to={`/cars/:id`}>
                             <Button className='bg-primaryColorLight hover:bg-slate-800 hover:text-white dark:bg-primaryColor dark:hover:bg-slate-100 dark:hover:text-black' variant={"secondary"} isArrowIcon={false} >Details</Button>
                         </Link>
                         <div>
