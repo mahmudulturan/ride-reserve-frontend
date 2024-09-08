@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 const CarDetailsPage: FC = () => {
     return (
-        <div>
+        <div className='wrapper'>
             CarDetailsPage
         </div>
     );
