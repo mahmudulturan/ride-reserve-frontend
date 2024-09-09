@@ -1,5 +1,5 @@
 import Logo from '@/components/shared/Logo';
-import { FC, useState } from 'react';
+import { FC, useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import sidebarStyles from './Sidebar.module.css';
 import { MdDashboard, MdDirectionsCarFilled, MdHistory } from 'react-icons/md';
@@ -13,8 +13,25 @@ const Sidebar: FC = () => {
 
     const menuToggler = () => setOpen(!open);
 
+    const sidebarRef = useRef<HTMLDivElement | null>(null);
+
+    // user menu outside click handler
+    const handleClickOutside = (event: Event) => {
+        if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
+            setOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        // Add the event listener when the component mounts
+        document.addEventListener("mousedown", handleClickOutside);
+        // Remove the event listener when the component unmounts
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
     return (
-        <div className='flex relative'>
+        <div ref={sidebarRef} className='flex relative'>
             <div className={`px-5 shadow-xl min-h-screen hidden lg:block w-[253px] `}>
                 <div className='min-h-screen py-5 flex flex-col'>
                     <div className='flex-1'>
@@ -78,9 +95,9 @@ const Sidebar: FC = () => {
                     </div>
                 </div>
             </div>
-            <div className='lg:hidden flex items-center justify-between w-full px-5 py-4' >
+            <div className='lg:hidden flex items-center justify-between w-full px-5 py-4 shadow-xl dark:border-b border-gray-900' >
                 <Logo />
-                <MenuButton menuToggler={menuToggler} />
+                <MenuButton open={open} menuToggler={menuToggler} />
             </div>
         </div>
     );
