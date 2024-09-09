@@ -12,11 +12,17 @@ interface ICar {
     isDeleted: boolean;
     createdAt: string;
     updatedAt: string;
+};
+
+interface ICarResponse {
+    data: ICar[];
+    message: string;
+    success: true;
 }
 
 const carApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        getCars: build.query<ICar[], void>({
+        getCars: build.query<ICarResponse, void>({
             query: () => "/cars",
         })
     })
