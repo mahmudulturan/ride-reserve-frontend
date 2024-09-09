@@ -30,7 +30,7 @@ const Navbar: FC = () => {
 
     const { isAuthenticate } = useAppSelector((state) => state.authSlice);
 
-    const manuToggler = () => setIsMenuOpen(!isMenuOpen);
+    const menuToggler = () => setIsMenuOpen(!isMenuOpen);
     return (
         <div className='sticky top-0 backdrop-blur-xl z-50 bg-white/60 dark:bg-black/60'>
             <div className='wrapper py-6 flex items-center justify-between overflow-hidden'>
@@ -62,7 +62,7 @@ const Navbar: FC = () => {
                 </div>
                 <div className='flex items-center gap-3 md:hidden'>
                     <ModeToggle />
-                    <MenuButton manuToggler={manuToggler} className='md:hidden' />
+                    <MenuButton menuToggler={menuToggler} className='md:hidden' />
                 </div>
                 <div className={`flex flex-col absolute top-[96px] right-0 backdrop-blur-2xl bg-black/90 rounded-b-md px-3 w-3/4 gap-3 py-3 md:hidden ${isMenuOpen ? ' scale-x-100' : 'scale-x-0'} origin-right transition-all duration-300`}>
                     {
