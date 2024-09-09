@@ -54,8 +54,8 @@ const Sidebar: FC = () => {
         };
     }, []);
     return (
-        <div ref={sidebarRef} className='flex relative'>
-            <div className={`px-5 shadow-xl min-h-screen hidden lg:block w-[253px] `}>
+        <div ref={sidebarRef} className='flex relative rounded-r-[20px] overflow-hidden'>
+            <div className={`px-5 shadow-xl min-h-screen hidden lg:block w-[253px] bg-gray-100 dark:bg-darkBg`}>
                 <div className='min-h-screen py-5 flex flex-col'>
                     <div className='flex-1'>
                         <div className='flex items-center justify-center pb-3'>

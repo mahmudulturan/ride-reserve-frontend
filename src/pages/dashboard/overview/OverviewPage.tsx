@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 const OverviewPage: FC = () => {
     return (
-        <div>
+        <div className='dashboard-wrapper'>
             OverviewPage
         </div>
     );

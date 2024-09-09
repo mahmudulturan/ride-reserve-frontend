@@ -48,7 +48,7 @@ const MainRoutes = createBrowserRouter([
         element: <DashboardLayout />,
         children: [
             {
-                path: '',
+                path: 'overview',
                 element: <OverviewPage />
             },
             {
