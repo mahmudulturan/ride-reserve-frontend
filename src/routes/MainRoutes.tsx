@@ -8,6 +8,7 @@ import LoginPage from "@/pages/root/auth/login/LoginPage";
 import RegisterPage from "@/pages/root/auth/register/RegisterPage";
 import CarDetailsPage from "@/pages/root/car-details/CarDetailsPage";
 import HomePage from "@/pages/root/home/HomePage";
+import OverviewPage from "@/pages/dashboard/overview/OverviewPage";
 
 const MainRoutes = createBrowserRouter([
     {
@@ -44,7 +45,12 @@ const MainRoutes = createBrowserRouter([
     {
         path: "/dashboard",
         element: <DashboardLayout />,
-        // children
+        children: [
+            {
+                path: '',
+                element: <OverviewPage />
+            }
+        ]
     }
 ])
 
