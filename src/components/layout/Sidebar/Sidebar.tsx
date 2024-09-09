@@ -8,6 +8,29 @@ import { Button } from '@/components/ui/button';
 import ModeToggle from '../Navbar/ModeToggle';
 import MenuButton from '../Navbar/MenuButton';
 
+const navlinksForSidebar = [
+    {
+        name: 'Overview',
+        path: '/dashboard/overview',
+        icon: <MdDashboard className='text-2xl' />
+    },
+    {
+        name: 'Manage Cars',
+        path: '/dashboard/manage-cars',
+        icon: <MdDirectionsCarFilled className='text-2xl' />
+    },
+    {
+        name: 'Manage Bookings',
+        path: '/dashboard/manage-bookings',
+        icon: <MdHistory className='text-2xl' />
+    },
+    {
+        name: 'Manage Users',
+        path: '/dashboard/manage-users',
+        icon: <FaUserGroup className='text-2xl' />
+    }
+]
+
 const Sidebar: FC = () => {
     const [open, setOpen] = useState(false);
 
@@ -38,23 +61,18 @@ const Sidebar: FC = () => {
                         <div className='flex items-center justify-center pb-3'>
                             <Logo />
                         </div>
-                        <div className='flex flex-col gap-1 flex-1 '>
+                        <div>
                             <h1 className='uppercase text-xs font-bold mt-6 dark:text-Grayish'>Dashboard</h1>
-                            <NavLink to={'/dashboard'} className={({ isActive }) => isActive ? sidebarStyles.active : sidebarStyles.navlink}>
-                                <MdDashboard className='size-5' /> Overview
-                            </NavLink>
-                            <NavLink to={'/dashboard/manage-cars'} className={({ isActive }) => isActive ? sidebarStyles.active : sidebarStyles.navlink}>
-                                <MdDirectionsCarFilled className='size-5' />
-                                Manage Cars
-                            </NavLink>
-                            <NavLink to={'/manage-bookings'} className={({ isActive }) => isActive ? sidebarStyles.active : sidebarStyles.navlink}>
-                                <MdHistory className='size-5' />
-                                Manage Bookings
-                            </NavLink>
-                            <NavLink to={'/'} className={({ isActive }) => isActive ? sidebarStyles.active : sidebarStyles.navlink}>
-                                <FaUserGroup className='size-5' />
-                                Manage Users
-                            </NavLink>
+                            <div className='flex flex-col gap-1 flex-1 my-3'>
+                                {
+                                    navlinksForSidebar.map((link, index) => (
+                                        <NavLink key={index} to={link.path} className={({ isActive }) => isActive ? sidebarStyles.active : sidebarStyles.navlink}>
+                                            {link.icon}
+                                            {link.name}
+                                        </NavLink>
+                                    ))
+                                }
+                            </div>
                         </div>
                     </div>
                     <div className='flex items-center gap-2'>
@@ -70,23 +88,18 @@ const Sidebar: FC = () => {
                         <div className='flex items-center justify-center pb-3'>
                             <Logo />
                         </div>
-                        <div className='flex flex-col gap-1 flex-1 '>
+                        <div>
                             <h1 className='uppercase text-xs font-bold mt-6 dark:text-Grayish'>Dashboard</h1>
-                            <NavLink to={'/dashboard'} className={({ isActive }) => isActive ? sidebarStyles.active : sidebarStyles.navlink}>
-                                <MdDashboard className='size-5' /> Overview
-                            </NavLink>
-                            <NavLink to={'/dashboard/manage-cars'} className={({ isActive }) => isActive ? sidebarStyles.active : sidebarStyles.navlink}>
-                                <MdDirectionsCarFilled className='size-5' />
-                                Manage Cars
-                            </NavLink>
-                            <NavLink to={'/manage-bookings'} className={({ isActive }) => isActive ? sidebarStyles.active : sidebarStyles.navlink}>
-                                <MdHistory className='size-5' />
-                                Manage Bookings
-                            </NavLink>
-                            <NavLink to={'/'} className={({ isActive }) => isActive ? sidebarStyles.active : sidebarStyles.navlink}>
-                                <FaUserGroup className='size-5' />
-                                Manage Users
-                            </NavLink>
+                            <div className='flex flex-col gap-1 flex-1 my-3'>
+                                {
+                                    navlinksForSidebar.map((link, index) => (
+                                        <NavLink key={index} to={link.path} className={({ isActive }) => isActive ? sidebarStyles.active : sidebarStyles.navlink}>
+                                            {link.icon}
+                                            {link.name}
+                                        </NavLink>
+                                    ))
+                                }
+                            </div>
                         </div>
                     </div>
                     <div className='flex items-center gap-2'>

@@ -6,25 +6,9 @@ import Logo from '@/components/shared/Logo';
 import MenuButton from './MenuButton';
 import styles from './navbar.module.css';
 import { useAppSelector } from '@/redux/hook';
+import { navlinks } from '@/constants';
 
-const navlinks = [
-    {
-        name: 'Home',
-        path: '/'
-    },
-    {
-        name: 'All Cars',
-        path: '/cars'
-    },
-    {
-        name: 'About',
-        path: '/about'
-    },
-    {
-        name: 'Contact',
-        path: '/contact'
-    }
-];
+
 const Navbar: FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -64,7 +48,7 @@ const Navbar: FC = () => {
                     <ModeToggle />
                     <MenuButton open={isMenuOpen} menuToggler={menuToggler} className='md:hidden' />
                 </div>
-                <div className={`flex flex-col absolute top-[96px] right-0 backdrop-blur-2xl bg-black/90 rounded-b-md px-3 w-3/4 gap-3 py-3 md:hidden ${isMenuOpen ? ' scale-x-100' : 'scale-x-0'} origin-right transition-all duration-300`}>
+                <div className={`flex flex-col absolute top-[96px] right-0 backdrop-blur-2xl bg-white/90 dark:bg-black/90 rounded-b-md px-3 w-3/4 gap-3 py-3 md:hidden ${isMenuOpen ? ' scale-x-100' : 'scale-x-0'} origin-right transition-all duration-300`}>
                     {
                         navlinks.map((link, index) => (
                             <NavLink key={index}
@@ -72,6 +56,18 @@ const Navbar: FC = () => {
                                 {link.name}
                             </NavLink>
                         ))
+                    }
+                    {
+                        isAuthenticate ?
+                            <NavLink
+                                className={({ isActive }) => isActive ? 'text-primaryColorLight dark:text-primaryColor' : 'hover:text-primaryColorLight dark:hover:text-primaryColor'} to={'/dashboard'}>
+                                Dashboard
+                            </NavLink>
+                            :
+                            <Link to={'/login'}>
+                                <Button variant={"secondary"}>Login</Button>
+                            </Link>
+
                     }
                 </div>
             </div>
