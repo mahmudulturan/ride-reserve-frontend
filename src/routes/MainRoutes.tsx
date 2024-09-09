@@ -9,6 +9,7 @@ import RegisterPage from "@/pages/root/auth/register/RegisterPage";
 import CarDetailsPage from "@/pages/root/car-details/CarDetailsPage";
 import HomePage from "@/pages/root/home/HomePage";
 import OverviewPage from "@/pages/dashboard/overview/OverviewPage";
+import ManageCarsPage from "@/pages/dashboard/manage-cars/ManageCarsPage";
 
 const MainRoutes = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ const MainRoutes = createBrowserRouter([
             {
                 path: '',
                 element: <OverviewPage />
+            },
+            {
+                path: 'manage-cars',
+                element: <ManageCarsPage />
             }
         ]
     }

@@ -5,6 +5,7 @@ import sidebarStyles from './Sidebar.module.css';
 import { MdDashboard, MdDirectionsCarFilled, MdHistory } from 'react-icons/md';
 import { FaUserGroup } from 'react-icons/fa6';
 import { Button } from '@/components/ui/button';
+import ModeToggle from '../Navbar/ModeToggle';
 
 const Sidebar: FC = () => {
     return (
@@ -18,7 +19,7 @@ const Sidebar: FC = () => {
                     <NavLink to={'/dashboard'} className={({ isActive }) => isActive ? sidebarStyles.active : sidebarStyles.navlink}>
                         <MdDashboard className='size-5' /> Overview
                     </NavLink>
-                    <NavLink to={'/manage-cars'} className={({ isActive }) => isActive ? sidebarStyles.active : sidebarStyles.navlink}>
+                    <NavLink to={'/dashboard/manage-cars'} className={({ isActive }) => isActive ? sidebarStyles.active : sidebarStyles.navlink}>
                         <MdDirectionsCarFilled className='size-5' />
                         Manage Cars
                     </NavLink>
@@ -32,8 +33,9 @@ const Sidebar: FC = () => {
                     </NavLink>
                 </div>
             </div>
-            <div>
+            <div className='flex items-center gap-2'>
                 <Button className='w-full'>Logout</Button>
+                <ModeToggle className='w-[48px] h-[48px]' />
             </div>
         </div>
     );
