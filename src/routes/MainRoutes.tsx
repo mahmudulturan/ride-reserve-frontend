@@ -10,6 +10,7 @@ import CarDetailsPage from "@/pages/root/car-details/CarDetailsPage";
 import HomePage from "@/pages/root/home/HomePage";
 import OverviewPage from "@/pages/dashboard/overview/OverviewPage";
 import ManageCarsPage from "@/pages/dashboard/manage-cars/ManageCarsPage";
+import ManageBookingsPage from "@/pages/dashboard/manage-bookings/ManageBookingsPage";
 
 const MainRoutes = createBrowserRouter([
     {
@@ -54,6 +55,10 @@ const MainRoutes = createBrowserRouter([
             {
                 path: 'manage-cars',
                 element: <ManageCarsPage />
+            },
+            {
+                path: 'manage-bookings',
+                element: <ManageBookingsPage />
             }
         ]
     }
