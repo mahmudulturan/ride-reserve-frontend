@@ -1,13 +1,19 @@
 import baseApi from "@/redux/baseApi";
 
-interface ICar {
+export interface ICar {
     _id: string;
     name: string;
+    model: string;
+    year: number;
+    totalPassengers: number;
+    totalDoors: number;
     description: string;
     color: string;
     isElectric: boolean;
+    carType: string;
     status: 'available' | 'unavailable';
     features: string[];
+    additionalFeatures : string[];
     pricePerHour: number;
     isDeleted: boolean;
     createdAt: string;
