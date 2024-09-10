@@ -1,4 +1,4 @@
-import { FC, FormEvent, useState } from 'react';
+import { FC, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
@@ -6,6 +6,9 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { ICar } from '@/redux/features/car/carApi';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import SelectFeatures from './SelectFeatures';
+import SelectAdditionalFeatures from './SelectAdditionalFeatures';
 
 
 const CreateCarModal: FC = () => {
@@ -14,31 +17,16 @@ const CreateCarModal: FC = () => {
     const [features, setFeatures] = useState<string[]>([]);
     const [additionalFeatures, setAdditionalFeatures] = useState<string[]>([]);
 
-    const handleAddCar = (e: FormEvent) => {
-        e.preventDefault();
-        const form = e.target as HTMLFormElement;
-        const name = (form.name as unknown as HTMLInputElement).value;
-        const model = (form.model as unknown as HTMLInputElement).value;
-        // const year = (form.year as unknown as HTMLInputElement).value;
-        const color = (form.color as unknown as HTMLInputElement).value;
-        const carType = (form.carType as unknown as HTMLInputElement).value;
-        const description = (form.description as unknown as HTMLInputElement).value;
-        const pricePerHour = (form.pricePerHour as unknown as HTMLInputElement).value;
+    const { register, handleSubmit, formState: { errors }, } = useForm<Partial<ICar>>();
 
-        const CarData: Partial<ICar> = {
-            name,
-            model,
-            year: parseInt('434'),
-            description,
-            color,
+    const onSubmit: SubmitHandler<Partial<ICar>> = (data) => {
+        const reqData = {
+            ...data,
             isElectric,
-            carType,
             features,
-            additionalFeatures,
-            pricePerHour: parseInt(pricePerHour)
+            additionalFeatures
         }
-
-        console.log(CarData)
+        console.log(reqData);
     }
     return (
         <Dialog open={open} onOpenChange={setOpen} >
@@ -53,18 +41,19 @@ const CreateCarModal: FC = () => {
                     </DialogDescription>
                 </DialogHeader>
                 <div>
-                    <form onSubmit={handleAddCar} className=''>
+                    <form onSubmit={handleSubmit(onSubmit)} className=''>
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-3 h-[50vh] overflow-y-auto thin-scrollbar px-2 pb-2'>
                             <div className="space-y-2">
                                 <Label htmlFor="name" className="text-right">
                                     Name
                                 </Label>
                                 <Input
-                                    required
+                                    {...register('name', { required: true })}
                                     id="name"
                                     placeholder='Car Name'
                                     className=""
                                 />
+                                {errors.name && <span className='text-red-400 text-sm px-3'>Name is required</span>}
                             </div>
 
                             <div className="space-y-2">
@@ -72,18 +61,21 @@ const CreateCarModal: FC = () => {
                                     Model
                                 </Label>
                                 <Input
-                                    required
+                                    {...register('model', { required: true })}
                                     id="model"
                                     placeholder='Car Model'
                                     className=""
                                 />
+                                {errors.model && <span className='text-red-400 text-sm px-3'>Model is required</span>}
                             </div>
 
                             <div className="space-y-2">
                                 <Label htmlFor="carType" className="text-right">
                                     Type
                                 </Label>
-                                <Select>
+                                <Select
+                                    {...register('carType')}
+                                >
                                     <SelectTrigger>
                                         <SelectValue placeholder="Select Car Type" />
                                     </SelectTrigger>
@@ -100,6 +92,7 @@ const CreateCarModal: FC = () => {
                                         <SelectItem value="Van">Van</SelectItem>
                                     </SelectContent>
                                 </Select>
+                                {errors.carType && <span className='text-red-400 text-sm px-3'>Car Type is required</span>}
                             </div>
 
                             <div className="space-y-2">
@@ -107,7 +100,7 @@ const CreateCarModal: FC = () => {
                                     Price
                                 </Label>
                                 <Input
-                                    required
+                                    {...register('pricePerHour', { required: true })}
                                     id="pricePerHour"
                                     placeholder='Car Price by Per Hour'
                                     className=""
@@ -121,10 +114,11 @@ const CreateCarModal: FC = () => {
                                     Color
                                 </Label>
                                 <Input
-                                    required
+                                    {...register('color', { required: true })}
                                     id="color"
                                     placeholder='Car Color'
                                     className=""
+                                    type='text'
                                 />
                             </div>
 
@@ -133,7 +127,7 @@ const CreateCarModal: FC = () => {
                                     Is Electric
                                 </Label>
                                 <div className="flex items-center gap-2 h-10 w-full rounded-md border text-black border-slate-200 bg-white px-3 py-2 text-sm dark:border-primaryColor">
-                                    <Checkbox id="isElectric" />
+                                    <Checkbox id="isElectric" onChange={(e: any) => setIsElectric(e.target.checked)} />
                                     <label
                                         htmlFor="isElectric"
                                         className="text-sm min-w-20 font-semibold cursor-pointer "
@@ -147,26 +141,14 @@ const CreateCarModal: FC = () => {
                                 <Label htmlFor="features" className="text-right">
                                     Features
                                 </Label>
-                                <Input
-                                    required
-                                    id="features"
-                                    placeholder="Car's Features"
-                                    className="col-span-2"
-                                    type='text'
-                                />
+                                <SelectFeatures features={features} setFeatures={setFeatures} />
                             </div>
 
                             <div className="space-y-2 col-span-2">
                                 <Label htmlFor="additionFeature" className="text-right">
                                     Additional Features
                                 </Label>
-                                <Input
-                                    required
-                                    id="additionFeature"
-                                    placeholder="Car's Additional Features"
-                                    className="col-span-2"
-                                    type='text'
-                                />
+                                <SelectAdditionalFeatures features={additionalFeatures} setFeatures={setAdditionalFeatures} />
                             </div>
 
                             <div className="space-y-2 col-span-2">
@@ -174,7 +156,7 @@ const CreateCarModal: FC = () => {
                                     Description
                                 </Label>
                                 <Input
-                                    required
+                                    {...register('description', { required: true })}
                                     id="description"
                                     placeholder='Car description'
                                     className="col-span-2"
@@ -187,7 +169,7 @@ const CreateCarModal: FC = () => {
                                     Total Passengers
                                 </Label>
                                 <Input
-                                    required
+                                    {...register('totalPassengers', { required: true })}
                                     id="totalPassengers"
                                     placeholder="Car's Total Passengers"
                                     className="col-span-2"
@@ -200,7 +182,7 @@ const CreateCarModal: FC = () => {
                                     Total Doors
                                 </Label>
                                 <Input
-                                    required
+                                    {...register('totalDoors', { required: true })}
                                     id="totalDoors"
                                     placeholder="Car's Total Doors"
                                     className="col-span-2"
