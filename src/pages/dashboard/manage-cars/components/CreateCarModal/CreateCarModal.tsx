@@ -1,10 +1,9 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { ICar } from '@/redux/features/car/carApi';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import SelectFeatures from './SelectFeatures';
@@ -12,22 +11,50 @@ import SelectAdditionalFeatures from './SelectAdditionalFeatures';
 
 
 const CreateCarModal: FC = () => {
-    const [open, setOpen] = useState(false);
-    const [isElectric, setIsElectric] = useState(false);
+    const [open, setOpen] = useState<boolean>(false);
+    const [isElectric, setIsElectric] = useState<string>("");
     const [features, setFeatures] = useState<string[]>([]);
     const [additionalFeatures, setAdditionalFeatures] = useState<string[]>([]);
-
+    const [carType, setCarType] = useState<string>('');
+    const [carTypeRequiredError, setCarTypeRequiredError] = useState<boolean>(false);
+    const [featuresRequiredError, setFeaturesRequiredError] = useState<boolean>(false);
+    const [isElectricRequiredError, setIsElectricRequiredError] = useState<boolean>(false);
     const { register, handleSubmit, formState: { errors }, } = useForm<Partial<ICar>>();
 
     const onSubmit: SubmitHandler<Partial<ICar>> = (data) => {
+
         const reqData = {
             ...data,
-            isElectric,
+            isElectric: isElectric === "Yes" ? true : false,
             features,
+            carType,
             additionalFeatures
         }
         console.log(reqData);
     }
+
+    const handleClickSubmit = () => {
+        if (!carType) {
+            setCarTypeRequiredError(true);
+        }
+        if (!features.length) {
+            setFeaturesRequiredError(true);
+        }
+        if (!isElectric) {
+            setIsElectricRequiredError(true);
+        }
+
+    }
+
+    useEffect(() => {
+        if (features.length) {
+            setFeaturesRequiredError(false);
+        }
+
+        if (carType) {
+            setCarTypeRequiredError(false);
+        }
+    }, [features, carType])
     return (
         <Dialog open={open} onOpenChange={setOpen} >
             <DialogTrigger asChild>
@@ -74,7 +101,7 @@ const CreateCarModal: FC = () => {
                                     Type
                                 </Label>
                                 <Select
-                                    {...register('carType')}
+                                    onValueChange={(e) => setCarType(e)}
                                 >
                                     <SelectTrigger>
                                         <SelectValue placeholder="Select Car Type" />
@@ -92,7 +119,7 @@ const CreateCarModal: FC = () => {
                                         <SelectItem value="Van">Van</SelectItem>
                                     </SelectContent>
                                 </Select>
-                                {errors.carType && <span className='text-red-400 text-sm px-3'>Car Type is required</span>}
+                                {carTypeRequiredError && <span className='text-red-400 text-sm px-3'>Car Type is required</span>}
                             </div>
 
                             <div className="space-y-2">
@@ -107,6 +134,7 @@ const CreateCarModal: FC = () => {
                                     min={0}
                                     type='number'
                                 />
+                                {errors.pricePerHour && <span className='text-red-400 text-sm px-3'>Price is required</span>}
                             </div>
 
                             <div className="space-y-2">
@@ -120,21 +148,27 @@ const CreateCarModal: FC = () => {
                                     className=""
                                     type='text'
                                 />
+                                {errors.color && <span className='text-red-400 text-sm px-3'>Color is required</span>}
                             </div>
 
                             <div className="space-y-2">
                                 <Label htmlFor="isElectric" className="text-right">
                                     Is Electric
                                 </Label>
-                                <div className="flex items-center gap-2 h-10 w-full rounded-md border text-black border-slate-200 bg-white px-3 py-2 text-sm dark:border-primaryColor">
-                                    <Checkbox id="isElectric" onChange={(e: any) => setIsElectric(e.target.checked)} />
-                                    <label
-                                        htmlFor="isElectric"
-                                        className="text-sm min-w-20 font-semibold cursor-pointer "
-                                    >
-                                        Is Electric
-                                    </label>
-                                </div>
+                                <Select
+                                    onValueChange={(e) => setIsElectric(e)}
+                                >
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Select Is Electric or Not" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="Yes">Yes</SelectItem>
+                                        <SelectItem value="No">No</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                                {
+                                    isElectricRequiredError && <span className='text-red-400 text-sm px-3'>Is Electric is required</span>
+                                }
                             </div>
 
                             <div className="space-y-2 col-span-2">
@@ -142,6 +176,7 @@ const CreateCarModal: FC = () => {
                                     Features
                                 </Label>
                                 <SelectFeatures features={features} setFeatures={setFeatures} />
+                                {featuresRequiredError && <span className='text-red-400 text-sm px-3'>Features is required</span>}
                             </div>
 
                             <div className="space-y-2 col-span-2">
@@ -162,6 +197,7 @@ const CreateCarModal: FC = () => {
                                     className="col-span-2"
                                     type='text'
                                 />
+                                {errors.description && <span className='text-red-400 text-sm px-3'>Description is required</span>}
                             </div>
 
                             <div className="space-y-2">
@@ -175,6 +211,7 @@ const CreateCarModal: FC = () => {
                                     className="col-span-2"
                                     type='number'
                                 />
+                                {errors.totalPassengers && <span className='text-red-400 text-sm px-3'>Total Passengers is required</span>}
                             </div>
 
                             <div className="space-y-2">
@@ -188,9 +225,10 @@ const CreateCarModal: FC = () => {
                                     className="col-span-2"
                                     type='number'
                                 />
+                                {errors.totalDoors && <span className='text-red-400 text-sm px-3'>Total Doors is required</span>}
                             </div>
                         </div>
-                        <Button type="submit" className='w-full mt-6'>Add Car</Button>
+                        <Button onClick={handleClickSubmit} type="submit" className='w-full mt-6'>Add Car</Button>
                     </form>
                 </div>
             </DialogContent>
