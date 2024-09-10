@@ -2,13 +2,13 @@ import Logo from '@/components/shared/Logo';
 import { FC, useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import sidebarStyles from './Sidebar.module.css';
-import { MdDashboard, MdDirectionsCarFilled, MdHistory } from 'react-icons/md';
+import { MdDashboard, MdDirectionsCarFilled, MdHistory, MdPayments } from 'react-icons/md';
 import { FaUserGroup } from 'react-icons/fa6';
 import { Button } from '@/components/ui/button';
 import ModeToggle from '../Navbar/ModeToggle';
 import MenuButton from '../Navbar/MenuButton';
 
-const navlinksForSidebar = [
+const navlinksForSidebarAdmin = [
     {
         name: 'Overview',
         path: '/dashboard/overview',
@@ -28,7 +28,26 @@ const navlinksForSidebar = [
         name: 'Manage Users',
         path: '/dashboard/manage-users',
         icon: <FaUserGroup className='text-2xl' />
+    },
+]
+
+const navlinksForSidebarUser = [
+    {
+        name: 'Overview',
+        path: '/dashboard/overview',
+        icon: <MdDashboard className='text-2xl' />
+    },
+    {
+        name: 'Manage Bookings',
+        path: '/dashboard/manage-bookings',
+        icon: <MdHistory className='text-2xl' />
+    },
+    {
+        name: 'Manage Payments',
+        path: '/dashboard/manage-payments',
+        icon: <MdPayments className='text-2xl' />
     }
+
 ]
 
 const Sidebar: FC = () => {
@@ -44,6 +63,8 @@ const Sidebar: FC = () => {
             setOpen(false);
         }
     };
+    const role: string = "user";
+    const navlinksForSidebar = role === "admin" ? navlinksForSidebarAdmin : navlinksForSidebarUser;
 
     useEffect(() => {
         // Add the event listener when the component mounts
