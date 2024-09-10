@@ -4,5 +4,5 @@
 }
 
 .active {
-    @apply text-primaryColorLight dark:text-primaryColor flex items-center gap-3 px-3 py-2 hover:bg-gray-200 dark:hover:bg-[#222222] rounded-md duration-300 ;
+    @apply bg-gray-200 text-primaryColorLight dark:text-primaryColor flex items-center gap-3 px-3 py-2 hover:bg-gray-200 dark:hover:bg-[#222222] rounded-md duration-300 ;
 }

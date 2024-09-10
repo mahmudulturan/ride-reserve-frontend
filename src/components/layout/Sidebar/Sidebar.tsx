@@ -87,7 +87,7 @@ const Sidebar: FC = () => {
                             <div className='flex flex-col gap-1 flex-1 my-3'>
                                 {
                                     navlinksForSidebar.map((link, index) => (
-                                        <NavLink key={index} to={link.path} className={({ isActive }) => isActive ? sidebarStyles.active : sidebarStyles.navlink}>
+                                        <NavLink key={index} to={link.path} className={({ isActive }) => isActive ? 'bg-gray-200 dark:bg-[#3a3939] text-primaryColorLight dark:text-primaryColor flex items-center gap-3 px-3 py-2 hover:bg-gray-200 dark:hover:bg-[#3a3939] rounded-md duration-300 ' : 'hover:text-primaryColorLight dark:hover:text-primaryColor flex items-center gap-3 px-3 py-2 hover:bg-gray-200 dark:hover:bg-[#3a3939] rounded-md duration-300'}>
                                             {link.icon}
                                             {link.name}
                                         </NavLink>
