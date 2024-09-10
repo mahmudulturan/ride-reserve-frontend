@@ -12,6 +12,7 @@ import OverviewPage from "@/pages/dashboard/admin/overview/OverviewPage";
 import ManageCarsPage from "@/pages/dashboard/admin/manage-cars/ManageCarsPage";
 import ManageBookingsPage from "@/pages/dashboard/admin/manage-bookings/ManageBookingsPage";
 import ManageUsersPage from "@/pages/dashboard/admin/manage-users/ManageUsersPage";
+import ManagePaymentsPage from "@/pages/dashboard/user/manage-payments/ManagePaymentsPage";
 
 const MainRoutes = createBrowserRouter([
     {
@@ -50,21 +51,33 @@ const MainRoutes = createBrowserRouter([
         element: <DashboardLayout />,
         children: [
             {
-                path: 'overview',
+                path: 'admin/overview',
                 element: <OverviewPage />
             },
             {
-                path: 'manage-cars',
+                path: 'admin/manage-cars',
                 element: <ManageCarsPage />
             },
             {
-                path: 'manage-bookings',
+                path: 'admin/manage-bookings',
                 element: <ManageBookingsPage />
             },
             {
-                path: 'manage-users',
+                path: 'admin/manage-users',
                 element: <ManageUsersPage />
-            }
+            },
+            {
+                path: 'user/overview',
+                element: <OverviewPage />
+            },
+            {
+                path: 'user/manage-bookings',
+                element: <ManageBookingsPage />
+            },
+            {
+                path: 'user/manage-payments',
+                element: <ManagePaymentsPage />
+            },
         ]
     }
 ])

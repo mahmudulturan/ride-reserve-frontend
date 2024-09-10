@@ -11,22 +11,22 @@ import MenuButton from '../Navbar/MenuButton';
 const navlinksForSidebarAdmin = [
     {
         name: 'Overview',
-        path: '/dashboard/overview',
+        path: '/dashboard/admin/overview',
         icon: <MdDashboard className='text-2xl' />
     },
     {
         name: 'Manage Cars',
-        path: '/dashboard/manage-cars',
+        path: '/dashboard/admin/manage-cars',
         icon: <MdDirectionsCarFilled className='text-2xl' />
     },
     {
         name: 'Manage Bookings',
-        path: '/dashboard/manage-bookings',
+        path: '/dashboard/admin/manage-bookings',
         icon: <MdHistory className='text-2xl' />
     },
     {
         name: 'Manage Users',
-        path: '/dashboard/manage-users',
+        path: '/dashboard/admin/manage-users',
         icon: <FaUserGroup className='text-2xl' />
     },
 ]
@@ -34,17 +34,17 @@ const navlinksForSidebarAdmin = [
 const navlinksForSidebarUser = [
     {
         name: 'Overview',
-        path: '/dashboard/overview',
+        path: '/dashboard/user/overview',
         icon: <MdDashboard className='text-2xl' />
     },
     {
         name: 'Manage Bookings',
-        path: '/dashboard/manage-bookings',
+        path: '/dashboard/user/manage-bookings',
         icon: <MdHistory className='text-2xl' />
     },
     {
         name: 'Manage Payments',
-        path: '/dashboard/manage-payments',
+        path: '/dashboard/user/manage-payments',
         icon: <MdPayments className='text-2xl' />
     }
 
