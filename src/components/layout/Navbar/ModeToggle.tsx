@@ -21,7 +21,7 @@ const ModeToggle: FC<{ className?: string }> = ({ className }) => {
         }
     }, [theme]);
 
-    console.log(theme);
+    // console.log(theme);
     return (
         <div className='pr-1'>
             <label className={cn("theme w-10 h-10", className)}>
