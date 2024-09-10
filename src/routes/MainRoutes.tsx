@@ -8,10 +8,10 @@ import LoginPage from "@/pages/root/auth/login/LoginPage";
 import RegisterPage from "@/pages/root/auth/register/RegisterPage";
 import CarDetailsPage from "@/pages/root/car-details/CarDetailsPage";
 import HomePage from "@/pages/root/home/HomePage";
-import OverviewPage from "@/pages/dashboard/overview/OverviewPage";
-import ManageCarsPage from "@/pages/dashboard/manage-cars/ManageCarsPage";
-import ManageBookingsPage from "@/pages/dashboard/manage-bookings/ManageBookingsPage";
-import ManageUsersPage from "@/pages/dashboard/manage-users/ManageUsersPage";
+import OverviewPage from "@/pages/dashboard/admin/overview/OverviewPage";
+import ManageCarsPage from "@/pages/dashboard/admin/manage-cars/ManageCarsPage";
+import ManageBookingsPage from "@/pages/dashboard/admin/manage-bookings/ManageBookingsPage";
+import ManageUsersPage from "@/pages/dashboard/admin/manage-users/ManageUsersPage";
 
 const MainRoutes = createBrowserRouter([
     {
