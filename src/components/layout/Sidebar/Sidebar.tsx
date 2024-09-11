@@ -1,7 +1,7 @@
 import Logo from '@/components/shared/Logo';
 import { FC, useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import sidebarStyles from './Sidebar.module.css';
+import sidebarStyles from './sidebar.module.css';
 import { MdDashboard, MdDirectionsCarFilled, MdHistory, MdPayments } from 'react-icons/md';
 import { FaUserGroup } from 'react-icons/fa6';
 import { Button } from '@/components/ui/button';
