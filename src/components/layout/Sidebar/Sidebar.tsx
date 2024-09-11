@@ -63,7 +63,7 @@ const Sidebar: FC = () => {
             setOpen(false);
         }
     };
-    const role: string = "user";
+    const role: string = "admin";
     const navlinksForSidebar = role === "admin" ? navlinksForSidebarAdmin : navlinksForSidebarUser;
 
     useEffect(() => {

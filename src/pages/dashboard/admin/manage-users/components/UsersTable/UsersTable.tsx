@@ -1,11 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { useGetCarsQuery } from '@/redux/features/car/carApi';
+import { useGetAllUsersQuery } from '@/redux/features/user/userApi';
 import { FC } from 'react';
 
 const UsersTable: FC = () => {
-    const { data: cars } = useGetCarsQuery();
-
+    const { data: users } = useGetAllUsersQuery(undefined);
+    // console.log(users.);
     return (
         <div className='overflow-x-auto thin-scrollbar'>
             <Table className='my-6 border dark:border-gray-600'>
@@ -21,17 +21,19 @@ const UsersTable: FC = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {cars?.data.map((car, index) => (
-                        <TableRow key={car._id}>
+                    {users?.data.map((user, index) => (
+                        <TableRow key={user._id}>
                             <TableCell className="font-medium">{index + 1}</TableCell>
                             <TableCell>
-                                {car.name}
-                                <p className="text-sm text-slate-500 dark:text-slate-300">{car.description.slice(0, 50)}...</p>
+                                {user.name}
+                                <p className="text-sm text-slate-500 dark:text-slate-300">{user.address.slice(0, 50)}...</p>
                             </TableCell>
-                            <TableCell>{car.color}</TableCell>
-                            <TableCell>{car.status}</TableCell>
-                            <TableCell>{car.isElectric ? 'Yes' : 'No'}</TableCell>
-                            <TableCell className="text-right">{car.pricePerHour}</TableCell>
+                            <TableCell>
+                                {user.email}
+                                <p className="text-sm text-slate-500 dark:text-slate-300">{user.phone}...</p>
+                            </TableCell>
+                            <TableCell>{user.role}</TableCell>
+                            <TableCell className="text-right">{user.createdAt}</TableCell>
                             <TableCell className="text-center space-x-3">
                                 <Button variant={"secondary"} isArrowIcon={false}>Edit</Button>
                                 <Button variant={"secondary"} isArrowIcon={false}>Delete</Button>
