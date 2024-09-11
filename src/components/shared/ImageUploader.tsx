@@ -10,12 +10,18 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onUploadSuccess }) => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [uploading, setUploading] = useState(false);
 
+    const inputRef = React.useRef<HTMLInputElement>(null);
+
+    // image select handler
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files.length > 0) {
             setSelectedFile(event.target.files[0]);
         }
     };
 
+
+
+    //   image upload handler
     const handleUpload = async () => {
         if (!selectedFile) return;
 
@@ -39,7 +45,14 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onUploadSuccess }) => {
             }
 
             const data = await response.json();
+
+            // Call the onUploadSuccess callback with the secure URL
             onUploadSuccess(data.secure_url);
+
+            // Reset the input value after uploading
+            if (inputRef.current) {
+                inputRef.current.value = '';
+            }
         } catch (error) {
             if (error instanceof Error) {
                 console.error('Error response:', error.message);
@@ -53,7 +66,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onUploadSuccess }) => {
 
     return (
         <div className='relative flex overflow-hidden rounded-md'>
-            <Input type="file" onChange={handleFileChange} className='cursor-pointer' accept="image/*" />
+            <Input ref={inputRef} type="file" onChange={handleFileChange} className='cursor-pointer' accept="image/*" />
             <Button className='h-10 absolute right-0 top-0 rounded-r-none hover:translate-y-0' onClick={handleUpload} disabled={!selectedFile || uploading}>
                 {uploading ? 'Uploading...' : 'Upload'}
             </Button>
