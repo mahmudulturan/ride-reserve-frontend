@@ -15,9 +15,19 @@ export interface IUser {
 
 const userApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        getAllUsers: builder.query<IResponse<IUser[]>, undefined>({ query: () => "/users" }),
+        getAllUsers: builder.query<IResponse<IUser[]>, undefined>({
+            query: () => "/users"
+        }),
+        changeIsBlockedStatus: builder.mutation<IResponse<IUser>, { id: string, isBlocked: boolean }>({
+            query: ({ id, isBlocked }) =>
+            ({
+                url: `/change-status/${id}`,
+                method: "PATCH",
+                body: { isBlocked }
+            })
+        })
     })
 })
 
 
-export const { useGetAllUsersQuery } = userApi;
+export const { useGetAllUsersQuery, useChangeIsBlockedStatusMutation } = userApi;
