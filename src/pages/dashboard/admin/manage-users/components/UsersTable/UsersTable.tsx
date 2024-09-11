@@ -3,15 +3,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { toast } from '@/components/ui/use-toast';
 import { formateDate } from '@/lib/formateDate';
-import { useChangeUserRoleMutation, useGetAllUsersQuery } from '@/redux/features/user/userApi';
+import { useChangeIsBlockedStatusMutation, useChangeUserRoleMutation, useGetAllUsersQuery } from '@/redux/features/user/userApi';
 import { FC } from 'react';
 
 const UsersTable: FC = () => {
-    // const [role, setRole] = useState<string>('');
     const { data: users } = useGetAllUsersQuery(undefined);
     const [changeRole, { isLoading: isRoleChangeLoading }] = useChangeUserRoleMutation();
-    // console.log(users.);
+    const [blockUser, { isLoading: isBlockUserLoading }] = useChangeIsBlockedStatusMutation(undefined);
 
+    // handler for changing role
     const handleRoleChange = (id: string, role: string) => {
         changeRole({ id, role }).unwrap().then((res) => {
             if (res.success) {
@@ -33,13 +33,29 @@ const UsersTable: FC = () => {
         });
     }
 
-    const handleBlockUser = (id: string) => {
-        console.log(id);
+
+    // handler for changing blocking status
+    const handleBlockStatusChange = (id: string, status: boolean) => {
+        blockUser({ id, isBlocked: status }).unwrap().then((res) => {
+            if (res.success) {
+                toast({
+                    title: res.message,
+                    description: `${res.data.name} now ${status ? 'blocked' : 'unblocked'}`,
+                })
+            } else {
+                toast({
+                    title: res.message,
+                    description: "Failed to block this user",
+                })
+            }
+        }).catch((err) => {
+            toast({
+                title: err.message,
+                description: "Failed to update user role",
+            })
+        });
     }
 
-    const handleUnblockUser = (id: string) => {
-        console.log(id);
-    }
 
     return (
         <div className='overflow-x-auto thin-scrollbar'>
@@ -85,9 +101,23 @@ const UsersTable: FC = () => {
                             <TableCell className="text-center space-x-3">
                                 {
                                     user.isBlocked ?
-                                        <Button onClick={() => handleUnblockUser(user._id)} variant={"destructive"} isArrowIcon={false}>Unblock</Button>
+                                        <Button
+                                            className='bg-green-500 hover:bg-green-400 dark:hover:bg-green-600 dark:bg-green-700'
+                                            disabled={isBlockUserLoading}
+                                            onClick={() => handleBlockStatusChange(user._id, false)}
+                                            variant={"destructive"}
+                                            isArrowIcon={false}>
+
+                                            Unblock
+                                        </Button>
                                         :
-                                        <Button onClick={() => handleBlockUser(user._id)} variant={"destructive"} isArrowIcon={false}>Block</Button>
+                                        <Button
+                                            disabled={isBlockUserLoading}
+                                            onClick={() => handleBlockStatusChange(user._id, true)}
+                                            variant={"destructive"}
+                                            isArrowIcon={false}>
+                                            Block
+                                        </Button>
                                 }
                             </TableCell>
                         </TableRow>
