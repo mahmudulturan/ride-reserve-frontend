@@ -21,7 +21,7 @@ const userApi = baseApi.injectEndpoints({
         changeIsBlockedStatus: builder.mutation<IResponse<IUser>, { id: string, isBlocked: boolean }>({
             query: ({ id, isBlocked }) =>
             ({
-                url: `/change-status/${id}`,
+                url: `/users/change-status/${id}`,
                 method: "PATCH",
                 body: { isBlocked }
             })
@@ -29,7 +29,7 @@ const userApi = baseApi.injectEndpoints({
         changeUserRole: builder.mutation<IResponse<IUser>, { id: string, role: string }>({
             query: ({ id, role }) =>
             ({
-                url: `/change-role/${id}`,
+                url: `/users/change-role/${id}`,
                 method: "PATCH",
                 body: { role }
             })

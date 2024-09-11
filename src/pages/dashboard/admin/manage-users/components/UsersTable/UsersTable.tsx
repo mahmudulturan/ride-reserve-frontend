@@ -1,17 +1,36 @@
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { toast } from '@/components/ui/use-toast';
 import { formateDate } from '@/lib/formateDate';
-import { useGetAllUsersQuery } from '@/redux/features/user/userApi';
+import { useChangeUserRoleMutation, useGetAllUsersQuery } from '@/redux/features/user/userApi';
 import { FC } from 'react';
 
 const UsersTable: FC = () => {
     // const [role, setRole] = useState<string>('');
     const { data: users } = useGetAllUsersQuery(undefined);
+    const [changeRole, { isLoading: isRoleChangeLoading }] = useChangeUserRoleMutation();
     // console.log(users.);
 
     const handleRoleChange = (id: string, role: string) => {
-        console.log(id, role);
+        changeRole({ id, role }).unwrap().then((res) => {
+            if (res.success) {
+                toast({
+                    title: res.message,
+                    description: `${res.data.name} now an ${res.data.role}`,
+                })
+            } else {
+                toast({
+                    title: res.message,
+                    description: "Failed to update user role",
+                })
+            }
+        }).catch((err) => {
+            toast({
+                title: err.message,
+                description: "Failed to update user role",
+            })
+        });
     }
 
     const handleBlockUser = (id: string) => {
@@ -49,6 +68,7 @@ const UsersTable: FC = () => {
                             </TableCell>
                             <TableCell>
                                 <Select
+                                    disabled={isRoleChangeLoading}
                                     onValueChange={(e) => handleRoleChange(user._id, e)}
                                     defaultValue={user.role}
                                 >
