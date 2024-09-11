@@ -25,9 +25,17 @@ const userApi = baseApi.injectEndpoints({
                 method: "PATCH",
                 body: { isBlocked }
             })
+        }),
+        changeUserRole: builder.mutation<IResponse<IUser>, { id: string, role: string }>({
+            query: ({ id, role }) =>
+            ({
+                url: `/change-role/${id}`,
+                method: "PATCH",
+                body: { role }
+            })
         })
     })
 })
 
 
-export const { useGetAllUsersQuery, useChangeIsBlockedStatusMutation } = userApi;
+export const { useGetAllUsersQuery, useChangeIsBlockedStatusMutation, useChangeUserRoleMutation } = userApi;
