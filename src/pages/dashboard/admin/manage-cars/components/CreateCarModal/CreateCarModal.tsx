@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import SelectFeatures from './SelectFeatures';
 import SelectAdditionalFeatures from './SelectAdditionalFeatures';
+import UploadCarImages from './UploadCarImages';
 
 
 const CreateCarModal: FC = () => {
@@ -19,6 +20,8 @@ const CreateCarModal: FC = () => {
     const [carTypeRequiredError, setCarTypeRequiredError] = useState<boolean>(false);
     const [featuresRequiredError, setFeaturesRequiredError] = useState<boolean>(false);
     const [isElectricRequiredError, setIsElectricRequiredError] = useState<boolean>(false);
+    const [images, setImages] = useState<string[]>([]);
+
     const { register, handleSubmit, formState: { errors }, } = useForm<Partial<ICar>>();
 
     const onSubmit: SubmitHandler<Partial<ICar>> = (data) => {
@@ -28,7 +31,8 @@ const CreateCarModal: FC = () => {
             isElectric: isElectric === "Yes" ? true : false,
             features,
             carType,
-            additionalFeatures
+            additionalFeatures,
+            images
         }
         console.log(reqData);
     }
@@ -226,6 +230,9 @@ const CreateCarModal: FC = () => {
                                     type='number'
                                 />
                                 {errors.totalDoors && <span className='text-red-400 text-sm px-3'>Total Doors is required</span>}
+                            </div>
+                            <div className='col-span-2'>
+                                <UploadCarImages images={images} setImages={setImages} />
                             </div>
                         </div>
                         <Button onClick={handleClickSubmit} type="submit" className='w-full mt-6'>Add Car</Button>

@@ -6,6 +6,7 @@ export interface ICar {
     model: string;
     year: number;
     totalPassengers: number;
+    images: string[];
     totalDoors: number;
     description: string;
     color: string;
@@ -13,7 +14,7 @@ export interface ICar {
     carType: string;
     status: 'available' | 'unavailable';
     features: string[];
-    additionalFeatures : string[];
+    additionalFeatures: string[];
     pricePerHour: number;
     isDeleted: boolean;
     createdAt: string;
