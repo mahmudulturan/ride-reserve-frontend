@@ -21,19 +21,27 @@ export interface ICar {
     updatedAt: string;
 };
 
-interface ICarResponse {
-    data: ICar[];
+interface ICarResponse<T> {
+    data: T;
     message: string;
     success: true;
 }
 
+
 const carApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        getCars: build.query<ICarResponse, void>({
+        getCars: build.query<ICarResponse<ICar[]>, void>({
             query: () => "/cars",
+        }),
+        createCar: build.mutation<ICarResponse<ICar>, Partial<ICar>>({
+            query: (body) => ({
+                url: "/cars",
+                method: "POST",
+                body
+            })
         })
     })
 })
 
 
-export const { useGetCarsQuery } = carApi;
+export const { useGetCarsQuery, useCreateCarMutation } = carApi;

@@ -3,12 +3,13 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { ICar } from '@/redux/features/car/carApi';
+import { ICar, useCreateCarMutation } from '@/redux/features/car/carApi';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import SelectFeatures from './SelectFeatures';
 import SelectAdditionalFeatures from './SelectAdditionalFeatures';
 import UploadCarImages from './UploadCarImages';
+import { toast } from '@/components/ui/use-toast';
 
 
 const CreateCarModal: FC = () => {
@@ -20,20 +21,47 @@ const CreateCarModal: FC = () => {
     const [carTypeRequiredError, setCarTypeRequiredError] = useState<boolean>(false);
     const [featuresRequiredError, setFeaturesRequiredError] = useState<boolean>(false);
     const [isElectricRequiredError, setIsElectricRequiredError] = useState<boolean>(false);
+    const [imagesRequiredError, setImagesRequiredError] = useState<boolean>(false);
     const [images, setImages] = useState<string[]>([]);
 
-    const { register, handleSubmit, formState: { errors }, } = useForm<Partial<ICar>>();
+    const { register, handleSubmit, reset, formState: { errors }, } = useForm<Partial<ICar>>();
+
+    const [createCar, { isLoading }] = useCreateCarMutation();
 
     const onSubmit: SubmitHandler<Partial<ICar>> = (data) => {
-
+        const { pricePerHour, totalDoors, totalPassengers, ...rest } = data;
         const reqData = {
-            ...data,
+            ...rest,
+            year: 2014,
+            pricePerHour: Number(pricePerHour),
+            totalDoors: Number(totalDoors),
+            totalPassengers: Number(totalPassengers),
             isElectric: isElectric === "Yes" ? true : false,
             features,
             carType,
             additionalFeatures,
             images
         }
+
+        createCar(reqData).unwrap().then((res) => {
+            toast({
+                title: res.message,
+                description: 'You have successfully logged in.'
+            });
+
+            reset();
+            setFeatures([]);
+            setAdditionalFeatures([]);
+            setCarType('');
+            setImages([]);
+            setIsElectric('');
+            setOpen(false);
+        }).catch((err) => {
+            toast({
+                title: err.data.message,
+                description: 'Something went wrong'
+            });
+        })
         console.log(reqData);
     }
 
@@ -47,9 +75,10 @@ const CreateCarModal: FC = () => {
         if (!isElectric) {
             setIsElectricRequiredError(true);
         }
-
+        if (images.length < 2) {
+            setImagesRequiredError(true);
+        }
     }
-
     useEffect(() => {
         if (features.length) {
             setFeaturesRequiredError(false);
@@ -58,7 +87,14 @@ const CreateCarModal: FC = () => {
         if (carType) {
             setCarTypeRequiredError(false);
         }
-    }, [features, carType])
+        if (images.length >= 2) {
+            setImagesRequiredError(false);
+        }
+
+        if (isElectric) {
+            setIsElectricRequiredError(false);
+        }
+    }, [features, carType, images, isElectric])
     return (
         <Dialog open={open} onOpenChange={setOpen} >
             <DialogTrigger asChild>
@@ -233,9 +269,16 @@ const CreateCarModal: FC = () => {
                             </div>
                             <div className='col-span-2'>
                                 <UploadCarImages images={images} setImages={setImages} />
+                                {
+                                    imagesRequiredError && <span className='text-red-400 text-sm px-3'>Atleast two images are required</span>
+                                }
                             </div>
                         </div>
-                        <Button onClick={handleClickSubmit} type="submit" className='w-full mt-6'>Add Car</Button>
+                        <Button disabled={isLoading} onClick={handleClickSubmit} type="submit" className='w-full mt-6'>
+                            {
+                                isLoading ? 'Creating...' : 'Create Car'
+                            }
+                        </Button>
                     </form>
                 </div>
             </DialogContent>
