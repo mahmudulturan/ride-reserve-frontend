@@ -16,22 +16,23 @@ export interface IUser {
 const userApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getAllUsers: builder.query<IResponse<IUser[]>, undefined>({
-            query: () => "/users"
+            query: () => "/users",
+            providesTags: ["Users"]
         }),
         changeIsBlockedStatus: builder.mutation<IResponse<IUser>, { id: string, isBlocked: boolean }>({
             query: ({ id, isBlocked }) =>
             ({
                 url: `/users/change-status/${id}`,
                 method: "PATCH",
-                body: { isBlocked }
-            })
+                body: { isBlocked },
+            }), invalidatesTags: ["Users"]
         }),
         changeUserRole: builder.mutation<IResponse<IUser>, { id: string, role: string }>({
             query: ({ id, role }) =>
             ({
                 url: `/users/change-role/${id}`,
                 method: "PATCH",
-                body: { role }
+                body: { role }, invalidatesTags: ["Users"]
             })
         })
     })
