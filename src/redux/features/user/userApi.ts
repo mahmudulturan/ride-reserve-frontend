@@ -9,8 +9,8 @@ export interface IUser {
     phone?: string;
     isDeleted: boolean;
     isBlocked: boolean;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 const userApi = baseApi.injectEndpoints({
