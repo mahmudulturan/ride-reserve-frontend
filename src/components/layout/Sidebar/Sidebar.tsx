@@ -75,7 +75,7 @@ const Sidebar: FC = () => {
         };
     }, []);
     return (
-        <div ref={sidebarRef} className='flex relative rounded-r-[20px] overflow-hidden'>
+        <div ref={sidebarRef} className='flex  rounded-b-[20px] lg:rounded-r-[20px] overflow-hidden'>
             <div className={`px-5 shadow-xl min-h-screen hidden lg:block w-[253px] bg-gray-100 dark:bg-darkBg`}>
                 <div className='min-h-screen py-5 flex flex-col'>
                     <div className='flex-1'>
@@ -103,7 +103,7 @@ const Sidebar: FC = () => {
                 </div>
             </div>
 
-            <div className={`px-5 shadow-xl min-h-screen lg:hidden w-[253px] bg-white dark:bg-[#1B1B1B] absolute left-0 ${open ? 'translate-x-0' : '-translate-x-full'} duration-300`}>
+            <div className={`px-5 shadow-xl min-h-screen lg:hidden w-[253px] bg-white dark:bg-[#1B1B1B] fixed z-20 left-0 ${open ? 'translate-x-0' : '-translate-x-full'} duration-300`}>
                 <div className='min-h-screen py-5 flex flex-col'>
                     <div className='flex-1'>
                         <div className='flex items-center justify-center pb-3'>
@@ -129,7 +129,7 @@ const Sidebar: FC = () => {
                     </div>
                 </div>
             </div>
-            <div className='lg:hidden flex items-center justify-between w-full px-5 py-4 shadow-xl dark:border-b border-gray-900' >
+            <div className='lg:hidden flex items-center justify-between w-full px-5 py-4 shadow-xl dark:border-b border-gray-900 bg-gray-100 dark:bg-darkBg' >
                 <Logo />
                 <MenuButton open={open} menuToggler={menuToggler} />
             </div>
