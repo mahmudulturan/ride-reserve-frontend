@@ -46,7 +46,7 @@ const Footer: FC = () => {
                         <p className='text-sm max-w-xs font-light text-slate-700 dark:text-slate-200'>Want to be notified about our services. Just sign up and we'll send you a notification by email.</p>
                         <div className='pt-3'>
                             <div className='relative'>
-                                <Input className='bg-transparent border-primaryColorLight dark:border-primaryColor focus-visible:ring-transparent  focus-visible:ring-offset-0 border-2 dark:placeholder:text-white dark:text-white dark:bg-transparent py-7 pr-[42px] rounded-full' placeholder='Enter your email' />
+                                <Input className='bg-transparent border-primaryColorLight dark:border-primaryColor focus-visible:ring-0  focus-visible:ring-offset-0 border-2 dark:placeholder:text-white dark:text-white dark:bg-transparent py-7 pr-[42px] rounded-full' placeholder='Enter your email' />
                                 <div className='absolute top-0 right-3 h-full w-[40px] flex items-center justify-center'>
                                     <Button variant={"outline"} size={"icon"} className='text-xl'></Button>
                                 </div>
