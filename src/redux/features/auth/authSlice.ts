@@ -1,7 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IUser } from "../user/userApi";
 
+interface IInitialState {
+    isAuthenticate: boolean;
+    isAuthLoading: boolean;
+    user: null | IUser;
+}
 
-const initialState = {
+const initialState: IInitialState = {
     isAuthenticate: false,
     isAuthLoading: true,
     user: null,

@@ -13,6 +13,7 @@ import ManageCarsPage from "@/pages/dashboard/admin/manage-cars/ManageCarsPage";
 import ManageBookingsPage from "@/pages/dashboard/admin/manage-bookings/ManageBookingsPage";
 import ManageUsersPage from "@/pages/dashboard/admin/manage-users/ManageUsersPage";
 import ManagePaymentsPage from "@/pages/dashboard/user/manage-payments/ManagePaymentsPage";
+import UserOverviewPage from "@/pages/dashboard/user/overview/UserOverviewPage";
 
 const MainRoutes = createBrowserRouter([
     {
@@ -68,7 +69,7 @@ const MainRoutes = createBrowserRouter([
             },
             {
                 path: 'user/overview',
-                element: <OverviewPage />
+                element: <UserOverviewPage />
             },
             {
                 path: 'user/manage-bookings',
