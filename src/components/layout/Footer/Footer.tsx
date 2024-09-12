@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const Footer: FC = () => {
     const year = new Date().getFullYear();
     return (
-        <div className=''>
+        <div className='border-t border-gray-100 dark:border-gray-800 my-20'>
             <div className='wrapper py-10 '>
                 <div className='my-6 flex items-start justify-between flex-col md:flex-row gap-6'>
                     <div className='space-y-3'>
