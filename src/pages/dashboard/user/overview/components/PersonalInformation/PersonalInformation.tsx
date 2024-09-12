@@ -1,11 +1,15 @@
 import { useAppSelector } from '@/redux/hook';
 import { FC } from 'react';
+import EditPersonalInformationModal from './EditPersonalInformationModal';
 
 const PersonalInformation: FC = () => {
     const user = useAppSelector(state => state.authSlice.user);
     return (
         <div className='border border-slate-200 dark:border-slate-600 px-4 py-5 my-6 rounded-[20px]'>
-            <h3 className='text-2xl font-semibold'>Personal Information</h3>
+            <div className='flex items-center justify-between'>
+                <h3 className='text-2xl font-semibold'>Personal Information</h3>
+                <EditPersonalInformationModal user={user} />
+            </div>
             <div className='my-2 space-y-1'>
                 <h4 className=''><span className='font-bold'>Name :</span> <span className='dark:text-slate-300'>{user?.name}</span>
                 </h4>
