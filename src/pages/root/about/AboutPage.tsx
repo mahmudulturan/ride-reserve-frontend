@@ -3,7 +3,8 @@ import { FC } from 'react';
 import TeamSection from './components/TeamSection/TeamSection';
 import SectionSeparator from '@/components/shared/SectionSeparator/SectionSeparator';
 import ContatctSection from './components/ContatctSection/ContatctSection';
-import HistorySection from './components/HistoryAndCommitment/HistorySection';
+import HistorySection from './components/HistorySection/HistorySection';
+import CommitmentSection from './components/CommitmentSection/CommitmentSection';
 
 const AboutPage: FC = () => {
     return (
@@ -14,6 +15,7 @@ const AboutPage: FC = () => {
             <div className='wrapper'>
                 <HistorySection />
                 <SectionSeparator />
+                <CommitmentSection />
                 <TeamSection />
                 <SectionSeparator />
                 <ContatctSection />
