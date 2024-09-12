@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useGetBookingsQuery } from '@/redux/features/booking/bookingApi';
+import UpdateBookingModal from '../UpdateBookingModal/UpdateBookingModal';
 
 const UserBookingsTable: FC = () => {
     const { data: bookings } = useGetBookingsQuery();
@@ -33,7 +34,7 @@ const UserBookingsTable: FC = () => {
                             <TableCell className="text-center">{booking.totalCost}</TableCell>
                             <TableCell className="text-center">{booking.status === "pending" && "Pending"}</TableCell>
                             <TableCell className="text-center space-x-3">
-                                <Button variant={"secondary"} isArrowIcon={false}>Edit</Button>
+                                <UpdateBookingModal booking={booking} />
 
                                 <Button
                                     // disabled={isChangeStatusLoading}

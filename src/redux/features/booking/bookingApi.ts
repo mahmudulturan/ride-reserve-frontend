@@ -2,7 +2,7 @@ import baseApi, { IResponse } from "@/redux/baseApi";
 import { IUser } from "../user/userApi";
 import { ICar } from "../car/carApi";
 
-interface IBooking {
+export interface IBooking {
     _id: string;
     date: string;
     user: IUser ;
