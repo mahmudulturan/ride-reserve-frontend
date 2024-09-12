@@ -11,7 +11,8 @@ const HistorySection: FC = () => {
         <div className='wrapper my-20 flex flex-col-reverse md:flex-row items-center justify-between gap-6'>
             <div className='flex-1'>
                 <SectionHeading subHeading='Ride Reserve' heading='We Are More Than A Car Rental Company' align='left' className='my-0' />
-                <p className='text-Grayish max-w-xl'>At our car rental company, we pride ourselves on providing an exceptional experience that sets us apart from the competition. From our wide selection of well-maintained vehicles to our unparalleled customer service, we're dedicated to making your rental experience seamless and enjoyable.</p>
+                <p className='text-Grayish max-w-xl'>Founded in 1995, Ride Reserve has been providing top-notch car rental services for over 25 years. Our mission is to offer reliable, affordable, and convenient transportation solutions to our customers.
+                    We envision a future where everyone has access to safe and comfortable transportation, no matter where their journey takes them.</p>
                 <div className='space-y-3 my-5'>
                     <div className='flex items-center gap-2 group'>
                         <Button variant={"outline"} size={"icon"} isArrowIcon={false} className='group-hover:bg-primaryColor group-hover:text-black'>
