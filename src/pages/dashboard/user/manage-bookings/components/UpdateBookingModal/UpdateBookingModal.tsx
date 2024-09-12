@@ -1,11 +1,13 @@
 import { FC, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
+// import { Label } from '@/components/ui/label';
+// import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { IBooking } from '@/redux/features/booking/bookingApi';
+import { Label } from '@radix-ui/react-label';
+import { Input } from '@/components/ui/input';
 
 
 const UpdateBookingModal: FC<{ booking: IBooking }> = ({ booking }) => {
@@ -16,8 +18,9 @@ const UpdateBookingModal: FC<{ booking: IBooking }> = ({ booking }) => {
 
 
     const onSubmit: SubmitHandler<Partial<IBooking>> = (data) => {
-
+        console.log(booking)
         console.log(data);
+        reset();
     }
 
     return (
@@ -35,6 +38,20 @@ const UpdateBookingModal: FC<{ booking: IBooking }> = ({ booking }) => {
                 <div>
                     <form onSubmit={handleSubmit(onSubmit)} className=''>
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-3  overflow-y-auto thin-scrollbar px-2 pb-2'>
+                            <div>
+                                <Label htmlFor="name" className="text-right">
+                                    Name
+                                </Label>
+                                <Input
+                                    {...register('date', { required: true })}
+                                    id="date"
+                                    placeholder='Booking date'
+                                    className=""
+                                />
+                                {errors.date && <p className='text-red-500'>This field is required</p>}
+                            </div>
+                            <div>
+                            </div>
                             {/* boooking info */}
                         </div>
 
