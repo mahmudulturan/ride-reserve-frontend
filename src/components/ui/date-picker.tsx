@@ -13,16 +13,16 @@ const DatePicker: FC<{ label: string }> = ({ label }) => {
 
     return (
         <Popover>
-            <PopoverTrigger asChild>
+            <PopoverTrigger asChild className="group">
                 <Button
                     variant={"outline"}
                     className={cn(
-                        "w-full justify-start text-left font-normal",
+                        "w-full justify-start text-left font-normal text-black dark:text-slate-400",
                         !date && "text-muted-foreground"
                     )}
                     isArrowIcon={false}
                 >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    <CalendarIcon className="mr-2 size-5 text-primaryColorLight dark:text-primaryColor group-hover:text-white dark:group-hover:text-black" />
                     {date ? format(date, "PPP") : <span>{label}</span>}
                 </Button>
             </PopoverTrigger>
