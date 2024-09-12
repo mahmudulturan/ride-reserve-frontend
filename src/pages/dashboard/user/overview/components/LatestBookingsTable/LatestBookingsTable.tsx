@@ -20,6 +20,7 @@ const LatestBookingsTable: FC = () => {
                         <TableHead className='text-center'>Start Time - End Time</TableHead>
                         <TableHead className="text-center">Date</TableHead>
                         <TableHead className='text-center'>Total Cost</TableHead>
+                        <TableHead className='text-center'>Status</TableHead>
                         <TableHead className="text-center min-w-[290px]">Actions</TableHead>
                     </TableRow>
                 </TableHeader>
@@ -34,6 +35,7 @@ const LatestBookingsTable: FC = () => {
                             <TableCell className='text-center'>{booking.startTime} - {booking.endTime ? booking.endTime : 'Running'}</TableCell>
                             <TableCell className="text-right">{booking.date}</TableCell>
                             <TableCell className="text-center">{booking.totalCost}</TableCell>
+                            <TableCell className="text-center">{booking.status === "pending" && "Pending"}</TableCell>
                             <TableCell className="text-center space-x-3">
                                 <Button variant={"secondary"} isArrowIcon={false}>Edit</Button>
 

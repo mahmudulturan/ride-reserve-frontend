@@ -10,6 +10,7 @@ interface IBooking {
     startTime: string;
     endTime: string;
     totalCost: number;
+    status: "pending" | "approved" | "cancelled";
 }
 
 const boookingApi = baseApi.injectEndpoints({
