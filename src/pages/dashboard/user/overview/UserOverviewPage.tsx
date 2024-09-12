@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import PersonalInformation from './components/PersonalInformation/PersonalInformation';
 import BookingStats from './components/BookingStats/BookingStats';
+import LatestBookingsTable from './components/LatestBookingsTable/LatestBookingsTable';
 
 const UserOverviewPage: FC = () => {
     return (
@@ -16,7 +17,7 @@ const UserOverviewPage: FC = () => {
                     <BookingStats />
                 </div>
             </div>
-
+            <LatestBookingsTable />
         </div>
     );
 };
