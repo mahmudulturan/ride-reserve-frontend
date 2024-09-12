@@ -8,8 +8,8 @@ const HomePage: FC = () => {
     return (
         <div style={{ minHeight: "calc(100vh - 84px)" }}>
             <Banner />
-            <FeaturedCars />
             <WhyChooseUsSection />
+            <FeaturedCars />
             <TestimonialsSection />
         </div>
     );
