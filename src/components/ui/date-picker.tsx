@@ -19,7 +19,7 @@ const DatePicker: React.FC = () => {
                 <Button
                     variant={"outline"}
                     className={cn(
-                        "w-[280px] justify-start text-left font-normal",
+                        "w-full lg:w-[280px] justify-start text-left font-normal",
                         !date && "text-muted-foreground"
                     )}
                     isArrowIcon={false}
