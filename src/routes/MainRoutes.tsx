@@ -15,6 +15,8 @@ import ManageUsersPage from "@/pages/dashboard/admin/manage-users/ManageUsersPag
 import ManagePaymentsPage from "@/pages/dashboard/user/manage-payments/ManagePaymentsPage";
 import UserOverviewPage from "@/pages/dashboard/user/overview/UserOverviewPage";
 import UserManageBookingsPage from "@/pages/dashboard/user/manage-bookings/UserManageBookingsPage";
+import PaymentSuccessPage from "@/pages/dashboard/user/payments/PaymentSuccessPage";
+import PaymentErrorPage from "@/pages/dashboard/user/payments/PaymentErrorPage";
 
 const MainRoutes = createBrowserRouter([
     {
@@ -79,6 +81,14 @@ const MainRoutes = createBrowserRouter([
             {
                 path: 'user/manage-payments',
                 element: <ManagePaymentsPage />
+            },
+            {
+                path: 'user/payment-success/:id',
+                element: <PaymentSuccessPage />
+            },
+            {
+                path: 'user/payment-failed/:id',
+                element: <PaymentErrorPage />
             },
         ]
     }
