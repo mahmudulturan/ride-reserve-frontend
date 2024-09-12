@@ -1,15 +1,15 @@
 import { FC } from 'react';
-import BookingsTable from './components/BookingsTable/BookingsTable';
+import UserBookingsTable from './components/BookingsTable/UserBookingsTable';
 
-const ManageBookingsPage: FC = () => {
+const UserManageBookingsPage: FC = () => {
     return (
         <div className='dashboard-wrapper overflow-x-auto'>
             <div className='flex justify-between'>
                 <h3 className='text-2xl font-bold'>Manage Bookings</h3>
             </div>
-            <BookingsTable />
+            <UserBookingsTable />
         </div>
     );
 };
 
-export default ManageBookingsPage;
+export default UserManageBookingsPage;

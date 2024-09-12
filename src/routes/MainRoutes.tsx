@@ -14,6 +14,7 @@ import ManageBookingsPage from "@/pages/dashboard/admin/manage-bookings/ManageBo
 import ManageUsersPage from "@/pages/dashboard/admin/manage-users/ManageUsersPage";
 import ManagePaymentsPage from "@/pages/dashboard/user/manage-payments/ManagePaymentsPage";
 import UserOverviewPage from "@/pages/dashboard/user/overview/UserOverviewPage";
+import UserManageBookingsPage from "@/pages/dashboard/user/manage-bookings/UserManageBookingsPage";
 
 const MainRoutes = createBrowserRouter([
     {
@@ -73,7 +74,7 @@ const MainRoutes = createBrowserRouter([
             },
             {
                 path: 'user/manage-bookings',
-                element: <ManageBookingsPage />
+                element: <UserManageBookingsPage />
             },
             {
                 path: 'user/manage-payments',
