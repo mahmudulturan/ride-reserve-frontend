@@ -1,16 +1,14 @@
-import ImageUploader from '@/components/shared/ImageUploader';
-import { FC, useState } from 'react';
+import { FC } from 'react';
+import OverviewStats from './components/OverviewStats/OverviewStats';
 
 const OverviewPage: FC = () => {
-    const [url, setUrl] = useState('');
-    const consoleit = (url: string) => {
-        setUrl(url);
-        console.log(url);
-    }
+
     return (
         <div className='dashboard-wrapper'>
-            <img src={url} alt="" />
-            <ImageUploader onUploadSuccess={consoleit} />
+            <div className='flex justify-between'>
+                <h3 className='text-2xl font-bold'>Overview</h3>
+            </div>
+            <OverviewStats />
         </div>
     );
 };

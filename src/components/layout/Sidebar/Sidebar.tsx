@@ -7,6 +7,7 @@ import { FaUserGroup } from 'react-icons/fa6';
 import { Button } from '@/components/ui/button';
 import ModeToggle from '../Navbar/ModeToggle';
 import MenuButton from '../Navbar/MenuButton';
+import { useAppSelector } from '@/redux/hook';
 
 const navlinksForSidebarAdmin = [
     {
@@ -52,6 +53,7 @@ const navlinksForSidebarUser = [
 
 const Sidebar: FC = () => {
     const [open, setOpen] = useState(false);
+    const user = useAppSelector(state => state.authSlice.user);
 
     const menuToggler = () => setOpen(!open);
 
@@ -63,8 +65,9 @@ const Sidebar: FC = () => {
             setOpen(false);
         }
     };
-    const role: string = "user";
-    const navlinksForSidebar = role === "admin" ? navlinksForSidebarAdmin : navlinksForSidebarUser;
+
+
+    const navlinksForSidebar = user?.role === "admin" ? navlinksForSidebarAdmin : navlinksForSidebarUser;
 
     useEffect(() => {
         // Add the event listener when the component mounts
