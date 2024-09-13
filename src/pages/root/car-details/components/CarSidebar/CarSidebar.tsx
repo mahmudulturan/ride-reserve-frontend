@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { GiCarDoor } from 'react-icons/gi';
 import { MdOutlineElectricCar } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 const CarSidebar: FC = () => {
     return (
@@ -43,7 +44,9 @@ const CarSidebar: FC = () => {
                         <h4 className='flex items-center justify-between gap-3'><span className='text-slate-500 dark:text-Grayish font-light'>Availiblity :</span> <span>Available</span></h4>
                     </div>
                 </div>
-                <Button className='w-full'>Book Now</Button>
+                <Link to={'/booking'}>
+                    <Button className='w-full'>Book Now</Button>
+                </Link>
             </div>
         </div>
     );

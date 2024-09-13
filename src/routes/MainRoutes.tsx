@@ -18,6 +18,7 @@ import UserManageBookingsPage from "@/pages/dashboard/user/manage-bookings/UserM
 import PaymentSuccessPage from "@/pages/dashboard/user/payments/PaymentSuccessPage";
 import PaymentErrorPage from "@/pages/dashboard/user/payments/PaymentErrorPage";
 import ManageReturnCarsPage from "@/pages/dashboard/admin/manage-return-cars/ManageReturnCarsPage";
+import BookingPage from "@/pages/root/booking/BookingPage";
 
 const MainRoutes = createBrowserRouter([
     {
@@ -36,6 +37,10 @@ const MainRoutes = createBrowserRouter([
             {
                 path: "/cars/:id",
                 element: <CarDetailsPage />
+            },
+            {
+                path: "/booking",
+                element: <BookingPage />
             },
             {
                 path: "/about",
