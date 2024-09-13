@@ -11,8 +11,8 @@ export const navlinks = [
         name: 'About',
         path: '/about'
     },
-    {
-        name: 'Contact',
-        path: '/contact'
-    }
+    // {
+    //     name: 'Contact',
+    //     path: '/contact'
+    // }
 ];
