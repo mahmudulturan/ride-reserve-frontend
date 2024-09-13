@@ -9,7 +9,7 @@ const AllCarsPage: FC = () => {
             <PageHeading subHeading='Rent Now'>
                 <span className='text-primaryColor'>Select</span> Luxury Car
             </PageHeading>
-            <div className='wrapper flex gap-6'>
+            <div className='flex flex-col lg:flex-row gap-6 wrapper'>
                 <div className='max-w-[356px] w-full'>
                     <SearchFilterSidebar />
                 </div>
