@@ -1,6 +1,6 @@
 import Logo from '@/components/shared/Logo';
 import { FC, useState, useEffect, useRef } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import sidebarStyles from './sidebar.module.css';
 import { MdDashboard, MdDirectionsCarFilled, MdHistory, MdPayments } from 'react-icons/md';
 import { IoCarSportSharp } from "react-icons/io5";
@@ -8,7 +8,9 @@ import { FaUserGroup } from 'react-icons/fa6';
 import { Button } from '@/components/ui/button';
 import ModeToggle from '../Navbar/ModeToggle';
 import MenuButton from '../Navbar/MenuButton';
-import { useAppSelector } from '@/redux/hook';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
+import { clearToken } from '@/utils/tokenStorage';
+import { removeUser } from '@/redux/features/auth/authSlice';
 
 const navlinksForSidebarAdmin = [
     {
@@ -60,6 +62,11 @@ const navlinksForSidebarUser = [
 const Sidebar: FC = () => {
     const [open, setOpen] = useState(false);
     const user = useAppSelector(state => state.authSlice.user);
+    const dispatch = useAppDispatch();
+    
+    const navlinksForSidebar = user?.role === "admin" ? navlinksForSidebarAdmin : navlinksForSidebarUser;
+
+    const navigate = useNavigate();
 
     const menuToggler = () => setOpen(!open);
 
@@ -73,7 +80,13 @@ const Sidebar: FC = () => {
     };
 
 
-    const navlinksForSidebar = user?.role === "admin" ? navlinksForSidebarAdmin : navlinksForSidebarUser;
+
+
+    const handleLogout = () => {
+        clearToken();
+        dispatch(removeUser());
+        navigate('/');
+    }
 
     useEffect(() => {
         // Add the event listener when the component mounts
@@ -106,7 +119,7 @@ const Sidebar: FC = () => {
                         </div>
                     </div>
                     <div className='flex items-center gap-2'>
-                        <Button className='w-full'>Logout</Button>
+                        <Button onClick={handleLogout} className='w-full'>Logout</Button>
                         <ModeToggle className='w-[48px] h-[48px]' />
                     </div>
                 </div>
@@ -133,7 +146,7 @@ const Sidebar: FC = () => {
                         </div>
                     </div>
                     <div className='flex items-center gap-2'>
-                        <Button className='w-full'>Logout</Button>
+                        <Button onClick={handleLogout} className='w-full'>Logout</Button>
                         <ModeToggle className='w-[48px] h-[48px]' />
                     </div>
                 </div>
