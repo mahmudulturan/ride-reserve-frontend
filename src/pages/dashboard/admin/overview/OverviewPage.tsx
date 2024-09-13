@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import OverviewStats from './components/OverviewStats/OverviewStats';
 import OverviewChart from './components/OverviewChart/OverviewChart';
+import OverviewCalender from './components/OverviewCalender/OverviewCalender';
 
 const OverviewPage: FC = () => {
 
@@ -15,7 +16,7 @@ const OverviewPage: FC = () => {
                     <OverviewChart />
                 </div>
                 <div className='md:col-span-2'>
-                    calender
+                    <OverviewCalender />
                 </div>
             </div>
         </div>

@@ -1,0 +1,13 @@
+.overview-calender .rdp{
+    width: 100%;
+}
+
+.overview-calender .rdp-caption_start{
+    width: 100%;
+}
+.overview-calender .rdp-head tr{
+    justify-content: space-between;
+}
+.overview-calender .rdp-tbody tr{
+    justify-content: space-between;
+}
