@@ -78,9 +78,9 @@ const Sidebar: FC = () => {
         };
     }, []);
     return (
-        <div ref={sidebarRef} className='flex  rounded-b-[20px] lg:rounded-r-[20px] overflow-hidden'>
+        <div ref={sidebarRef} className='flex  rounded-b-[20px] lg:rounded-r-[20px] overflow-hidden sticky top-0'>
             <div className={`px-5 shadow-xl min-h-screen hidden lg:block w-[253px] bg-gray-100 dark:bg-darkBg`}>
-                <div className='min-h-screen py-5 flex flex-col'>
+                <div className='min-h-screen py-5 flex flex-col '>
                     <div className='flex-1'>
                         <div className='flex items-center justify-center pb-3'>
                             <Logo />
