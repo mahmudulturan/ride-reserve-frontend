@@ -2,8 +2,10 @@ import { FC } from 'react';
 import PageHeading from '@/components/shared/PageHeading/PageHeading';
 import SearchFilterSidebar from './components/SearchFilterSidebar/SearchFilterSidebar';
 import CarCardSecondary from './components/CarCardSecondary/CarCardSecondary';
+import { useGetCarsQuery } from '@/redux/features/car/carApi';
 
 const AllCarsPage: FC = () => {
+    const { data: cars } = useGetCarsQuery();
     return (
         <div>
             <PageHeading subHeading='Rent Now'>
@@ -16,8 +18,8 @@ const AllCarsPage: FC = () => {
 
                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 my-20'>
                     {
-                        Array(10).fill(0).map((_, index) => (
-                            <CarCardSecondary key={index} />
+                        cars?.data.map((car, index) => (
+                            <CarCardSecondary car={car} key={index} />
                         ))
                     }
                 </div>

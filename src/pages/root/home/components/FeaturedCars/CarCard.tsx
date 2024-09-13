@@ -15,7 +15,7 @@ const CarCard: FC<{ car: ICar }> = ({ car }) => {
             <div className='lg:absolute w-full flex items-center justify-center z-10 -bottom-10'>
                 <div className='lg:w-10/12 mx-auto rounded-[20px] rounded-t-none lg:rounded-t-[20px] bg-gray-100 dark:bg-[#222222] py-[30px] px-[25px] flex items-stretch sm:items-center justify-between w-full flex-col sm:flex-row gap-4'>
                     <div className=''>
-                        <Link to={"/car-details"}>
+                        <Link to={`/cars/${car._id}`}>
                             <h2 className='text-[21px] font-bold'>{car.name}</h2>
                         </Link>
                         <div className='flex items-center gap-3'>
