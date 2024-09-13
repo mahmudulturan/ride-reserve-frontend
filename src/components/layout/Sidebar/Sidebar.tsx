@@ -3,6 +3,7 @@ import { FC, useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import sidebarStyles from './sidebar.module.css';
 import { MdDashboard, MdDirectionsCarFilled, MdHistory, MdPayments } from 'react-icons/md';
+import { IoCarSportSharp } from "react-icons/io5";
 import { FaUserGroup } from 'react-icons/fa6';
 import { Button } from '@/components/ui/button';
 import ModeToggle from '../Navbar/ModeToggle';
@@ -24,6 +25,11 @@ const navlinksForSidebarAdmin = [
         name: 'Manage Bookings',
         path: '/dashboard/admin/manage-bookings',
         icon: <MdHistory className='text-2xl' />
+    },
+    {
+        name: 'Manage Return Cars',
+        path: '/dashboard/admin/manage-return-cars',
+        icon: <IoCarSportSharp className='text-2xl' />
     },
     {
         name: 'Manage Users',
