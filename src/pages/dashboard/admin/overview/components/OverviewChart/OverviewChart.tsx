@@ -1,41 +1,60 @@
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
-import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent, } from "@/components/ui/chart"
 import { FC } from "react"
+import { Bar, BarChart, XAxis } from "recharts"
+import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent, } from "@/components/ui/chart"
 
 
 const chartData = [
-    { date: "2024-04-01", desktop: 222, mobile: 150 },
-    { date: "2024-04-02", desktop: 97, mobile: 180 },
-    { date: "2024-04-03", desktop: 167, mobile: 120 },
-    { date: "2024-04-04", desktop: 242, mobile: 260 },
-    { date: "2024-04-05", desktop: 373, mobile: 290 },
-    { date: "2024-06-21", desktop: 169, mobile: 210 },
-    { date: "2024-06-22", desktop: 317, mobile: 270 },
+    { date: "2024-04-01", rent: 222 },
+    { date: "2024-04-02", rent: 97 },
+    { date: "2024-04-03", rent: 167 },
+    { date: "2024-04-04", rent: 242 },
+    { date: "2024-04-05", rent: 373 },
+    { date: "2024-06-21", rent: 169 },
+    { date: "2024-06-22", rent: 317 },
+    { date: "2024-04-04", rent: 242 },
+    { date: "2024-04-05", rent: 373 },
+    { date: "2024-06-21", rent: 169 },
+    { date: "2024-04-01", rent: 222 },
+    { date: "2024-04-02", rent: 97 },
+    { date: "2024-04-03", rent: 167 },
+    { date: "2024-04-04", rent: 242 },
+    { date: "2024-04-05", rent: 373 },
+    { date: "2024-06-21", rent: 169 },
+    { date: "2024-06-22", rent: 317 },
+    { date: "2024-04-04", rent: 242 },
+    { date: "2024-04-05", rent: 373 },
+    { date: "2024-06-21", rent: 169 },
+    { date: "2024-04-01", rent: 222 },
+    { date: "2024-04-02", rent: 97 },
+    { date: "2024-04-03", rent: 167 },
+    { date: "2024-04-04", rent: 242 },
+    { date: "2024-04-05", rent: 373 },
+    { date: "2024-06-21", rent: 169 },
+    { date: "2024-06-22", rent: 317 },
+    { date: "2024-04-04", rent: 242 },
+    { date: "2024-04-05", rent: 373 },
+    { date: "2024-06-21", rent: 169 },
 
 ]
 const chartConfig = {
     views: {
-        label: "Page Views",
+        label: "Total Rents",
     },
-    desktop: {
-        label: "Desktop",
+    rent: {
+        label: "Rent",
         color: "hsl(var(--chart-1))",
-    },
-    mobile: {
-        label: "Mobile",
-        color: "hsl(var(--chart-2))",
-    },
+    }
 } satisfies ChartConfig
 
 
 const OverviewChart: FC = () => {
 
-
     return (
         <div className="border border-slate-200 dark:border-slate-600 py-5 px-4 h-full rounded-[20px]" style={{ minHeight: "calc(100vh - 282px)" }}>
+            <h3 className='text-2xl font-semibold mb-3'>Last 30 days</h3>
             <ChartContainer
                 config={chartConfig}
-                className="aspect-auto h-full w-full"
+                className="aspect-auto max-h-[550px] w-full"
             >
                 <BarChart
                     accessibilityLayer
@@ -45,7 +64,6 @@ const OverviewChart: FC = () => {
                         right: 12,
                     }}
                 >
-                    <CartesianGrid vertical={false} />
                     <XAxis
                         dataKey="date"
                         tickLine={false}
@@ -75,7 +93,7 @@ const OverviewChart: FC = () => {
                             />
                         }
                     />
-                    <Bar dataKey={"desktop"} fill={`var(--color-${"desktop"})`} />
+                    <Bar dataKey={"rent"} fill={`var(--color-${"rent"})`} />
                 </BarChart>
             </ChartContainer>
         </div>
