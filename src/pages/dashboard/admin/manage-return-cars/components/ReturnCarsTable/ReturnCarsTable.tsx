@@ -1,14 +1,11 @@
 import { FC } from 'react';
-import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useGetBookingsQuery } from '@/redux/features/booking/bookingApi';
+import ReturnCarModal from '../ReturnCarModal/ReturnCarModal';
 
 const ReturnCarsTable: FC = () => {
     const { data: bookings } = useGetBookingsQuery();
 
-    const handleChangeBookingStatus = (id: string, status: "approved" | "cancelled") => {
-        console.log(id, status)
-    }
     return (
         <div className='overflow-x-auto thin-scrollbar'>
             <Table className='my-6 border dark:border-gray-600'>
@@ -45,16 +42,7 @@ const ReturnCarsTable: FC = () => {
                             <TableCell className="text-center">45</TableCell>
                             <TableCell className="text-center">{booking.totalCost}</TableCell>
                             <TableCell className="text-center space-x-3">
-                                <Button
-                                    className='bg-green-500 hover:bg-green-400 dark:hover:bg-green-600 dark:bg-green-700'
-                                    // disabled={isChangeStatusLoading}
-                                    onClick={() => handleChangeBookingStatus(booking._id, "approved")}
-                                    variant={"destructive"}
-                                    isArrowIcon={false}>
-                                    Return
-                                </Button>
-
-
+                                <ReturnCarModal />
                             </TableCell>
                         </TableRow>
                     ))}
