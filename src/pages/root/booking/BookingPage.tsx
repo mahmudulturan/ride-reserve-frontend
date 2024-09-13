@@ -1,9 +1,12 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import SearchSectionBooking from './components/SearchSectionBooking/SearchSectionBooking';
 import BookingForm from './components/BookingForm/BookingForm';
 import BookingCarCard from './components/BookingCarCard/BookingCarCard';
+import { ICar } from '@/redux/features/car/carApi';
 
 const BookingPage: FC = () => {
+    const [selectedCar, setSelectedCar] = useState<ICar | null>(null);
+
     return (
         <div >
             <div className='min-h-[calc(70vh - 84px] -mt-[84px] pt-[84px] mb-[19px]' style={{ backgroundImage: "url(https://i.ibb.co.com/hXqgVzT/11.jpg)", backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed" }}>
@@ -25,13 +28,13 @@ const BookingPage: FC = () => {
                     <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
                         {
                             Array(6).fill(0).map((_, index) => (
-                                <BookingCarCard key={index} />
+                                <BookingCarCard setSelectedCar={setSelectedCar} key={index} />
                             ))
                         }
                     </div>
                 </div>
                 <div className='max-w-[356px] w-full'>
-                    <BookingForm />
+                    <BookingForm selectedCar={selectedCar} />
                 </div>
             </div>
         </div>
