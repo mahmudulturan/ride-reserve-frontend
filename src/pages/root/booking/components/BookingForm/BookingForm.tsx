@@ -56,28 +56,28 @@ const BookingForm: FC<{ selectedCar: ICar | null }> = ({ selectedCar }) => {
                                     <IoCarSportSharp />
                                     <span className='text-slate-500 dark:text-Grayish font-light'>Car Name</span>
                                 </div>
-                                <span className='text-slate-700 dark:text-slate-100'>Lamborghini Urus</span>
+                                <span className='text-slate-700 dark:text-slate-100'>{selectedCar?.name}</span>
                             </div>
                             <div className='flex items-center justify-between gap-3 text-primaryColorLight dark:text-primaryColor text-sm '>
                                 <div className="flex items-center justify-between gap-3">
                                     <FaCarSide />
                                     <span className='text-slate-500 dark:text-Grayish font-light'>Car Type</span>
                                 </div>
-                                <span className='text-slate-700 dark:text-slate-100'>SUV</span>
+                                <span className='text-slate-700 dark:text-slate-100'>{selectedCar?.carType}</span>
                             </div>
                             <div className='flex items-center justify-between gap-3 text-primaryColorLight dark:text-primaryColor text-sm '>
                                 <div className="flex items-center justify-between gap-3">
                                     <GiCarDoor />
                                     <span className='text-slate-500 dark:text-Grayish font-light'>Doors</span>
                                 </div>
-                                <span className='text-slate-700 dark:text-slate-100'> 4</span>
+                                <span className='text-slate-700 dark:text-slate-100'> {selectedCar?.totalDoors}</span>
                             </div>
                             <div className='flex items-center justify-between gap-3 text-primaryColorLight dark:text-primaryColor text-sm '>
                                 <div className="flex items-center justify-between gap-3">
                                     <BsFillPersonFill />
                                     <span className='text-slate-500 dark:text-Grayish font-light'>Passengers</span>
                                 </div>
-                                <span className='text-slate-700 dark:text-slate-100'> 4</span>
+                                <span className='text-slate-700 dark:text-slate-100'> {selectedCar?.totalPassengers}</span>
 
                             </div>
                             <div className='flex items-center justify-between gap-3 text-primaryColorLight dark:text-primaryColor text-sm '>
@@ -85,12 +85,12 @@ const BookingForm: FC<{ selectedCar: ICar | null }> = ({ selectedCar }) => {
                                     <MdOutlineElectricCar />
                                     <span className='text-slate-500 dark:text-Grayish font-light'>Electric</span>
                                 </div>
-                                <span className='text-slate-700 dark:text-slate-100'>Yes</span>
+                                <span className='text-slate-700 dark:text-slate-100'>{selectedCar?.isElectric ? "Yes" : "No"}</span>
                             </div>
                         </div>
                         <hr className='border-slate-500 dark:border-Grayish' />
                         <div className='my-3'>
-                            <h4 className='flex items-center justify-between gap-3'><span className='text-slate-500 dark:text-Grayish font-light'>Availiblity :</span> <span>Available</span></h4>
+                            <h4 className='flex items-center justify-between gap-3'><span className='text-slate-500 dark:text-Grayish font-light'>Availiblity :</span> <span>{selectedCar?.status === "available" ? "Available" : "Unavailable"}</span></h4>
                         </div>
                     </div>
                     <div>

@@ -7,19 +7,22 @@ import { MdOutlineElectricCar } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
 interface IBookingCardProps {
-    setSelectedCar: React.Dispatch<React.SetStateAction<ICar | null>>
+    setSelectedCar: React.Dispatch<React.SetStateAction<ICar | null>>;
+    car: ICar;
 }
 
-const BookingCarCard: FC<IBookingCardProps> = ({ setSelectedCar }) => {
+const BookingCarCard: FC<IBookingCardProps> = ({ setSelectedCar, car }) => {
     return (
         <div className='group relative mb-[50px]'>
             <div className='rounded-[20px] rounded-b-none overflow-hidden'>
-                <img src="https://webredox.net/demo/wp/renax/demo12/wp-content/uploads/sites/12/2024/04/7.jpg" alt=""
-                    className='group-hover:brightness-[0.8] group-hover:scale-110 transition duration-500 ease-in-out max-w-[356px] object-cover' />
+                <img
+                    src={car.images[0]} alt=""
+                    className='group-hover:brightness-[0.8] group-hover:scale-110 transition duration-500 ease-in-out h-[200px] w-full lg:w-[356px] object-cover'
+                />
             </div>
             <div className="rounded-[20px] rounded-t-none bg-gray-100 dark:bg-[#222222] p-[30px]">
                 <Link to={'#'}>
-                    <h3 className="text-[21px] font-bold">Lamborghini Urus</h3>
+                    <h3 className="text-[21px] font-bold">{car.name}</h3>
                 </Link>
                 <div className="space-y-3 my-4">
                     <div className='flex items-center justify-between gap-3 text-primaryColorLight dark:text-primaryColor text-sm '>
@@ -27,14 +30,14 @@ const BookingCarCard: FC<IBookingCardProps> = ({ setSelectedCar }) => {
                             <GiCarDoor />
                             <span className='text-slate-500 dark:text-Grayish font-light'>Doors</span>
                         </div>
-                        <span className='text-slate-700 dark:text-slate-100'> 4</span>
+                        <span className='text-slate-700 dark:text-slate-100'> {car.totalDoors}</span>
                     </div>
                     <div className='flex items-center justify-between gap-3 text-primaryColorLight dark:text-primaryColor text-sm '>
                         <div className="flex items-center justify-between gap-3">
                             <BsFillPersonFill />
                             <span className='text-slate-500 dark:text-Grayish font-light'>Passengers</span>
                         </div>
-                        <span className='text-slate-700 dark:text-slate-100'> 4</span>
+                        <span className='text-slate-700 dark:text-slate-100'> {car.totalPassengers}</span>
 
                     </div>
                     <div className='flex items-center justify-between gap-3 text-primaryColorLight dark:text-primaryColor text-sm '>
@@ -42,17 +45,17 @@ const BookingCarCard: FC<IBookingCardProps> = ({ setSelectedCar }) => {
                             <MdOutlineElectricCar />
                             <span className='text-slate-500 dark:text-Grayish font-light'>Electric</span>
                         </div>
-                        <span className='text-slate-700 dark:text-slate-100'>Yes</span>
+                        <span className='text-slate-700 dark:text-slate-100'>{car.isElectric ? "Yes" : "No"}</span>
                     </div>
                 </div>
 
                 <div className="flex items-center justify-between gap-3">
                     <div>
-                        <h2 className='text-primaryColorLight dark:text-primaryColor font-bold text-[21px]'>$600
-                            <span className='text-sm text-slate-800 dark:text-slate-200 font-thin ml-1'>/day</span>
+                        <h2 className='text-primaryColorLight dark:text-primaryColor font-bold text-[21px]'>${car.pricePerHour}
+                            <span className='text-sm text-slate-800 dark:text-slate-200 font-thin ml-1'>/hour</span>
                         </h2>
                     </div>
-                    <Button onClick={() => setSelectedCar(null)} className='bg-primaryColorLight hover:bg-slate-800 hover:text-white dark:bg-primaryColor dark:hover:bg-slate-100 dark:hover:text-black' variant={"secondary"} isArrowIcon={false} >Book Now</Button>
+                    <Button onClick={() => setSelectedCar(car)} className='bg-primaryColorLight hover:bg-slate-800 hover:text-white dark:bg-primaryColor dark:hover:bg-slate-100 dark:hover:text-black' variant={"secondary"} isArrowIcon={false} >Book Now</Button>
                 </div>
             </div>
         </div>

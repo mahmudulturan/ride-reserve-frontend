@@ -2,11 +2,17 @@ import { FC, useState } from 'react';
 import SearchSectionBooking from './components/SearchSectionBooking/SearchSectionBooking';
 import BookingForm from './components/BookingForm/BookingForm';
 import BookingCarCard from './components/BookingCarCard/BookingCarCard';
-import { ICar } from '@/redux/features/car/carApi';
+import { ICar, useGetCarsQuery } from '@/redux/features/car/carApi';
+import Loader from '@/components/shared/Loader/Loader';
 
 const BookingPage: FC = () => {
     const [selectedCar, setSelectedCar] = useState<ICar | null>(null);
 
+    const { data: cars, isLoading } = useGetCarsQuery();
+
+    if (isLoading) {
+        return <Loader />
+    }
     return (
         <div >
             <div className='min-h-[calc(70vh - 84px] -mt-[84px] pt-[84px] mb-[19px]' style={{ backgroundImage: "url(https://i.ibb.co.com/hXqgVzT/11.jpg)", backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed" }}>
@@ -27,8 +33,8 @@ const BookingPage: FC = () => {
                     {/* <h3 className='text-center my-3'>Search Results :</h3> */}
                     <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
                         {
-                            Array(6).fill(0).map((_, index) => (
-                                <BookingCarCard setSelectedCar={setSelectedCar} key={index} />
+                            cars?.data.map((car, index) => (
+                                <BookingCarCard car={car} setSelectedCar={setSelectedCar} key={index} />
                             ))
                         }
                     </div>
