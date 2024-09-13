@@ -1,4 +1,4 @@
-import baseApi from "@/redux/baseApi";
+import baseApi, { IResponse } from "@/redux/baseApi";
 
 export interface ICar {
     _id: string;
@@ -21,27 +21,23 @@ export interface ICar {
     updatedAt: string;
 };
 
-interface ICarResponse<T> {
-    data: T;
-    message: string;
-    success: true;
-}
-
-
 const carApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        getCars: build.query<ICarResponse<ICar[]>, void>({
+        getCars: build.query<IResponse<ICar[]>, void>({
             query: () => "/cars",
         }),
-        createCar: build.mutation<ICarResponse<ICar>, Partial<ICar>>({
+        createCar: build.mutation<IResponse<ICar>, Partial<ICar>>({
             query: (body) => ({
                 url: "/cars",
                 method: "POST",
                 body
             })
+        }),
+        getHighestPricedCar: build.query<IResponse<number>, void>({
+            query: () => "/cars/highest-price-car"
         })
     })
 })
 
 
-export const { useGetCarsQuery, useCreateCarMutation } = carApi;
+export const { useGetCarsQuery, useCreateCarMutation, useGetHighestPricedCarQuery } = carApi;
