@@ -54,7 +54,7 @@ const OverviewChart: FC = () => {
             <h3 className='text-2xl font-semibold mb-3'>Last 30 days</h3>
             <ChartContainer
                 config={chartConfig}
-                className="aspect-auto max-h-[550px] w-full"
+                className="aspect-auto max-h-[550px] h-full w-full"
             >
                 <BarChart
                     accessibilityLayer
