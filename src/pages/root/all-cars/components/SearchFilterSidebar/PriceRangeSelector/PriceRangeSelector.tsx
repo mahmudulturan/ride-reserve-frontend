@@ -6,7 +6,7 @@ type SliderProps = React.ComponentProps<typeof Slider>
 
 const PriceRangeSelector: FC<SliderProps> = ({ className, ...props }) => {
     const [priceRange, setPriceRange] = useState([0, 50000]);
-
+    
     return (
         <div>
             <Slider
