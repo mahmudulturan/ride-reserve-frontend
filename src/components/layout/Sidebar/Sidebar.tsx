@@ -63,7 +63,7 @@ const Sidebar: FC = () => {
     const [open, setOpen] = useState(false);
     const user = useAppSelector(state => state.authSlice.user);
     const dispatch = useAppDispatch();
-    
+
     const navlinksForSidebar = user?.role === "admin" ? navlinksForSidebarAdmin : navlinksForSidebarUser;
 
     const navigate = useNavigate();
@@ -81,7 +81,7 @@ const Sidebar: FC = () => {
 
 
 
-
+    // logout handler
     const handleLogout = () => {
         clearToken();
         dispatch(removeUser());

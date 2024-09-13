@@ -12,7 +12,7 @@ import { navlinks } from '@/constants';
 const Navbar: FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const { isAuthenticate } = useAppSelector((state) => state.authSlice);
+    const { isAuthenticate, user } = useAppSelector((state) => state.authSlice);
 
     const menuToggler = () => setIsMenuOpen(!isMenuOpen);
     return (
@@ -33,7 +33,7 @@ const Navbar: FC = () => {
                     {
                         isAuthenticate ?
                             <NavLink
-                                className={({ isActive }) => isActive ? 'text-primaryColorLight dark:text-primaryColor' : 'hover:text-primaryColorLight dark:hover:text-primaryColor'} to={'/dashboard'}>
+                                className={({ isActive }) => isActive ? 'text-primaryColorLight dark:text-primaryColor' : 'hover:text-primaryColorLight dark:hover:text-primaryColor'} to={user?.role === 'admin' ? '/dashboard/admin/overview' : '/dashboard/user/overview'}>
                                 Dashboard
                             </NavLink>
                             :
@@ -60,7 +60,9 @@ const Navbar: FC = () => {
                     {
                         isAuthenticate ?
                             <NavLink
-                                className={({ isActive }) => isActive ? 'text-primaryColorLight dark:text-primaryColor' : 'hover:text-primaryColorLight dark:hover:text-primaryColor'} to={'/dashboard'}>
+                                className={({ isActive }) => isActive ? 'text-primaryColorLight dark:text-primaryColor' : 'hover:text-primaryColorLight dark:hover:text-primaryColor'}
+                                to={user?.role === 'admin' ? '/dashboard/admin/overview' : '/dashboard/user/overview'}
+                            >
                                 Dashboard
                             </NavLink>
                             :
