@@ -1,5 +1,7 @@
 import { FC } from 'react';
 import SearchSectionBooking from './components/SearchSectionBooking/SearchSectionBooking';
+import BookingForm from './components/BookingForm/BookingForm';
+import BookingCarCard from './components/BookingCarCard/BookingCarCard';
 
 const BookingPage: FC = () => {
     return (
@@ -14,6 +16,22 @@ const BookingPage: FC = () => {
                         <SearchSectionBooking />
                     </div>
                     <div className='w-[1px] h-10 bg-primaryColorLight dark:bg-primaryColor absolute -bottom-[19px] left-1/2'></div>
+                </div>
+            </div>
+
+            <div className='flex flex-col-reverse lg:flex-row gap-6 wrapper'>
+                <div className='my-20'>
+                    {/* <h3 className='text-center my-3'>Search Results :</h3> */}
+                    <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+                        {
+                            Array(6).fill(0).map((_, index) => (
+                                <BookingCarCard key={index} />
+                            ))
+                        }
+                    </div>
+                </div>
+                <div className='max-w-[356px] w-full'>
+                    <BookingForm />
                 </div>
             </div>
         </div>
