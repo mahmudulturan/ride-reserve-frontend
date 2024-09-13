@@ -12,7 +12,7 @@ const CarCardSecondary: FC<{ car: ICar }> = ({ car }) => {
         <div className='group relative mb-[50px]'>
             <div className='rounded-[20px] rounded-b-none overflow-hidden'>
                 <img src={car.images[0]} alt=""
-                    className='group-hover:brightness-[0.8] group-hover:scale-110 transition duration-500 ease-in-out h-[200px] w-[356px] object-cover' />
+                    className='group-hover:brightness-[0.8] group-hover:scale-110 transition duration-500 ease-in-out h-[200px] w-full lg:w-[356px] object-cover' />
             </div>
             <div className="rounded-[20px] rounded-t-none bg-gray-100 dark:bg-[#222222] p-[30px]">
                 <Link to={`/cars/${car._id}`}>
