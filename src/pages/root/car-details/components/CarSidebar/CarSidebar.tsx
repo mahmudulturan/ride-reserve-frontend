@@ -1,11 +1,12 @@
 import { Button } from '@/components/ui/button';
+import { ICar } from '@/redux/features/car/carApi';
 import { FC } from 'react';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { GiCarDoor } from 'react-icons/gi';
 import { MdOutlineElectricCar } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
-const CarSidebar: FC = () => {
+const CarSidebar: FC<{ car: ICar | undefined }> = ({ car }) => {
     return (
         <div className='sticky top-[128px] -mt-[128px]  rounded-[20px]' >
             <div className='rounded-[20px] rounded-b-none overflow-hidden bg-primaryColorLight dark:bg-primaryColor p-[30px]'>
@@ -21,22 +22,21 @@ const CarSidebar: FC = () => {
                                 <GiCarDoor />
                                 <span className='text-slate-500 dark:text-Grayish font-light'>Doors</span>
                             </div>
-                            <span className='text-slate-700 dark:text-slate-100'> 4</span>
+                            <span className='text-slate-700 dark:text-slate-100'> {car?.totalDoors}</span>
                         </div>
                         <div className='flex items-center justify-between gap-3 text-primaryColorLight dark:text-primaryColor text-sm '>
                             <div className="flex items-center justify-between gap-3">
                                 <BsFillPersonFill />
                                 <span className='text-slate-500 dark:text-Grayish font-light'>Passengers</span>
                             </div>
-                            <span className='text-slate-700 dark:text-slate-100'> 4</span>
-
+                            <span className='text-slate-700 dark:text-slate-100'> {car?.totalPassengers}</span>
                         </div>
                         <div className='flex items-center justify-between gap-3 text-primaryColorLight dark:text-primaryColor text-sm '>
                             <div className="flex items-center justify-between gap-3">
                                 <MdOutlineElectricCar />
                                 <span className='text-slate-500 dark:text-Grayish font-light'>Electric</span>
                             </div>
-                            <span className='text-slate-700 dark:text-slate-100'>Yes</span>
+                            <span className='text-slate-700 dark:text-slate-100'> {car?.isElectric ? 'Yes' : 'No'}</span>
                         </div>
                     </div>
                     <hr className='border-slate-500 dark:border-Grayish' />
@@ -44,7 +44,7 @@ const CarSidebar: FC = () => {
                         <h4 className='flex items-center justify-between gap-3'><span className='text-slate-500 dark:text-Grayish font-light'>Availiblity :</span> <span>Available</span></h4>
                     </div>
                 </div>
-                <Link to={'/booking'}>
+                <Link to={`/booking?car=${car?._id}`}>
                     <Button className='w-full'>Book Now</Button>
                 </Link>
             </div>

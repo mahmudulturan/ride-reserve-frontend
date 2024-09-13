@@ -26,6 +26,9 @@ const carApi = baseApi.injectEndpoints({
         getCars: build.query<IResponse<ICar[]>, void>({
             query: () => "/cars",
         }),
+        getACar: build.query<IResponse<ICar>, string>({
+            query: (id) => `/cars/${id}`,
+        }),
         createCar: build.mutation<IResponse<ICar>, Partial<ICar>>({
             query: (body) => ({
                 url: "/cars",
@@ -40,4 +43,4 @@ const carApi = baseApi.injectEndpoints({
 })
 
 
-export const { useGetCarsQuery, useCreateCarMutation, useGetHighestPricedCarQuery } = carApi;
+export const { useGetCarsQuery, useCreateCarMutation, useGetHighestPricedCarQuery, useGetACarQuery } = carApi;

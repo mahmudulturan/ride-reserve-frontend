@@ -1,7 +1,7 @@
 import { FC, useState, useEffect, useRef } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 
-const ImageCard: FC = () => {
+const ImageCard: FC<{ image: string }> = ({ image }) => {
     const [isOpen, setIsOpen] = useState(false);
     const imageRef = useRef<HTMLImageElement | null>(null);
     const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -26,8 +26,8 @@ const ImageCard: FC = () => {
         <>
             <div onClick={() => setIsOpen(true)} className='rounded-[20px] overflow-hidden group cursor-pointer'>
                 <img
-                    src="https://webredox.net/demo/wp/renax/wp-content/uploads/2024/04/11b.jpg"
-                    className='group-hover:scale-110 duration-300'
+                    src={image}
+                    className='group-hover:scale-110 duration-300 w-full lg:w-[368px] h-[207px] object-cover'
                     alt=""
                 />
             </div>
@@ -37,7 +37,7 @@ const ImageCard: FC = () => {
                     <div className='relative flex items-center justify-center min-h-screen'>
                         <img
                             ref={imageRef}
-                            src="https://webredox.net/demo/wp/renax/wp-content/uploads/2024/04/11b.jpg"
+                            src={image}
                             className='md:w-1/2 cursor-pointer'
                             onBlur={() => setIsOpen(false)}
                         />
