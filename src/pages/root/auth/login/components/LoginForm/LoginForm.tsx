@@ -30,7 +30,7 @@ const LoginForm: FC = () => {
 
     const onSubmit: SubmitHandler<ILoginInputs> = (data) => {
         const reqData = {
-            email: data.email,
+            email: data.email.toLowerCase(),
             password: data.password,
 
         }
@@ -39,7 +39,7 @@ const LoginForm: FC = () => {
                 title: res.message,
                 description: 'You have successfully logged in.'
             });
-            dipatch(saveUser({ user: res.user, isAuthenticate: true, isLoading: false }));
+            dipatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false }));
             navigate('/', { replace: true });
             storeToken(res.token);
         }).catch((err) => {
@@ -48,7 +48,6 @@ const LoginForm: FC = () => {
                 description: err.data.message === 'Incorrect password' ? 'Try with correct password' : 'Something went wrong'
             });
         })
-        console.log(reqData);
     }
 
     return (

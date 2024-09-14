@@ -2,6 +2,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 import { useRegisterMutation } from '@/redux/features/auth/authApi';
+import { saveUser } from '@/redux/features/auth/authSlice';
+import { useAppDispatch } from '@/redux/hook';
 // import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -22,6 +24,7 @@ const RegisterForm: FC = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<IRegisterInputs>();
 
     const [registerUser, { isLoading }] = useRegisterMutation();
+    const dipatch = useAppDispatch();
 
     const { toast } = useToast();
 
@@ -30,18 +33,18 @@ const RegisterForm: FC = () => {
     const onSubmit: SubmitHandler<IRegisterInputs> = (data) => {
         const reqData = {
             name: data.name,
-            email: data.email,
+            email: data.email.toLowerCase(),
             address: data.address,
             password: data.password,
             role: "user"
         }
 
         registerUser(reqData).unwrap().then((res) => {
-
             toast({
                 title: res.message,
                 description: "You have successfully registered! Now login first!",
             })
+            dipatch(saveUser({ user: res.user, isAuthenticate: true, isLoading: false }));
             navigate("/login", { replace: true })
         }).catch((err) => {
             toast({
