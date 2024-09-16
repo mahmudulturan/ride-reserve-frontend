@@ -29,7 +29,7 @@ const CarsTable: FC = () => {
                         <TableBody>
                             {cars?.data.map((car, index) => (
                                 <TableRow key={car._id}>
-                                    <TableCell className="font-medium">{index + 1}</TableCell>
+                                    <TableCell className="font-medium text-center">{index + 1}</TableCell>
                                     <TableCell>
                                         {car.name}
                                         <p className="text-sm text-slate-500 dark:text-slate-300">{car.description.slice(0, 50)}...</p>
