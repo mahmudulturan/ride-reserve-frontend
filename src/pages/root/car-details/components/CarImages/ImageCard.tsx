@@ -1,26 +1,44 @@
 import { FC, useState, useEffect, useRef } from 'react';
 import { RxCross2 } from 'react-icons/rx';
+import { FiZoomIn, FiZoomOut } from 'react-icons/fi';
 
 const ImageCard: FC<{ image: string }> = ({ image }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [scale, setScale] = useState(1);
     const imageRef = useRef<HTMLImageElement | null>(null);
     const buttonRef = useRef<HTMLButtonElement | null>(null);
+    const zoomInButtonRef = useRef<HTMLButtonElement | null>(null);
+    const zoomOutButtonRef = useRef<HTMLButtonElement | null>(null);
 
-    // user menu outside click handler
-    const handleClickOutside = (event: Event) => {
-        if (imageRef.current && !imageRef.current.contains(event.target as Node) && buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
+    const handleClickOutside = (event: MouseEvent) => {
+        if (
+            imageRef.current && !imageRef.current.contains(event.target as Node)
+            &&
+            buttonRef.current && !buttonRef.current.contains(event.target as Node)
+            &&
+            zoomInButtonRef.current && !zoomInButtonRef.current.contains(event.target as Node)
+            &&
+            zoomOutButtonRef.current && !zoomOutButtonRef.current.contains(event.target as Node)
+        ) {
             setIsOpen(false);
+            setScale(1);
         }
     };
 
     useEffect(() => {
-        // Add the event listener when the component mounts
         document.addEventListener("mousedown", handleClickOutside);
-        // Remove the event listener when the component unmounts
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
+
+    const handleZoomIn = () => {
+        setScale(prevScale => Math.min(prevScale + 0.1, 3));
+    };
+
+    const handleZoomOut = () => {
+        setScale(prevScale => Math.max(prevScale - 0.1, 0.5));
+    };
 
     return (
         <>
@@ -38,7 +56,8 @@ const ImageCard: FC<{ image: string }> = ({ image }) => {
                         <img
                             ref={imageRef}
                             src={image}
-                            className='md:w-1/2 cursor-pointer'
+                            className='md:w-1/2 cursor-move'
+                            style={{ transform: `scale(${scale})`, transition: 'transform 0.2s' }}
                             onBlur={() => setIsOpen(false)}
                         />
                         <button
@@ -47,6 +66,24 @@ const ImageCard: FC<{ image: string }> = ({ image }) => {
                             className='absolute top-5 right-5 text-white p-1'>
                             <RxCross2 className='size-6' />
                         </button>
+
+                        {/* Zoom controls */}
+                        <div className='absolute bottom-5 left-1/2 transform -translate-x-1/2 flex gap-4'>
+                            <button
+                                ref={zoomInButtonRef}
+                                onClick={handleZoomIn}
+                                className='bg-white/20 hover:bg-white/30 text-white p-2 rounded-full'
+                            >
+                                <FiZoomIn className='size-6' />
+                            </button>
+                            <button
+                                ref={zoomOutButtonRef}
+                                onClick={handleZoomOut}
+                                className='bg-white/20 hover:bg-white/30 text-white p-2 rounded-full'
+                            >
+                                <FiZoomOut className='size-6' />
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
