@@ -1,14 +1,39 @@
 import Loader from '@/components/shared/Loader/Loader';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { useGetCarsQuery } from '@/redux/features/car/carApi';
+import { toast } from '@/components/ui/use-toast';
+import { useDeleteCarMutation, useGetCarsQuery } from '@/redux/features/car/carApi';
 import { FC } from 'react';
 
 const CarsTable: FC = () => {
     const { data: cars, isLoading } = useGetCarsQuery();
 
+    const [deleteCar, { isLoading: isDeleting }] = useDeleteCarMutation();
+
+
     if (isLoading) {
         return <Loader />
+    }
+
+    const handleCarDelete = (id: string) => {
+        deleteCar(id).unwrap().then((res) => {
+            if (res.success) {
+                toast({
+                    title: res.message,
+                    description: "The car has been deleted successfully, you can't see it anymore",
+                });
+            } else {
+                toast({
+                    title: res.message,
+                    description: "Failed to delete car, try again later",
+                });
+            }
+        }).catch((err) => {
+            toast({
+                title: err.error,
+                description: "Failed to delete car, try again later",
+            });
+        })
     }
     return (
         <div className='overflow-x-auto thin-scrollbar'>
@@ -40,7 +65,14 @@ const CarsTable: FC = () => {
                                     <TableCell className="text-right">{car.pricePerHour}</TableCell>
                                     <TableCell className="text-center space-x-3">
                                         <Button variant={"secondary"} isArrowIcon={false}>Edit</Button>
-                                        <Button variant={"secondary"} isArrowIcon={false}>Delete</Button>
+                                        <Button
+                                            onClick={() => handleCarDelete(car._id)}
+                                            variant={"secondary"}
+                                            isArrowIcon={false}
+                                            disabled={isDeleting}
+                                        >
+                                            Delete
+                                        </Button>
                                     </TableCell>
                                 </TableRow>
                             ))}
