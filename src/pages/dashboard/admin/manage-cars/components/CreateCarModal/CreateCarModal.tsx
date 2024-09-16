@@ -112,7 +112,7 @@ const CreateCarModal: FC = () => {
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-3 h-[50vh] overflow-y-auto thin-scrollbar px-2 pb-2'>
                             <div className="space-y-2">
                                 <Label htmlFor="name" className="text-right">
-                                    Name
+                                    Name <span className='text-red-400'>*</span>
                                 </Label>
                                 <Input
                                     {...register('name', { required: true })}
@@ -125,7 +125,7 @@ const CreateCarModal: FC = () => {
 
                             <div className="space-y-2">
                                 <Label htmlFor="model" className="text-right">
-                                    Model
+                                    Model <span className='text-red-400'>*</span>
                                 </Label>
                                 <Input
                                     {...register('model', { required: true })}
@@ -138,7 +138,7 @@ const CreateCarModal: FC = () => {
 
                             <div className="space-y-2">
                                 <Label htmlFor="carType" className="text-right">
-                                    Type
+                                    Type <span className='text-red-400'>*</span>
                                 </Label>
                                 <Select
                                     onValueChange={(e) => setCarType(e)}
@@ -164,7 +164,7 @@ const CreateCarModal: FC = () => {
 
                             <div className="space-y-2">
                                 <Label htmlFor="pricePerHour" className="text-right">
-                                    Price
+                                    Price <span className='text-red-400'>*</span>
                                 </Label>
                                 <Input
                                     {...register('pricePerHour', { required: true })}
@@ -179,7 +179,7 @@ const CreateCarModal: FC = () => {
 
                             <div className="space-y-2">
                                 <Label htmlFor="color" className="text-right">
-                                    Color
+                                    Color <span className='text-red-400'>*</span>
                                 </Label>
                                 <Input
                                     {...register('color', { required: true })}
@@ -193,7 +193,7 @@ const CreateCarModal: FC = () => {
 
                             <div className="space-y-2">
                                 <Label htmlFor="isElectric" className="text-right">
-                                    Is Electric
+                                    Is Electric <span className='text-red-400'>*</span>
                                 </Label>
                                 <Select
                                     onValueChange={(e) => setIsElectric(e)}
@@ -213,7 +213,7 @@ const CreateCarModal: FC = () => {
 
                             <div className="space-y-2 col-span-2">
                                 <Label htmlFor="features" className="text-right">
-                                    Features
+                                    Features <span className='text-red-400'>*</span>
                                 </Label>
                                 <SelectFeatures features={features} setFeatures={setFeatures} />
                                 {featuresRequiredError && <span className='text-red-400 text-sm px-3'>Features is required</span>}
@@ -228,7 +228,7 @@ const CreateCarModal: FC = () => {
 
                             <div className="space-y-2 col-span-2">
                                 <Label htmlFor="description" className="text-right">
-                                    Description
+                                    Description <span className='text-red-400'>*</span>
                                 </Label>
                                 <Input
                                     {...register('description', { required: true })}
@@ -242,7 +242,7 @@ const CreateCarModal: FC = () => {
 
                             <div className="space-y-2">
                                 <Label htmlFor="totalPassengers" className="text-right">
-                                    Total Passengers
+                                    Total Passengers <span className='text-red-400'>*</span>
                                 </Label>
                                 <Input
                                     {...register('totalPassengers', { required: true })}
@@ -256,7 +256,7 @@ const CreateCarModal: FC = () => {
 
                             <div className="space-y-2">
                                 <Label htmlFor="totalDoors" className="text-right">
-                                    Total Doors
+                                    Total Doors <span className='text-red-400'>*</span>
                                 </Label>
                                 <Input
                                     {...register('totalDoors', { required: true })}
@@ -268,6 +268,9 @@ const CreateCarModal: FC = () => {
                                 {errors.totalDoors && <span className='text-red-400 text-sm px-3'>Total Doors is required</span>}
                             </div>
                             <div className='col-span-2'>
+                                <Label htmlFor="image" className="text-right">
+                                    Images <span className='text-red-400'>*</span>
+                                </Label>
                                 <UploadCarImages images={images} setImages={setImages} />
                                 {
                                     imagesRequiredError && <span className='text-red-400 text-sm px-3'>Atleast two images are required</span>

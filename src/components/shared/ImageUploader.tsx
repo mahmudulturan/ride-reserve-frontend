@@ -67,7 +67,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onUploadSuccess }) => {
 
     return (
         <div className='relative flex overflow-hidden rounded-md'>
-            <Input ref={inputRef} type="file" onChange={handleFileChange} className='cursor-pointer' accept="image/*" />
+            <Input id='image' ref={inputRef} type="file" onChange={handleFileChange} className='cursor-pointer' accept="image/*" />
             <Button className='h-10 absolute z-10 right-0 top-0 rounded-r-none hover:translate-y-0' onClick={handleUpload} disabled={!selectedFile || uploading}>
                 {uploading ? 'Uploading...' : 'Upload'}
             </Button>
