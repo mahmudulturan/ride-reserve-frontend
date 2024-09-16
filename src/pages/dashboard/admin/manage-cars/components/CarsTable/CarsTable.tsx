@@ -45,9 +45,11 @@ const CarsTable: FC = () => {
                             <TableRow>
                                 <TableHead className="w-[100px] text-center">#</TableHead>
                                 <TableHead className='min-w-[340px]'>Name</TableHead>
-                                <TableHead>Color</TableHead>
-                                <TableHead>Status</TableHead>
-                                <TableHead>Is Electric</TableHead>
+                                <TableHead className='text-center'>Type</TableHead>
+                                <TableHead className='text-center'>Model</TableHead>
+                                <TableHead className='text-center'>Color</TableHead>
+                                <TableHead className='text-center'>Status</TableHead>
+                                <TableHead className="text-center">Is Electric</TableHead>
                                 <TableHead className="text-center">Price</TableHead>
                                 <TableHead className="text-center min-w-[290px]">Actions</TableHead>
                             </TableRow>
@@ -60,10 +62,12 @@ const CarsTable: FC = () => {
                                         {car.name}
                                         <p className="text-sm text-slate-500 dark:text-slate-300">{car.description.slice(0, 50)}...</p>
                                     </TableCell>
-                                    <TableCell>{car.color}</TableCell>
-                                    <TableCell>{car.status}</TableCell>
-                                    <TableCell>{car.isElectric ? 'Yes' : 'No'}</TableCell>
-                                    <TableCell className="text-right">{car.pricePerHour}</TableCell>
+                                    <TableCell className='text-center'>{car.carType}</TableCell>
+                                    <TableCell className='text-center'>{car.model}</TableCell>
+                                    <TableCell className='text-center'>{car.color}</TableCell>
+                                    <TableCell className='text-center'>{car.status}</TableCell>
+                                    <TableCell className='text-center'>{car.isElectric ? 'Yes' : 'No'}</TableCell>
+                                    <TableCell className="text-center">{car.pricePerHour}</TableCell>
                                     <TableCell className="text-center space-x-3">
                                         <EditCarModal car={car} />
                                         <Button
