@@ -4,6 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { toast } from '@/components/ui/use-toast';
 import { useDeleteCarMutation, useGetCarsQuery } from '@/redux/features/car/carApi';
 import { FC } from 'react';
+import EditCarModal from '../EditCarModal/EditCarModal';
 
 const CarsTable: FC = () => {
     const { data: cars, isLoading } = useGetCarsQuery();
@@ -64,7 +65,7 @@ const CarsTable: FC = () => {
                                     <TableCell>{car.isElectric ? 'Yes' : 'No'}</TableCell>
                                     <TableCell className="text-right">{car.pricePerHour}</TableCell>
                                     <TableCell className="text-center space-x-3">
-                                        <Button variant={"secondary"} isArrowIcon={false}>Edit</Button>
+                                        <EditCarModal car={car} />
                                         <Button
                                             onClick={() => handleCarDelete(car._id)}
                                             variant={"secondary"}
