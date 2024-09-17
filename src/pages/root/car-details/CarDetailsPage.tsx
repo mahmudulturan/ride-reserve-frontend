@@ -18,7 +18,7 @@ const CarDetailsPage: FC = () => {
     }
     return (
         <div>
-            <PageHeading subHeading={car?.data.carType || "Luxury Car"} align='left'>
+            <PageHeading subHeading={car?.data.carType || "Luxury Car"} align='left' bgImage={car?.data.images[0]}>
                 {car?.data.name}
             </PageHeading>
 
