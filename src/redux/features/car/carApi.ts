@@ -21,10 +21,20 @@ export interface ICar {
     updatedAt: string;
 };
 
+export interface ICarFilter {
+    searchKey?: string;
+    page?: number;
+    minPrice?: number;
+    maxPrice?: number;
+    sortBy?: string;
+    carType?: string;
+}
+
 const carApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        getCars: build.query<IResponse<ICar[]>, void>({
-            query: () => "/cars",
+        getCars: build.query<IResponse<ICar[]>, ICarFilter>({
+            query: ({ searchKey = '', page = 1, minPrice = '', maxPrice = '', sortBy = '', carType = '' }) =>
+                `/cars?searchKey=${searchKey}&page=${page}&minPrice=${minPrice}${maxPrice && `&maxPrice=${maxPrice}`}&sort=${sortBy}${carType && `&carType=${carType}`}`,
             providesTags: ["Cars"]
         }),
         getACar: build.query<IResponse<ICar>, string>({
