@@ -76,9 +76,14 @@ const SearchFilterSidebar: FC<ISearchFilterSidebarProps> = ({ searchParams, setS
                 <div>
                     <h3 className='text-[17px] font-bold'>Categories</h3>
                     <div className='my-4 space-y-3'>
-
+                        <div className='flex items-center gap-2'>
+                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
+                            <button onClick={() => handleFilterCategory('')} className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>
+                                All
+                            </button>
+                        </div>
                         {
-                            categories.map((category) => <div className='flex items-center gap-2'>
+                            categories.map((category, index) => <div key={index} className='flex items-center gap-2'>
                                 <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
                                 <button onClick={() => handleFilterCategory(category)} className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>
                                     {category}

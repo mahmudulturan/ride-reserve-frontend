@@ -7,8 +7,12 @@ import { useSearchParams } from 'react-router-dom';
 
 const AllCarsPage: FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    console.log(searchParams.get('searchKey'));
-    const { data: cars } = useGetCarsQuery({ page: 1 });
+    const { data: cars } = useGetCarsQuery({ page: '1', 
+        searchKey: searchParams.get("searchKey") || "",
+        carType: searchParams.get("carType") || "",
+        minPrice: searchParams.get("minPrice") || "",
+        maxPrice: searchParams.get("maxPrice") || "",
+     });
     return (
         <div>
             <PageHeading subHeading='Rent Now'>

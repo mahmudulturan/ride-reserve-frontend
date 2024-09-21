@@ -23,9 +23,9 @@ export interface ICar {
 
 export interface ICarFilter {
     searchKey?: string;
-    page?: number;
-    minPrice?: number;
-    maxPrice?: number;
+    page?: string;
+    minPrice?: string;
+    maxPrice?: string;
     sortBy?: string;
     carType?: string;
 }
