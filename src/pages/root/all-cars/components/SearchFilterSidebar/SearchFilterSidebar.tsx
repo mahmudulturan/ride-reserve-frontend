@@ -1,20 +1,49 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { IoSearchOutline } from 'react-icons/io5';
 import PriceRangeSelector from './PriceRangeSelector/PriceRangeSelector';
+import { categories } from '@/constants';
 
 interface ISearchFilterSidebarProps {
     searchParams: URLSearchParams;
     setSearchParams: React.Dispatch<React.SetStateAction<URLSearchParams>>;
 }
 
+
 const SearchFilterSidebar: FC<ISearchFilterSidebarProps> = ({ searchParams, setSearchParams }) => {
     const [searchKey, setSearchKey] = useState<string>(searchParams.get('searchKey') || '');
+
+    useEffect(() => {
+        setSearchKey(searchParams.get('searchKey') || '');
+    }, [searchParams]);
+
+    const updateSearchParams = (key: string, value: string) => {
+        setSearchParams(prevParams => {
+            const newParams = new URLSearchParams(prevParams);
+            if (value) {
+                newParams.set(key, value);
+            } else {
+                newParams.delete(key);
+            }
+            return newParams;
+        });
+    };
+
     const handleSearch = () => {
-        const searchParams = new URLSearchParams();
-        searchParams.append('searchKey', searchKey);
-        setSearchParams(searchParams);
+        updateSearchParams('searchKey', searchKey);
+    };
+
+    const handleFilterCategory = (category: string) => {
+        updateSearchParams('carType', category);
+    };
+
+    const handleMinPrice = (val: string) => {
+        updateSearchParams('minPrice', val);
+    }
+
+    const handleMaxPrice = (val: string) => {
+        updateSearchParams('maxPrice', val);
     }
     return (
         <div className='sticky top-[139px] -mt-[139px]  rounded-[20px]' >
@@ -41,32 +70,21 @@ const SearchFilterSidebar: FC<ISearchFilterSidebarProps> = ({ searchParams, setS
                 <div>
                     <h3 className='text-[17px] font-bold'>Price Range</h3>
                     <div className='my-4 space-y-3'>
-                        <PriceRangeSelector />
+                        <PriceRangeSelector handleMaxPrice={handleMaxPrice} handleMinPrice={handleMinPrice} />
                     </div>
                 </div>
                 <div>
                     <h3 className='text-[17px] font-bold'>Categories</h3>
                     <div className='my-4 space-y-3'>
-                        <div className='flex items-center gap-2'>
-                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
-                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Convertible</button>
-                        </div>
-                        <div className='flex items-center gap-2'>
-                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
-                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Luxury Cars</button>
-                        </div>
-                        <div className='flex items-center gap-2'>
-                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
-                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Sedan</button>
-                        </div>
-                        <div className='flex items-center gap-2'>
-                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
-                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Small Cars</button>
-                        </div>
-                        <div className='flex items-center gap-2'>
-                            <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
-                            <button className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>Sport Cars</button>
-                        </div>
+
+                        {
+                            categories.map((category) => <div className='flex items-center gap-2'>
+                                <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
+                                <button onClick={() => handleFilterCategory(category)} className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>
+                                    {category}
+                                </button>
+                            </div>)
+                        }
                     </div>
                 </div>
 

@@ -16,3 +16,17 @@ export const navlinks = [
     //     path: '/contact'
     // }
 ];
+
+
+export const categories = [
+    "Sedan",
+    "SUV",
+    "Hatchback",
+    "Coupe",
+    "Truck",
+    "Minivan",
+    "Convertible",
+    "Wagon",
+    "Crossover",
+    "Van",
+]

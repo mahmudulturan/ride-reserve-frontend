@@ -3,9 +3,12 @@ import { cn } from '@/lib/utils';
 import { useGetHighestPricedCarQuery } from '@/redux/features/car/carApi';
 import { FC, useEffect, useState } from 'react';
 
-type SliderProps = React.ComponentProps<typeof Slider>
+interface SliderProps extends React.ComponentProps<typeof Slider> {
+    handleMinPrice: (val: string) => void;
+    handleMaxPrice: (val: string) => void;
+}
 
-const PriceRangeSelector: FC<SliderProps> = ({ className, ...props }) => {
+const PriceRangeSelector: FC<SliderProps> = ({ handleMaxPrice, handleMinPrice, className, ...props }) => {
     const [priceRange, setPriceRange] = useState([0, 1]);
     const { data: highestPrice } = useGetHighestPricedCarQuery();
 
@@ -14,7 +17,18 @@ const PriceRangeSelector: FC<SliderProps> = ({ className, ...props }) => {
         if (highestPrice?.data) {
             setPriceRange([0, highestPrice.data]);
         }
-    }, [highestPrice])
+    }, [highestPrice]);
+
+    const onValueChange = (data: [number, number]) => {
+        if (priceRange[0] != data[0]) {
+            handleMinPrice(data[0].toString());
+        }
+        if (priceRange[1] != data[1]) {
+            handleMaxPrice(data[1].toString());
+        }
+        setPriceRange(data);
+    }
+
     return (
         <div>
             <Slider
@@ -22,7 +36,7 @@ const PriceRangeSelector: FC<SliderProps> = ({ className, ...props }) => {
                 max={highestPrice?.data || 1}
                 step={1}
                 value={priceRange}
-                onValueChange={setPriceRange}
+                onValueChange={onValueChange}
                 className={cn(
                     "mt-2 w-full",
                     className
