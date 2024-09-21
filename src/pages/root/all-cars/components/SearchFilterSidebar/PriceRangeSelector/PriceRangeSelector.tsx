@@ -10,14 +10,14 @@ interface SliderProps extends React.ComponentProps<typeof Slider> {
 
 const PriceRangeSelector: FC<SliderProps> = ({ handleMaxPrice, handleMinPrice, className, ...props }) => {
     const [priceRange, setPriceRange] = useState([0, 1]);
-    const { data: highestPrice } = useGetHighestPricedCarQuery();
+    const { data: priceRangeData } = useGetHighestPricedCarQuery();
 
 
     useEffect(() => {
-        if (highestPrice?.data) {
-            setPriceRange([0, highestPrice.data]);
+        if (priceRangeData?.data) {
+            setPriceRange([priceRangeData.data.lowestPriceCar.pricePerHour, priceRangeData.data.highestPriceCar.pricePerHour]);
         }
-    }, [highestPrice]);
+    }, [priceRangeData]);
 
     const onValueChange = (data: [number, number]) => {
         if (priceRange[0] != data[0]) {
@@ -32,8 +32,8 @@ const PriceRangeSelector: FC<SliderProps> = ({ handleMaxPrice, handleMinPrice, c
     return (
         <div>
             <Slider
-                min={0}
-                max={highestPrice?.data || 1}
+                min={priceRangeData?.data?.lowestPriceCar?.pricePerHour || 0}
+                max={priceRangeData?.data?.highestPriceCar?.pricePerHour || 1}
                 step={1}
                 value={priceRange}
                 onValueChange={onValueChange}

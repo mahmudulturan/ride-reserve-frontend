@@ -49,8 +49,8 @@ const carApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["Cars"]
         }),
-        getHighestPricedCar: build.query<IResponse<number>, void>({
-            query: () => "/cars/highest-price-car",
+        getHighestPricedCar: build.query<IResponse<{ highestPriceCar: { pricePerHour: number }, lowestPriceCar: { pricePerHour: number } }>, void>({
+            query: () => "/cars/price-range",
             providesTags: ["Cars"]
         }),
         deleteCar: build.mutation<IResponse<ICar>, string>({
