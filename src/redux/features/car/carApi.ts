@@ -32,7 +32,7 @@ export interface ICarFilter {
 
 const carApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        getCars: build.query<IResponse<ICar[]>, ICarFilter>({
+        getCars: build.query<IResponse<{ cars: ICar[], carsCount: number }>, ICarFilter>({
             query: ({ searchKey = '', page = 1, minPrice = '', maxPrice = '', sortBy = '', carType = '' }) =>
                 `/cars?searchKey=${searchKey}&page=${page}&minPrice=${minPrice}${maxPrice && `&maxPrice=${maxPrice}`}&sort=${sortBy}${carType && `&carType=${carType}`}`,
             providesTags: ["Cars"]

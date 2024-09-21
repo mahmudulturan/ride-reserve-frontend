@@ -8,27 +8,17 @@ import { categories } from '@/constants';
 interface ISearchFilterSidebarProps {
     searchParams: URLSearchParams;
     setSearchParams: React.Dispatch<React.SetStateAction<URLSearchParams>>;
+    updateSearchParams: (key: string, val: string) => void;
 }
 
 
-const SearchFilterSidebar: FC<ISearchFilterSidebarProps> = ({ searchParams, setSearchParams }) => {
+const SearchFilterSidebar: FC<ISearchFilterSidebarProps> = ({ searchParams, updateSearchParams }) => {
     const [searchKey, setSearchKey] = useState<string>(searchParams.get('searchKey') || '');
 
     useEffect(() => {
         setSearchKey(searchParams.get('searchKey') || '');
     }, [searchParams]);
 
-    const updateSearchParams = (key: string, value: string) => {
-        setSearchParams(prevParams => {
-            const newParams = new URLSearchParams(prevParams);
-            if (value) {
-                newParams.set(key, value);
-            } else {
-                newParams.delete(key);
-            }
-            return newParams;
-        });
-    };
 
     const handleSearch = () => {
         updateSearchParams('searchKey', searchKey);
