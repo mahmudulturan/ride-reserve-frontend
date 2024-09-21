@@ -3,9 +3,12 @@ import PageHeading from '@/components/shared/PageHeading/PageHeading';
 import SearchFilterSidebar from './components/SearchFilterSidebar/SearchFilterSidebar';
 import CarCardSecondary from './components/CarCardSecondary/CarCardSecondary';
 import { useGetCarsQuery } from '@/redux/features/car/carApi';
+import { useSearchParams } from 'react-router-dom';
 
 const AllCarsPage: FC = () => {
-    const { data: cars } = useGetCarsQuery();
+    const [searchParams, setSearchParams] = useSearchParams();
+    console.log(searchParams.get('searchKey'));
+    const { data: cars } = useGetCarsQuery({ page: 1 });
     return (
         <div>
             <PageHeading subHeading='Rent Now'>
@@ -13,7 +16,7 @@ const AllCarsPage: FC = () => {
             </PageHeading>
             <div className='flex flex-col lg:flex-row gap-6 wrapper'>
                 <div className='max-w-[356px] w-full'>
-                    <SearchFilterSidebar />
+                    <SearchFilterSidebar searchParams={searchParams} setSearchParams={setSearchParams} />
                 </div>
 
                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 my-20'>

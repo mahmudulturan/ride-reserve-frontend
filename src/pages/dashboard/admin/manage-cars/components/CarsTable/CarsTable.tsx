@@ -7,7 +7,7 @@ import { FC } from 'react';
 import EditCarModal from '../EditCarModal/EditCarModal';
 
 const CarsTable: FC = () => {
-    const { data: cars, isLoading } = useGetCarsQuery();
+    const { data: cars, isLoading } = useGetCarsQuery({});
 
     const [deleteCar, { isLoading: isDeleting }] = useDeleteCarMutation();
 

@@ -8,7 +8,7 @@ import Loader from '@/components/shared/Loader/Loader';
 const BookingPage: FC = () => {
     const [selectedCar, setSelectedCar] = useState<ICar | null>(null);
 
-    const { data: cars, isLoading } = useGetCarsQuery();
+    const { data: cars, isLoading } = useGetCarsQuery({});
 
     if (isLoading) {
         return <Loader />

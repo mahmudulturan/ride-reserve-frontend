@@ -5,7 +5,7 @@ import { useGetCarsQuery } from '@/redux/features/car/carApi';
 import { useCreateAPaymentMutation } from '@/redux/features/payment/paymentApi';
 
 const PaymentsTable: FC = () => {
-    const { data: cars } = useGetCarsQuery();
+    const { data: cars } = useGetCarsQuery({});
 
     const [createPayment, { isLoading }] = useCreateAPaymentMutation();
 

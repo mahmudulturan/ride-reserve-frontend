@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
 const FeaturedCars: FC = () => {
-    const { data: cars } = useGetCarsQuery();
+    const { data: cars } = useGetCarsQuery({});
     console.log(cars);
     const swiperRef = useRef<SwiperRef | null>(null);
 
