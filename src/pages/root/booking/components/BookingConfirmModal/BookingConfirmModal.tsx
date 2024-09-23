@@ -19,7 +19,9 @@ const BookingConfirmModal: FC<IBookingConfirmModalProps> = ({ reset, open, setOp
             nidOrPassport: bookingData?.nidOrPassport || '',
             drivingLicense: bookingData?.drivingLicense || '',
             paymentMethod: bookingData?.paymentMethod || '',
-            accountNo: bookingData?.accountNo || ''
+            accountNo: bookingData?.accountNo || '',
+            date: `${new Date().getFullYear()}-${new Date().getDate().toString().padStart(2, '0')}`,
+            startTime: new Date().getHours().toString().padStart(2, '0') + ':' + new Date().getMinutes().toString().padStart(2, '0'),
         };
         console.log(reqData);
         reset();
