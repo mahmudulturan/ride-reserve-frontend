@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { useGetBookingsQuery } from '@/redux/features/booking/bookingApi';
+import { useGetMyBookingsQuery } from '@/redux/features/booking/bookingApi';
 import UpdateBookingModal from '../UpdateBookingModal/UpdateBookingModal';
 
 const UserBookingsTable: FC = () => {
-    const { data: bookings } = useGetBookingsQuery();
+    const { data: bookings } = useGetMyBookingsQuery();
 
     return (
         <div className='overflow-x-auto thin-scrollbar'>

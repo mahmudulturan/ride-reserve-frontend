@@ -3,6 +3,7 @@ import { IUser } from "../user/userApi";
 import { ICar } from "../car/carApi";
 
 export interface IBooking {
+    _id: string;
     date: string;
     user: IUser;
     car: ICar;
