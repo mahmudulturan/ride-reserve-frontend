@@ -32,7 +32,7 @@ const PaymentsTable: FC = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {cars?.data.map((car, index) => (
+                    {cars?.data.cars.map((car, index) => (
                         <TableRow key={car._id}>
                             <TableCell className="font-medium">{index + 1}</TableCell>
                             <TableCell>
