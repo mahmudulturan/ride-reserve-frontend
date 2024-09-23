@@ -1,17 +1,16 @@
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ICar } from '@/redux/features/car/carApi';
 import { useAppSelector } from '@/redux/hook';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { GiCarDoor } from 'react-icons/gi';
 import { MdOutlineElectricCar } from 'react-icons/md';
-import { Link } from 'react-router-dom';
 import { IoCarSportSharp } from "react-icons/io5";
 import { FaCarSide } from 'react-icons/fa6';
+import BookingConfirm from '../BookingConfirm/BookingConfirm';
 
 interface IBookingInfo {
     car: string;
@@ -23,6 +22,7 @@ interface IBookingInfo {
 }
 
 const BookingForm: FC<{ selectedCar: ICar | null }> = ({ selectedCar }) => {
+    const [open, setOpen] = useState<boolean>(false);
     const { register, handleSubmit, reset, formState: { errors }, } = useForm<Partial<IBookingInfo>>();
     const user = useAppSelector((state) => state.authSlice.user);
     const onSubmit: SubmitHandler<Partial<IBookingInfo>> = (data) => {
@@ -175,9 +175,7 @@ const BookingForm: FC<{ selectedCar: ICar | null }> = ({ selectedCar }) => {
                         </form>
                     </div>
                 </div>
-                <Link to={'/booking-confirm'}>
-                    <Button className='w-full'>Procced to confirm</Button>
-                </Link>
+                <BookingConfirm open={open} setOpen={setOpen} />
             </div>
         </div>
     );
