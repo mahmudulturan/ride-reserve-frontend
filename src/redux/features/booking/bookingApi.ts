@@ -16,6 +16,17 @@ export interface IBooking {
     accountNo: string;
 }
 
+export interface IBookingRequest {
+    car: string;
+    user: string;
+    date: string;
+    startTime: string;
+    nidOrPassport: string;
+    drivingLicense: string;
+    accountNo: string;
+    paymentMethod: string;
+}
+
 const boookingApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getBookings: builder.query<IResponse<IBooking[]>, void>({
@@ -24,7 +35,7 @@ const boookingApi = baseApi.injectEndpoints({
         getMyBookings: builder.query<IResponse<IBooking[]>, void>({
             query: () => "/bookings/my-bookings"
         }),
-        createABooking: builder.mutation<IResponse<IBooking>, Partial<IBooking>>({
+        createABooking: builder.mutation<IResponse<IBooking>, Partial<IBookingRequest>>({
             query: (body) => ({
                 url: "/bookings",
                 method: "POST",

@@ -2,6 +2,9 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { FC } from 'react';
 import { IBookingInfo } from '../BookingForm/BookingForm';
 import { Button } from '@/components/ui/button';
+import { useCreateABookingMutation } from '@/redux/features/booking/bookingApi';
+import { toast } from '@/components/ui/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 interface IBookingConfirmModalProps {
     bookingData: IBookingInfo | null;
@@ -11,7 +14,9 @@ interface IBookingConfirmModalProps {
 }
 
 const BookingConfirmModal: FC<IBookingConfirmModalProps> = ({ reset, open, setOpen, bookingData }) => {
+    const [createBooking, { isLoading }] = useCreateABookingMutation();
 
+    const navigate = useNavigate();
     const handleConfirmBooking = () => {
         const reqData = {
             car: bookingData?.car._id || '',
@@ -23,9 +28,27 @@ const BookingConfirmModal: FC<IBookingConfirmModalProps> = ({ reset, open, setOp
             date: `${new Date().getFullYear()}-${new Date().getDate().toString().padStart(2, '0')}`,
             startTime: new Date().getHours().toString().padStart(2, '0') + ':' + new Date().getMinutes().toString().padStart(2, '0'),
         };
-        console.log(reqData);
-        reset();
-        setOpen(false);
+        createBooking(reqData).unwrap().then((res) => {
+            if (res.success) {
+                toast({
+                    title: res.message,
+                    description: 'You have successfully created a booking!'
+                });
+                navigate('/dashboard/user/manage-bookings', { replace: true });
+                reset();
+                setOpen(false);
+            } else {
+                toast({
+                    title: res.message,
+                    description: 'Something went wrong'
+                });
+            }
+        }).catch((err) => {
+            toast({
+                title: err.data.message,
+                description: err.data.message || 'Something went wrong'
+            });
+        })
     }
     return (
         <Dialog open={open} onOpenChange={setOpen} >
@@ -111,7 +134,7 @@ const BookingConfirmModal: FC<IBookingConfirmModalProps> = ({ reset, open, setOp
                             </div>
                         </div>
                     </div>
-                    <Button onClick={handleConfirmBooking} className='w-full'>Confirm</Button>
+                    <Button disabled={isLoading} onClick={handleConfirmBooking} className='w-full'>Confirm</Button>
                 </div>
             </DialogContent>
         </Dialog>
