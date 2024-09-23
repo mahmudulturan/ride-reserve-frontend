@@ -10,9 +10,9 @@ import { GiCarDoor } from 'react-icons/gi';
 import { MdOutlineElectricCar } from 'react-icons/md';
 import { IoCarSportSharp } from "react-icons/io5";
 import { FaCarSide } from 'react-icons/fa6';
-import BookingConfirm from '../BookingConfirm/BookingConfirm';
 import { Button } from '@/components/ui/button';
 import { IUser } from '@/redux/features/user/userApi';
+import BookingConfirmModal from '../BookingConfirmModal/BookingConfirmModal';
 
 export interface IBookingInfo {
     car: ICar;
@@ -206,7 +206,7 @@ const BookingForm: FC<{ selectedCar: ICar | null }> = ({ selectedCar }) => {
                 >
                     Book Now
                 </Button>
-                <BookingConfirm bookingData={bookingInfo} reset={reset} open={open} setOpen={setOpen} />
+                <BookingConfirmModal bookingData={bookingInfo} reset={reset} open={open} setOpen={setOpen} />
             </form>
         </div>
     );

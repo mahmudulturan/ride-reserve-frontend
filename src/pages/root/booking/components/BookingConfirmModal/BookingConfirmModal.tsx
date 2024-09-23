@@ -3,14 +3,14 @@ import { FC } from 'react';
 import { IBookingInfo } from '../BookingForm/BookingForm';
 import { Button } from '@/components/ui/button';
 
-interface IBookingConfirmProps {
+interface IBookingConfirmModalProps {
     bookingData: IBookingInfo | null;
     reset: () => void;
     open: boolean;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const BookingConfirm: FC<IBookingConfirmProps> = ({ reset, open, setOpen, bookingData }) => {
+const BookingConfirmModal: FC<IBookingConfirmModalProps> = ({ reset, open, setOpen, bookingData }) => {
 
     const handleConfirmBooking = () => {
         const reqData = {
@@ -116,4 +116,4 @@ const BookingConfirm: FC<IBookingConfirmProps> = ({ reset, open, setOpen, bookin
     );
 };
 
-export default BookingConfirm;
+export default BookingConfirmModal;
