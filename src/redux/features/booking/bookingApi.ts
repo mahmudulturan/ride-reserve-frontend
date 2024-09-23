@@ -3,14 +3,17 @@ import { IUser } from "../user/userApi";
 import { ICar } from "../car/carApi";
 
 export interface IBooking {
-    _id: string;
     date: string;
-    user: IUser ;
-    car: ICar ;
+    user: IUser;
+    car: ICar;
     startTime: string;
     endTime: string;
     totalCost: number;
-    status: "pending" | "approved" | "cancelled";
+    status: 'pending' | 'approved' | 'cancelled' | 'completed';
+    nidOrPassport: string;
+    drivingLicense: string;
+    paymentMethod: string;
+    accountNo: string;
 }
 
 const boookingApi = baseApi.injectEndpoints({
@@ -32,4 +35,4 @@ const boookingApi = baseApi.injectEndpoints({
 })
 
 
-export const { useGetBookingsQuery } = boookingApi
+export const { useGetBookingsQuery, useCreateABookingMutation, useGetMyBookingsQuery } = boookingApi
