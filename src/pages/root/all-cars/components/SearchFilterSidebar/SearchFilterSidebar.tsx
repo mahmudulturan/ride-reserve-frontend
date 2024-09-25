@@ -21,8 +21,8 @@ const SearchFilterSidebar: FC<ISearchFilterSidebarProps> = ({ searchParams, upda
     useEffect(() => {
         setSearchKey(searchParams.get('searchKey') || '');
         setCarType(searchParams.get('carType') || '');
-        setMinPrice(Number(searchParams.get('minPrice')) || 0);
-        setMaxPrice(Number(searchParams.get('maxPrice')) || 1);
+        setMinPrice(Number(searchParams.get('minPrice')) || null);
+        setMaxPrice(Number(searchParams.get('maxPrice')) || null);
     }, [searchParams, carType, minPrice, maxPrice]);
 
 
