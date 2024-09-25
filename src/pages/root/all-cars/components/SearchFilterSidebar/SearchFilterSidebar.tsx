@@ -15,8 +15,8 @@ interface ISearchFilterSidebarProps {
 const SearchFilterSidebar: FC<ISearchFilterSidebarProps> = ({ searchParams, updateSearchParams }) => {
     const [searchKey, setSearchKey] = useState<string>(searchParams.get('searchKey') || '');
     const [carType, setCarType] = useState<string>(searchParams.get('carType') || '');
-    const [minPrice, setMinPrice] = useState<number>(Number(searchParams.get('minPrice')) || 0);
-    const [maxPrice, setMaxPrice] = useState<number>(Number(searchParams.get('maxPrice')) || 1);
+    const [minPrice, setMinPrice] = useState<number | null>(Number(searchParams.get('minPrice')) || null);
+    const [maxPrice, setMaxPrice] = useState<number | null>(Number(searchParams.get('maxPrice')) || null);
 
     useEffect(() => {
         setSearchKey(searchParams.get('searchKey') || '');

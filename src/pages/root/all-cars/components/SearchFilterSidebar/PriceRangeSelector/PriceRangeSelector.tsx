@@ -6,7 +6,7 @@ import { FC, useEffect, useState } from 'react';
 interface SliderProps extends React.ComponentProps<typeof Slider> {
     handleMinPrice: (val: string) => void;
     handleMaxPrice: (val: string) => void;
-    previousValue: [number, number];
+    previousValue: [number | null, number | null];
 }
 
 const PriceRangeSelector: FC<SliderProps> = ({ handleMaxPrice, handleMinPrice, className, previousValue, ...props }) => {
@@ -32,7 +32,24 @@ const PriceRangeSelector: FC<SliderProps> = ({ handleMaxPrice, handleMinPrice, c
     }
 
     useEffect(() => {
-        setPriceRange(previousValue);
+        if (previousValue[0] == null && previousValue[1] == null) {
+            if (priceRangeData?.data) {
+                setPriceRange([priceRangeData.data.lowestPriceCar.pricePerHour, priceRangeData.data.highestPriceCar.pricePerHour]);
+            }
+        }
+        else if (typeof previousValue[0] == "number" && previousValue[1] == null) {
+            if (priceRangeData?.data) {
+                setPriceRange([previousValue[0], priceRangeData.data.highestPriceCar.pricePerHour]);
+            }
+        }
+        else if (typeof previousValue[1] == "number" && previousValue[0] == null) {
+            if (priceRangeData?.data) {
+                setPriceRange([priceRangeData.data.lowestPriceCar.pricePerHour, previousValue[1]]);
+            }
+        }
+        else {
+            setPriceRange([previousValue[0] || 0, previousValue[1] || 1]);
+        }
     }, [previousValue]);
 
     return (

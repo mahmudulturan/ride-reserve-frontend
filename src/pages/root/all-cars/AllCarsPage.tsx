@@ -5,6 +5,7 @@ import CarCardSecondary from './components/CarCardSecondary/CarCardSecondary';
 import { useGetCarsQuery } from '@/redux/features/car/carApi';
 import { useSearchParams } from 'react-router-dom';
 import PaginationControlls from '@/components/shared/PaginationControlls/PaginationControlls';
+import { Button } from '@/components/ui/button';
 
 const AllCarsPage: FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -29,6 +30,10 @@ const AllCarsPage: FC = () => {
         });
     };
 
+    const handleResetSearchParams = () => {
+        setSearchParams({});
+    }
+
     return (
         <div>
             <PageHeading subHeading='Rent Now'>
@@ -39,15 +44,25 @@ const AllCarsPage: FC = () => {
                     <SearchFilterSidebar updateSearchParams={updateSearchParams} searchParams={searchParams} setSearchParams={setSearchParams} />
                 </div>
 
-                <div className='my-20'>
-                    <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-                        {
-                            cars?.data.cars.map((car, index) => (
-                                <CarCardSecondary car={car} key={index} />
-                            ))
-                        }
-                    </div>
-                    <PaginationControlls carsCount={cars?.data.carsCount || 1} updateSearchParams={updateSearchParams} searchParams={searchParams} setSearchParams={setSearchParams} />
+                <div className='my-20 flex-1'>
+                    {
+                        cars?.data.cars ?
+                            <>
+                                <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+                                    {
+                                        cars?.data.cars.map((car, index) => (
+                                            <CarCardSecondary car={car} key={index} />
+                                        ))
+                                    }
+                                </div>
+                                <PaginationControlls carsCount={cars?.data.carsCount || 1} updateSearchParams={updateSearchParams} searchParams={searchParams} setSearchParams={setSearchParams} />
+                            </>
+                            :
+                            <div className='min-h-[40vh] flex flex-col items-center justify-center gap-2'>
+                                <h3 className='text-4xl font-bold'>No cars found</h3>
+                                <Button onClick={handleResetSearchParams} variant={"secondary"} isArrowIcon={false}>Reset Filters</Button>
+                            </div>
+                    }
                 </div>
             </div>
         </div>
