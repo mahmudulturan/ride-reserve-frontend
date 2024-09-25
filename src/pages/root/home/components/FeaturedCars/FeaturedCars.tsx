@@ -58,13 +58,15 @@ const FeaturedCars: FC = () => {
                 }}
                 autoplay={{
                     delay: 2500,
-                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true
+
                 }}
                 loop={true}
                 pagination={{
                     clickable: true,
                 }}
                 modules={[Autoplay, Pagination]}
+                
                 className="mySwiper testimonials relative"
             >
                 {
