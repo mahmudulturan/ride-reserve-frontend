@@ -19,11 +19,15 @@ import PaymentSuccessPage from "@/pages/dashboard/user/payments/PaymentSuccessPa
 import PaymentErrorPage from "@/pages/dashboard/user/payments/PaymentErrorPage";
 import ManageReturnCarsPage from "@/pages/dashboard/admin/manage-return-cars/ManageReturnCarsPage";
 import BookingPage from "@/pages/root/booking/BookingPage";
+import ScrollToTop from "@/components/shared/ScrollToTop";
 
 const MainRoutes = createBrowserRouter([
     {
         path: "/",
-        element: <MainLayout />,
+        element: <>
+            <ScrollToTop />
+            <MainLayout />
+        </>,
         errorElement: <ErrorPage />,
         children: [
             {
@@ -58,7 +62,10 @@ const MainRoutes = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <DashboardLayout />,
+        element: <>
+            <ScrollToTop />
+            <DashboardLayout />
+        </>,
         children: [
             {
                 path: 'admin/overview',
