@@ -70,7 +70,7 @@ const FeaturedCars: FC = () => {
                 className="mySwiper testimonials relative"
             >
                 {
-                    cars?.data.cars.map((car, index) => (
+                    cars?.data?.cars?.map((car, index) => (
                         <SwiperSlide key={index}>
                             <CarCard car={car} key={index} />
                         </SwiperSlide>

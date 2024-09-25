@@ -55,7 +55,7 @@ const CarsTable: FC = () => {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {cars?.data.cars.map((car, index) => (
+                            {cars?.data?.cars?.map((car, index) => (
                                 <TableRow key={car._id}>
                                     <TableCell className="font-medium text-center">{index + 1}</TableCell>
                                     <TableCell>

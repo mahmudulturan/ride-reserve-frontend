@@ -50,7 +50,7 @@ const AllCarsPage: FC = () => {
                             <>
                                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
                                     {
-                                        cars?.data.cars.map((car, index) => (
+                                        cars?.data?.cars?.map((car, index) => (
                                             <CarCardSecondary car={car} key={index} />
                                         ))
                                     }

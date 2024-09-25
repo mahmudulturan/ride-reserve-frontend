@@ -33,7 +33,7 @@ const BookingPage: FC = () => {
                     {/* <h3 className='text-center my-3'>Search Results :</h3> */}
                     <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
                         {
-                            cars?.data.cars.map((car, index) => (
+                            cars?.data?.cars?.map((car, index) => (
                                 <BookingCarCard car={car} setSelectedCar={setSelectedCar} key={index} />
                             ))
                         }
