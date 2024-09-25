@@ -74,8 +74,10 @@ const SearchFilterSidebar: FC<ISearchFilterSidebarProps> = ({ searchParams, upda
                     <div className='my-4 space-y-3'>
                         <div className='flex items-center gap-2'>
                             <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
-                            <button onClick={() => handleFilterCategory('')} className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>
-                                All
+                            <button
+
+                                onClick={() => handleFilterCategory('')}
+                                className={`text-sm font-light ${!carType ? 'text-primaryColorLight dark:text-primaryColor' : "text-slate-500  dark:text-Grayish"} hover:text-primaryColorLight dark:hover:text-primaryColor`}>                                All
                             </button>
                         </div>
                         {
