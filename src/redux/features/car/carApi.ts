@@ -28,13 +28,14 @@ export interface ICarFilter {
     maxPrice?: string;
     sortBy?: string;
     carType?: string;
+    status?: 'available' | 'unavailable';
 }
 
 const carApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         getCars: build.query<IResponse<{ cars: ICar[], carsCount: number }>, ICarFilter>({
-            query: ({ searchKey = '', page = 1, minPrice = '', maxPrice = '', sortBy = '', carType = '' }) =>
-                `/cars?searchKey=${searchKey}&page=${page}&minPrice=${minPrice}${maxPrice && `&maxPrice=${maxPrice}`}&sort=${sortBy}${carType && `&carType=${carType}`}`,
+            query: ({ searchKey = '', page = 1, minPrice = '', maxPrice = '', sortBy = '', carType = '', status = '' }) =>
+                `/cars?searchKey=${searchKey}&page=${page}&minPrice=${minPrice}${maxPrice && `&maxPrice=${maxPrice}`}&sort=${sortBy}${carType && `&carType=${carType}`}${status && `&status=${status}`}`,
             providesTags: ["Cars"]
         }),
         getACar: build.query<IResponse<ICar>, string>({

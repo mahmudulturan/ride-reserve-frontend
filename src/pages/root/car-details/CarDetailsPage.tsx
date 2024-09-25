@@ -10,7 +10,6 @@ import CarFeatures from './components/CarFeatures/CarFeatures';
 
 const CarDetailsPage: FC = () => {
     const { id } = useParams();
-    console.log(id)
     const { data: car, isLoading } = useGetACarQuery(id!);
 
     if (isLoading) {

@@ -28,7 +28,7 @@ const CarSidebar: FC<{ car: ICar | undefined }> = ({ car }) => {
                         </div>
                         <div className='flex items-center justify-between gap-3 text-primaryColorLight dark:text-primaryColor text-sm '>
                             <div className="flex items-center justify-between gap-3">
-                                <IoColorPalette  />
+                                <IoColorPalette />
                                 <span className='text-slate-500 dark:text-Grayish font-light'>Color</span>
                             </div>
                             <span className='text-slate-700 dark:text-slate-100'> {car?.color}</span>
@@ -57,7 +57,7 @@ const CarSidebar: FC<{ car: ICar | undefined }> = ({ car }) => {
                     </div>
                     <hr className='border-slate-500 dark:border-Grayish' />
                     <div className='my-3'>
-                        <h4 className='flex items-center justify-between gap-3'><span className='text-slate-500 dark:text-Grayish font-light'>Availiblity :</span> <span>Available</span></h4>
+                        <h4 className='flex items-center justify-between gap-3'><span className='text-slate-500 dark:text-Grayish font-light'>Availiblity :</span> <span>{car?.status == "available" ? "Available" : "Unavailable"}</span></h4>
                     </div>
                 </div>
                 <Link to={`/booking?car=${car?._id}`}>

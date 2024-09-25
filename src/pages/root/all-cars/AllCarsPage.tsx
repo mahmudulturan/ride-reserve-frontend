@@ -14,6 +14,7 @@ const AllCarsPage: FC = () => {
         carType: searchParams.get("carType") || "",
         minPrice: searchParams.get("minPrice") || "",
         maxPrice: searchParams.get("maxPrice") || "",
+        status: "available"
     });
 
     const updateSearchParams = (key: string, value: string) => {
