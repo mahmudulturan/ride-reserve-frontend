@@ -6,9 +6,10 @@ import { FC, useEffect, useState } from 'react';
 interface SliderProps extends React.ComponentProps<typeof Slider> {
     handleMinPrice: (val: string) => void;
     handleMaxPrice: (val: string) => void;
+    previousValue: [number, number];
 }
 
-const PriceRangeSelector: FC<SliderProps> = ({ handleMaxPrice, handleMinPrice, className, ...props }) => {
+const PriceRangeSelector: FC<SliderProps> = ({ handleMaxPrice, handleMinPrice, className, previousValue, ...props }) => {
     const [priceRange, setPriceRange] = useState([0, 1]);
     const { data: priceRangeData } = useGetHighestPricedCarQuery();
 
@@ -19,6 +20,7 @@ const PriceRangeSelector: FC<SliderProps> = ({ handleMaxPrice, handleMinPrice, c
         }
     }, [priceRangeData]);
 
+
     const onValueChange = (data: [number, number]) => {
         if (priceRange[0] != data[0]) {
             handleMinPrice(data[0].toString());
@@ -28,6 +30,10 @@ const PriceRangeSelector: FC<SliderProps> = ({ handleMaxPrice, handleMinPrice, c
         }
         setPriceRange(data);
     }
+
+    useEffect(() => {
+        setPriceRange(previousValue);
+    }, [previousValue]);
 
     return (
         <div>

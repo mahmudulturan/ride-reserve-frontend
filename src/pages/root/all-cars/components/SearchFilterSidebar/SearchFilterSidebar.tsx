@@ -14,10 +14,16 @@ interface ISearchFilterSidebarProps {
 
 const SearchFilterSidebar: FC<ISearchFilterSidebarProps> = ({ searchParams, updateSearchParams }) => {
     const [searchKey, setSearchKey] = useState<string>(searchParams.get('searchKey') || '');
+    const [carType, setCarType] = useState<string>(searchParams.get('carType') || '');
+    const [minPrice, setMinPrice] = useState<number>(Number(searchParams.get('minPrice')) || 0);
+    const [maxPrice, setMaxPrice] = useState<number>(Number(searchParams.get('maxPrice')) || 1);
 
     useEffect(() => {
         setSearchKey(searchParams.get('searchKey') || '');
-    }, [searchParams]);
+        setCarType(searchParams.get('carType') || '');
+        setMinPrice(Number(searchParams.get('minPrice')) || 0);
+        setMaxPrice(Number(searchParams.get('maxPrice')) || 1);
+    }, [searchParams, carType, minPrice, maxPrice]);
 
 
     const handleSearch = () => {
@@ -60,7 +66,7 @@ const SearchFilterSidebar: FC<ISearchFilterSidebarProps> = ({ searchParams, upda
                 <div>
                     <h3 className='text-[17px] font-bold'>Price Range</h3>
                     <div className='my-4 space-y-3'>
-                        <PriceRangeSelector handleMaxPrice={handleMaxPrice} handleMinPrice={handleMinPrice} />
+                        <PriceRangeSelector previousValue={[minPrice, maxPrice]} handleMaxPrice={handleMaxPrice} handleMinPrice={handleMinPrice} />
                     </div>
                 </div>
                 <div>
@@ -75,7 +81,9 @@ const SearchFilterSidebar: FC<ISearchFilterSidebarProps> = ({ searchParams, upda
                         {
                             categories.map((category, index) => <div key={index} className='flex items-center gap-2'>
                                 <div className='rounded-full size-[9px] border-primaryColorLight dark:border-primaryColor border' />
-                                <button onClick={() => handleFilterCategory(category)} className='text-sm font-light text-slate-500 dark:text-Grayish hover:text-primaryColorLight dark:hover:text-primaryColor'>
+                                <button
+                                    onClick={() => handleFilterCategory(category)}
+                                    className={`text-sm font-light ${carType === category ? 'text-primaryColorLight dark:text-primaryColor' : "text-slate-500  dark:text-Grayish"} hover:text-primaryColorLight dark:hover:text-primaryColor`}>
                                     {category}
                                 </button>
                             </div>)
