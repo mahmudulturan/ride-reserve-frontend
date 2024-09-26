@@ -1,10 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { useGetBookingsQuery } from '@/redux/features/booking/bookingApi';
+import { useGetMyBookingsQuery } from '@/redux/features/booking/bookingApi';
 import { FC } from 'react';
+import UpdateBookingModal from '../../../manage-bookings/components/UpdateBookingModal/UpdateBookingModal';
 
 const LatestBookingsTable: FC = () => {
-    const { data: bookings } = useGetBookingsQuery();
+    const { data: bookings } = useGetMyBookingsQuery();
 
     const handleChangeBookingStatus = (id: string, status: "approved" | "cancelled") => {
         console.log(id, status)
@@ -37,8 +38,7 @@ const LatestBookingsTable: FC = () => {
                             <TableCell className="text-center">{booking.totalCost}</TableCell>
                             <TableCell className="text-center">{booking.status === "pending" && "Pending"}</TableCell>
                             <TableCell className="text-center space-x-3">
-                                <Button variant={"secondary"} isArrowIcon={false}>Edit</Button>
-
+                                <UpdateBookingModal booking={booking} />
                                 <Button
                                     // disabled={isChangeStatusLoading}
                                     onClick={() => handleChangeBookingStatus(booking._id, "cancelled")}
