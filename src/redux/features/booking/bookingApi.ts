@@ -36,6 +36,9 @@ const boookingApi = baseApi.injectEndpoints({
         getMyBookings: builder.query<IResponse<IBooking[]>, void>({
             query: () => "/bookings/my-bookings"
         }),
+        getMyBookingsStats: builder.query<IResponse<{ total: number, pending: number, approved: number, cancelled: number, completed: number }>, void>({
+            query: () => "/bookings/my-bookings-stats"
+        }),
         createABooking: builder.mutation<IResponse<IBooking>, Partial<IBookingRequest>>({
             query: (body) => ({
                 url: "/bookings",
@@ -47,4 +50,4 @@ const boookingApi = baseApi.injectEndpoints({
 })
 
 
-export const { useGetBookingsQuery, useCreateABookingMutation, useGetMyBookingsQuery } = boookingApi
+export const { useGetBookingsQuery, useCreateABookingMutation, useGetMyBookingsQuery, useGetMyBookingsStatsQuery } = boookingApi
