@@ -145,20 +145,8 @@ const BookingForm: FC<{ selectedCar: ICar | undefined }> = ({ selectedCar }) => 
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="drivingLicencse" className="text-right">
-                                    NID/Passport
-                                </Label>
-                                <Input
-                                    {...register('drivingLicense', { required: true })}
-                                    id="drivingLicencse"
-                                    placeholder='Your Driving Licencese No.'
-                                    className="w-full"
-                                />
-                                {errors.drivingLicense && <span className='text-red-400 text-sm px-3'>Name is required</span>}
-                            </div>
-                            <div className="space-y-2">
                                 <Label htmlFor="nidOrPassport" className="text-right">
-                                    Driving License
+                                    NID/Passport
                                 </Label>
                                 <Input
                                     {...register('nidOrPassport', { required: true })}
@@ -166,7 +154,19 @@ const BookingForm: FC<{ selectedCar: ICar | undefined }> = ({ selectedCar }) => 
                                     placeholder='Your NID/Passport No.'
                                     className="w-full"
                                 />
-                                {errors.drivingLicense && <span className='text-red-400 text-sm px-3'>Name is required</span>}
+                                {errors.nidOrPassport && <span className='text-red-400 text-sm px-3'>NID/Passport is required</span>}
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="drivingLicense" className="text-right">
+                                    Driving License
+                                </Label>
+                                <Input
+                                    {...register('drivingLicense', { required: true })}
+                                    id="drivingLicense"
+                                    placeholder='Your Driving Licencese No.'
+                                    className="w-full"
+                                />
+                                {errors.drivingLicense && <span className='text-red-400 text-sm px-3'>Driving License is required</span>}
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="accountNo" className="text-right">
