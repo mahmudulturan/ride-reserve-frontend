@@ -45,9 +45,16 @@ const boookingApi = baseApi.injectEndpoints({
                 method: "POST",
                 body
             })
+        }),
+        updateABooking: builder.mutation<IResponse<IBooking>, Partial<IBooking>>({
+            query: (body) => ({
+                url: `/bookings/${body._id}`,
+                method: "PUT",
+                body, invalidatesTags: ["Bookings"]
+            })
         })
     })
 })
 
 
-export const { useGetBookingsQuery, useCreateABookingMutation, useGetMyBookingsQuery, useGetMyBookingsStatsQuery } = boookingApi
+export const { useGetBookingsQuery, useCreateABookingMutation, useGetMyBookingsQuery, useGetMyBookingsStatsQuery, useUpdateABookingMutation } = boookingApi

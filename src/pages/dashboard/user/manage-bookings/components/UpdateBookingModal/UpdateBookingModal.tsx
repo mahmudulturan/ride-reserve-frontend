@@ -3,11 +3,12 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { IBooking } from '@/redux/features/booking/bookingApi';
+import { IBooking, useUpdateABookingMutation } from '@/redux/features/booking/bookingApi';
 import { Input } from '@/components/ui/input';
 import { useAppSelector } from '@/redux/hook';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
+import { toast } from '@/components/ui/use-toast';
 
 
 const UpdateBookingModal: FC<{ booking: IBooking }> = ({ booking }) => {
@@ -18,6 +19,8 @@ const UpdateBookingModal: FC<{ booking: IBooking }> = ({ booking }) => {
 
     const { register, handleSubmit, formState: { errors }, } = useForm<Partial<IBooking>>();
 
+    const [updateBooking, { isLoading }] = useUpdateABookingMutation();
+
     const onSubmit: SubmitHandler<Partial<IBooking>> = (data) => {
         if (!paymentMethod) {
             return setPaymentMethodError(true);
@@ -26,14 +29,32 @@ const UpdateBookingModal: FC<{ booking: IBooking }> = ({ booking }) => {
         }
         if (!user || !paymentMethod) return;
         const reqData = {
+            _id: booking._id,
             nidOrPassport: data.nidOrPassport || '',
             drivingLicense: data.drivingLicense || '',
             paymentMethod: paymentMethod,
             accountNo: data.accountNo || ''
         }
 
-        console.log(reqData);
-        // reset();
+        updateBooking(reqData).unwrap().then((res) => {
+            if (res.success) {
+                toast({
+                    title: res.message,
+                    description: 'You have successfully updated a booking!'
+                });
+                setOpen(false);
+            } else {
+                toast({
+                    title: res.message,
+                    description: 'Failed to update booking, try again later'
+                });
+            }
+        }).catch((_err) => {
+            toast({
+                title: 'Booking update failed',
+                description: 'Failed to update booking, try again later'
+            });
+        })
     }
 
     return (
@@ -146,7 +167,7 @@ const UpdateBookingModal: FC<{ booking: IBooking }> = ({ booking }) => {
 
                             {/* boooking info */}
                         </div>
-                        <Button type="submit" className='w-full mt-6'>
+                        <Button disabled={isLoading} type="submit" className='w-full mt-6'>
                             {
                                 false ? 'Updating...' : 'Update'
                             }
