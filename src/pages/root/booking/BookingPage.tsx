@@ -2,13 +2,25 @@ import { FC, useState } from 'react';
 import SearchSectionBooking from './components/SearchSectionBooking/SearchSectionBooking';
 import BookingForm from './components/BookingForm/BookingForm';
 import BookingCarCard from './components/BookingCarCard/BookingCarCard';
-import { ICar, useGetCarsQuery } from '@/redux/features/car/carApi';
+import { useGetACarQuery, useGetCarsQuery } from '@/redux/features/car/carApi';
 import Loader from '@/components/shared/Loader/Loader';
+import { useSearchParams } from 'react-router-dom';
 
 const BookingPage: FC = () => {
-    const [selectedCar, setSelectedCar] = useState<ICar | null>(null);
-
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [carQuery, setCarQuery] = useState(searchParams.get("car"));
+    // console.log(carQuery);
     const { data: cars, isLoading } = useGetCarsQuery({ status: "available" });
+    const { data: selectedCar } = useGetACarQuery(carQuery || '66e7a3761db7b5cf1baa1199');
+    // useEffect(() => {
+
+    // }, [carQuery])
+    console.log(selectedCar);
+
+    const handleUpdateCarParams = (id: string) => {
+        setCarQuery(id);
+        setSearchParams(new URLSearchParams({ car: id }));
+    }
 
     if (isLoading) {
         return <Loader />
@@ -34,13 +46,13 @@ const BookingPage: FC = () => {
                     <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
                         {
                             cars?.data?.cars?.map((car, index) => (
-                                <BookingCarCard car={car} setSelectedCar={setSelectedCar} key={index} />
+                                <BookingCarCard car={car} setSelectedCar={handleUpdateCarParams} key={index} />
                             ))
                         }
                     </div>
                 </div>
                 <div className='max-w-[356px] w-full'>
-                    <BookingForm selectedCar={selectedCar} />
+                    <BookingForm selectedCar={selectedCar?.data} />
                 </div>
             </div>
         </div>

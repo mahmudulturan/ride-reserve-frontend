@@ -23,7 +23,7 @@ export interface IBookingInfo {
     accountNo: string;
 }
 
-const BookingForm: FC<{ selectedCar: ICar | null }> = ({ selectedCar }) => {
+const BookingForm: FC<{ selectedCar: ICar | undefined }> = ({ selectedCar }) => {
     const [open, setOpen] = useState<boolean>(false);
     const [paymentMethod, setPaymentMethod] = useState<string>('');
     const [paymentMethodError, setPaymentMethodError] = useState<boolean>(false);

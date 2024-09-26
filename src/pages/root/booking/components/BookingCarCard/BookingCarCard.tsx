@@ -1,13 +1,13 @@
 import { Button } from '@/components/ui/button';
 import { ICar } from '@/redux/features/car/carApi';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { GiCarDoor } from 'react-icons/gi';
 import { MdOutlineElectricCar } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
 interface IBookingCardProps {
-    setSelectedCar: React.Dispatch<React.SetStateAction<ICar | null>>;
+    setSelectedCar: (value: string) => void;
     car: ICar;
 }
 
@@ -55,7 +55,7 @@ const BookingCarCard: FC<IBookingCardProps> = ({ setSelectedCar, car }) => {
                             <span className='text-sm text-slate-800 dark:text-slate-200 font-thin ml-1'>/hour</span>
                         </h2>
                     </div>
-                    <Button onClick={() => setSelectedCar(car)} className='bg-primaryColorLight hover:bg-slate-800 hover:text-white dark:bg-primaryColor dark:hover:bg-slate-100 dark:hover:text-black' variant={"secondary"} isArrowIcon={false} >Book Now</Button>
+                    <Button onClick={() => setSelectedCar(car._id)} className='bg-primaryColorLight hover:bg-slate-800 hover:text-white dark:bg-primaryColor dark:hover:bg-slate-100 dark:hover:text-black' variant={"secondary"} isArrowIcon={false} >Book Now</Button>
                 </div>
             </div>
         </div>
