@@ -24,7 +24,7 @@ const EditPersonalInformationModal: FC<{ user: IUser | null }> = ({ user }) => {
     return (
         <Dialog open={open} onOpenChange={setOpen} >
             <DialogTrigger asChild>
-                <Button variant="outline" className='h-10 px-4'>Update Info</Button>
+                <Button variant="outline" className='h-8 px-3'>Update Info</Button>
             </DialogTrigger>
             <DialogContent className="max-w-2xl px-2">
                 <DialogHeader className='px-2'>

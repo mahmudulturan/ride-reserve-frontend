@@ -11,13 +11,15 @@ const PersonalInformation: FC = () => {
                 <EditPersonalInformationModal user={user} />
             </div>
             <div className='my-2 space-y-1'>
-                <h4 className=''><span className='font-bold'>Name :</span> <span className='dark:text-slate-300'>{user?.name} <span className='text-xs'>{user?.role == "admin" && " (Admin)"}</span></span>
+                <h4 className=''><span className='font-bold'>Name :</span> <span className='dark:text-slate-300'>{user?.name}</span>
                 </h4>
                 <h4 className=''><span className='font-bold'>Email :</span> <span className='dark:text-slate-300'>{user?.email}</span>
                 </h4>
                 <h4 className=''><span className='font-bold'>Phone :</span> <span className='dark:text-slate-300'>{user?.phone ? user?.phone : "N/A"}</span>
                 </h4>
                 <h4 className=''><span className='font-bold'>Address :</span> <span className='dark:text-slate-300'>{user?.address ? user?.address : "N/A"}</span>
+                </h4>
+                <h4 className=''><span className='font-bold'>Role :</span> <span className='dark:text-slate-300'>{user?.role ? user?.role : "N/A"}</span>
                 </h4>
             </div>
         </div>
