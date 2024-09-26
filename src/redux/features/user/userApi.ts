@@ -34,9 +34,16 @@ const userApi = baseApi.injectEndpoints({
                 method: "PATCH",
                 body: { role }, invalidatesTags: ["Users"]
             })
+        }),
+        updateUserInformation: builder.mutation<IResponse<IUser>, Partial<IUser>>({
+            query: (body) => ({
+                url: `/users/${body._id}`,
+                method: "PUT",
+                body, invalidatesTags: ["User"]
+            }),
         })
     })
 })
 
 
-export const { useGetAllUsersQuery, useChangeIsBlockedStatusMutation, useChangeUserRoleMutation } = userApi;
+export const { useGetAllUsersQuery, useChangeIsBlockedStatusMutation, useChangeUserRoleMutation, useUpdateUserInformationMutation } = userApi;

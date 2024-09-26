@@ -4,21 +4,42 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { IUser } from '@/redux/features/user/userApi';
+import { IUser, useUpdateUserInformationMutation } from '@/redux/features/user/userApi';
+import { toast } from '@/components/ui/use-toast';
 
 
 const EditPersonalInformationModal: FC<{ user: IUser | null }> = ({ user }) => {
     const [open, setOpen] = useState<boolean>(false);
 
+    const [updateUserInformation, { isLoading }] = useUpdateUserInformationMutation();
 
-    const { register, handleSubmit, reset, formState: { errors }, } = useForm<Partial<IUser>>();
+    const { register, handleSubmit, formState: { errors }, } = useForm<Partial<IUser>>();
 
 
     const onSubmit: SubmitHandler<Partial<IUser>> = (data) => {
-
-
-        console.log(data);
-        reset();
+        const reqData = {
+            _id: user?._id,
+            ...data
+        }
+        updateUserInformation(reqData).unwrap().then((res) => {
+            if (res.success) {
+                toast({
+                    title: res.message,
+                    description: 'User information updated successfully',
+                })
+                setOpen(false);
+            } else {
+                toast({
+                    title: res.message,
+                    description: 'User information update failed',
+                })
+            }
+        }).catch((_err) => {
+            toast({
+                title: "Something went wrong",
+                description: 'User information update failed',
+            })
+        });
     }
 
     return (
@@ -94,7 +115,7 @@ const EditPersonalInformationModal: FC<{ user: IUser | null }> = ({ user }) => {
                                 {errors.address && <span className='text-red-400 text-sm px-3'>Address is required</span>}
                             </div>
                         </div>
-                        <Button type="submit" className='w-full mt-6'>
+                        <Button type="submit" disabled={isLoading} className='w-full mt-6'>
                             {
                                 false ? 'Updating...' : 'Update'
                             }
