@@ -6,13 +6,15 @@ import Logo from '@/components/shared/Logo';
 import MenuButton from './MenuButton';
 import styles from './navbar.module.css';
 import { useAppSelector } from '@/redux/hook';
-import { navlinks } from '@/constants';
+import { privateNavlinks, publicNavlinks } from '@/constants';
 
 
 const Navbar: FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const { isAuthenticate, user } = useAppSelector((state) => state.authSlice);
+
+    const navlinks = isAuthenticate ? privateNavlinks : publicNavlinks;
 
     const menuToggler = () => setIsMenuOpen(!isMenuOpen);
     return (

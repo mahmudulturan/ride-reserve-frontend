@@ -1,4 +1,4 @@
-export const navlinks = [
+export const publicNavlinks = [
     {
         name: 'Home',
         path: '/'
@@ -10,13 +10,27 @@ export const navlinks = [
     {
         name: 'About',
         path: '/about'
-    },
-    // {
-    //     name: 'Contact',
-    //     path: '/contact'
-    // }
+    }
 ];
 
+export const privateNavlinks = [
+    {
+        name: 'Home',
+        path: '/'
+    },
+    {
+        name: 'All Cars',
+        path: '/cars'
+    },
+    {
+        name: 'Booking',
+        path: '/booking'
+    },
+    {
+        name: 'About',
+        path: '/about'
+    }
+]
 
 export const categories = [
     "Sedan",
