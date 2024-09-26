@@ -16,6 +16,7 @@ interface IRegisterInputs {
     address: string
     password: string
     role: string
+    phone?: string
 }
 
 const RegisterForm: FC = () => {
@@ -34,6 +35,7 @@ const RegisterForm: FC = () => {
         const reqData = {
             name: data.name,
             email: data.email.toLowerCase(),
+            phone: data.phone,
             address: data.address,
             password: data.password,
             role: "user"
@@ -57,22 +59,26 @@ const RegisterForm: FC = () => {
     return (
         <form className='max-w-xl w-full mx-auto space-y-2' onSubmit={handleSubmit(onSubmit)}>
             <div className='space-y-1'>
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name">Name <span className='text-red-600 dark:text-red-400'>*</span></label>
                 <Input {...register('name', { required: true })} className='w-full' type="text" name='name' placeholder='Type your name...' />
                 {errors.name && <span>Name is required</span>}
             </div>
             <div className='space-y-1'>
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">Email <span className='text-red-600 dark:text-red-400'>*</span></label>
                 <Input {...register('email', { required: true })} className='w-full' type="email" name='email' placeholder='Type your email...' />
                 {errors.email && <span>Email is required</span>}
             </div>
             <div className='space-y-1'>
-                <label htmlFor="address">Address</label>
+                <label htmlFor="phone">Phone</label>
+                <Input {...register('phone')} className='w-full' type="text" name='phone' placeholder='Type your phone...' />
+            </div>
+            <div className='space-y-1'>
+                <label htmlFor="address">Address <span className='text-red-600 dark:text-red-400'>*</span></label>
                 <Input {...register('address', { required: true })} className='w-full' type="text" name='address' placeholder='Type your address...' />
                 {errors.address && <span>Address is required</span>}
             </div>
             <div className='space-y-1'>
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">Password <span className='text-red-600 dark:text-red-400'>*</span></label>
                 <div className='relative'>
                     <Input {...register('password', { required: true })} className='w-full' type={isVisible ? "text" : "password"} name='password' placeholder='Type your passsword...' />
                     <div className='absolute h-full top-0 right-2 flex items-center justify-center'>
