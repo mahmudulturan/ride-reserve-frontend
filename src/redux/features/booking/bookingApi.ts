@@ -60,6 +60,16 @@ const boookingApi = baseApi.injectEndpoints({
                 method: "PATCH",
             }),
             invalidatesTags: ["Bookings"]
+        }),
+        updateBookingStatus: builder.mutation<IResponse<IBooking>, { id: string, status: string }>({
+            query: (body) => ({
+                url: `/bookings/update-status/${body.id}`,
+                method: "PATCH",
+                body: {
+                    status: body.status
+                }
+            }),
+            invalidatesTags: ["Bookings"]
         })
     })
 })
@@ -70,5 +80,6 @@ export const {
     useCreateABookingMutation,
     useGetMyBookingsQuery,
     useUpdateABookingMutation,
-    useCancelBookingMutation
+    useCancelBookingMutation,
+    useUpdateBookingStatusMutation
 } = boookingApi

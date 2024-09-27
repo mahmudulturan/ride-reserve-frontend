@@ -1,14 +1,33 @@
 import { FC } from 'react';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { useGetBookingsQuery } from '@/redux/features/booking/bookingApi';
+import { useGetBookingsQuery, useUpdateBookingStatusMutation } from '@/redux/features/booking/bookingApi';
 import Loader from '@/components/shared/Loader/Loader';
+import { toast } from '@/components/ui/use-toast';
 
 const BookingsTable: FC = () => {
     const { data: bookings, isLoading } = useGetBookingsQuery();
+    const [updateBookingStatus, { isLoading: isUpdatingBookingStatus }] = useUpdateBookingStatusMutation();
 
     const handleChangeBookingStatus = (id: string, status: "approved" | "cancelled") => {
-        console.log(id, status)
+        updateBookingStatus({ id, status }).unwrap().then((res) => {
+            if (res.success) {
+                toast({
+                    title: res.message,
+                    description: `This booking is now ${status}`,
+                })
+            } else {
+                toast({
+                    title: res.message,
+                    description: "Failed to update booking status",
+                })
+            }
+        }).catch((_err) => {
+            toast({
+                title: "Something went wrong",
+                description: "Failed to update booking status",
+            })
+        })
     }
 
     if (isLoading) {
@@ -53,19 +72,19 @@ const BookingsTable: FC = () => {
                                     <TableCell className="text-center space-x-3">
                                         <Button
                                             className='bg-green-500 hover:bg-green-400 dark:hover:bg-green-600 dark:bg-green-700'
-                                            // disabled={isChangeStatusLoading}
+                                            disabled={isUpdatingBookingStatus || booking.status === "approved"}
                                             onClick={() => handleChangeBookingStatus(booking._id, "approved")}
                                             variant={"destructive"}
                                             isArrowIcon={false}>
-                                            Approve
+                                            {booking.status === "approved" ? "Approved" : "Approve"}
                                         </Button>
 
                                         <Button
-                                            // disabled={isChangeStatusLoading}
+                                            disabled={isUpdatingBookingStatus || booking.status === "cancelled"}
                                             onClick={() => handleChangeBookingStatus(booking._id, "cancelled")}
                                             variant={"destructive"}
                                             isArrowIcon={false}>
-                                            Cancel
+                                            {booking.status === "cancelled" ? "Cancelled" : "Cancel"}
                                         </Button>
 
                                     </TableCell>
