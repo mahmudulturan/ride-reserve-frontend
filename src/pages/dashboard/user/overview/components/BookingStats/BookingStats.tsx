@@ -1,8 +1,8 @@
-import { useGetMyBookingsStatsQuery } from '@/redux/features/booking/bookingApi';
+import { useGetUserBookingStatsQuery } from '@/redux/features/dashboard/dashboardApi';
 import { FC } from 'react';
 
 const BookingStats: FC = () => {
-    const { data: bookingStats } = useGetMyBookingsStatsQuery();
+    const { data: bookingStats } = useGetUserBookingStatsQuery();
     return (
         <div className='border border-slate-200 dark:border-slate-600 px-4 py-5 my-6 rounded-[20px]'>
             <h3 className='text-2xl font-semibold'>Booking Stats</h3>
