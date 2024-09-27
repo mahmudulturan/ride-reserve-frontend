@@ -60,7 +60,7 @@ const UpdateBookingModal: FC<{ booking: IBooking }> = ({ booking }) => {
     return (
         <Dialog open={open} onOpenChange={setOpen} >
             <DialogTrigger asChild>
-                <Button variant={"secondary"} isArrowIcon={false}>Edit</Button>
+                <Button variant={"secondary"} isArrowIcon={false} disabled={booking.status !== "pending"}>Edit</Button>
             </DialogTrigger>
             <DialogContent className="max-w-2xl px-2">
                 <DialogHeader className='px-2'>

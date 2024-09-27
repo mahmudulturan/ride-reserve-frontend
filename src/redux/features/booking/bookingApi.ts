@@ -31,30 +31,49 @@ export interface IBookingRequest {
 const boookingApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getBookings: builder.query<IResponse<IBooking[]>, void>({
-            query: () => "/bookings"
+            query: () => "/bookings",
+            providesTags: ["Bookings"]
         }),
         getMyBookings: builder.query<IResponse<IBooking[]>, void>({
-            query: () => "/bookings/my-bookings"
+            query: () => "/bookings/my-bookings",
+            providesTags: ["Bookings"]
         }),
         getMyBookingsStats: builder.query<IResponse<{ total: number, pending: number, approved: number, cancelled: number, completed: number }>, void>({
-            query: () => "/bookings/my-bookings-stats"
+            query: () => "/bookings/my-bookings-stats",
+            providesTags: ["Bookings"]
         }),
         createABooking: builder.mutation<IResponse<IBooking>, Partial<IBookingRequest>>({
             query: (body) => ({
                 url: "/bookings",
                 method: "POST",
                 body
-            })
+            }),
+            invalidatesTags: ["Bookings"]
         }),
         updateABooking: builder.mutation<IResponse<IBooking>, Partial<IBooking>>({
             query: (body) => ({
                 url: `/bookings/${body._id}`,
                 method: "PUT",
-                body, invalidatesTags: ["Bookings"]
-            })
+                body,
+            }),
+            invalidatesTags: ["Bookings"]
+        }),
+        cancelBooking: builder.mutation<IResponse<IBooking>, string>({
+            query: (id) => ({
+                url: `/bookings/cancel/${id}`,
+                method: "PATCH",
+            }),
+            invalidatesTags: ["Bookings"]
         })
     })
 })
 
 
-export const { useGetBookingsQuery, useCreateABookingMutation, useGetMyBookingsQuery, useGetMyBookingsStatsQuery, useUpdateABookingMutation } = boookingApi
+export const {
+    useGetBookingsQuery,
+    useCreateABookingMutation,
+    useGetMyBookingsQuery,
+    useGetMyBookingsStatsQuery,
+    useUpdateABookingMutation,
+    useCancelBookingMutation
+} = boookingApi

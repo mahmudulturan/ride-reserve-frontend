@@ -1,14 +1,33 @@
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { useGetMyBookingsQuery } from '@/redux/features/booking/bookingApi';
+import { useCancelBookingMutation, useGetMyBookingsQuery } from '@/redux/features/booking/bookingApi';
 import { FC } from 'react';
 import UpdateBookingModal from '../../../manage-bookings/components/UpdateBookingModal/UpdateBookingModal';
+import { toast } from '@/components/ui/use-toast';
 
 const LatestBookingsTable: FC = () => {
     const { data: bookings } = useGetMyBookingsQuery();
+    const [cancelBooking, { isLoading }] = useCancelBookingMutation();
 
-    const handleChangeBookingStatus = (id: string, status: "approved" | "cancelled") => {
-        console.log(id, status)
+    const handleCancelBooking = (id: string) => {
+        cancelBooking(id).unwrap().then((res) => {
+            if (res.success) {
+                toast({
+                    title: res.message,
+                    description: 'You have successfully cancelled a booking!',
+                })
+            } else {
+                toast({
+                    title: res.message,
+                    description: 'Failed to cancel booking, try again later',
+                })
+            }
+        }).catch((_err) => {
+            toast({
+                title: "Something went wrong",
+                description: 'Failed to cancel booking, try again later',
+            })
+        })
     }
     return (
         <div className='overflow-x-auto thin-scrollbar'>
@@ -36,15 +55,20 @@ const LatestBookingsTable: FC = () => {
                             <TableCell className='text-center'>{booking.startTime} - {booking.endTime ? booking.endTime : 'Running'}</TableCell>
                             <TableCell className="text-right">{booking.date}</TableCell>
                             <TableCell className="text-center">{booking.totalCost}</TableCell>
-                            <TableCell className="text-center">{booking.status === "pending" && "Pending"}</TableCell>
+                            <TableCell className="text-center">
+                                {booking.status === "pending" && "Pending"}
+                                {booking.status === "cancelled" && "Cancelled"}
+                                {booking.status === "completed" && "Completed"}
+                                {booking.status === "approved" && "Approved"}
+                            </TableCell>
                             <TableCell className="text-center space-x-3">
                                 <UpdateBookingModal booking={booking} />
                                 <Button
-                                    // disabled={isChangeStatusLoading}
-                                    onClick={() => handleChangeBookingStatus(booking._id, "cancelled")}
+                                    disabled={isLoading || booking.status != "pending"}
+                                    onClick={() => handleCancelBooking(booking._id)}
                                     variant={"destructive"}
                                     isArrowIcon={false}>
-                                    Cancel
+                                    {booking.status === "cancelled" ? "Cancelled" : "Cancel"}
                                 </Button>
 
                             </TableCell>
