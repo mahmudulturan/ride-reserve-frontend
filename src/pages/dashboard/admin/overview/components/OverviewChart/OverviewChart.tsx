@@ -3,51 +3,26 @@ import { Bar, BarChart, XAxis } from "recharts"
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent, } from "@/components/ui/chart"
 
 
-const chartData = [
-    { date: "2024-04-01", rent: 222 },
-    { date: "2024-04-02", rent: 97 },
-    { date: "2024-04-03", rent: 167 },
-    { date: "2024-04-04", rent: 242 },
-    { date: "2024-04-05", rent: 373 },
-    { date: "2024-06-21", rent: 169 },
-    { date: "2024-06-22", rent: 317 },
-    { date: "2024-04-04", rent: 242 },
-    { date: "2024-04-05", rent: 373 },
-    { date: "2024-06-21", rent: 169 },
-    { date: "2024-04-01", rent: 222 },
-    { date: "2024-04-02", rent: 97 },
-    { date: "2024-04-03", rent: 167 },
-    { date: "2024-04-04", rent: 242 },
-    { date: "2024-04-05", rent: 373 },
-    { date: "2024-06-21", rent: 169 },
-    { date: "2024-06-22", rent: 317 },
-    { date: "2024-04-04", rent: 242 },
-    { date: "2024-04-05", rent: 373 },
-    { date: "2024-06-21", rent: 169 },
-    { date: "2024-04-01", rent: 222 },
-    { date: "2024-04-02", rent: 97 },
-    { date: "2024-04-03", rent: 167 },
-    { date: "2024-04-04", rent: 242 },
-    { date: "2024-04-05", rent: 373 },
-    { date: "2024-06-21", rent: 169 },
-    { date: "2024-06-22", rent: 317 },
-    { date: "2024-04-04", rent: 242 },
-    { date: "2024-04-05", rent: 373 },
-    { date: "2024-06-21", rent: 169 },
 
-]
 const chartConfig = {
     views: {
-        label: "Total Rents",
+        label: "Total totalBookingss",
     },
-    rent: {
-        label: "Rent",
+    totalBookings: {
+        label: "totalBookings",
         color: "hsl(var(--chart-1))",
     }
 } satisfies ChartConfig
 
 
-const OverviewChart: FC = () => {
+interface IOverviewChartProps {
+    last30DaysBookings: {
+        date: string;
+        totalBookings: number;
+    }[]
+}
+
+const OverviewChart: FC<IOverviewChartProps> = ({ last30DaysBookings }) => {
 
     return (
         <div className="border border-slate-200 dark:border-slate-600 py-5 px-4 h-full rounded-[20px]" style={{ minHeight: "calc(100vh - 282px)" }}>
@@ -58,7 +33,7 @@ const OverviewChart: FC = () => {
             >
                 <BarChart
                     accessibilityLayer
-                    data={chartData}
+                    data={last30DaysBookings}
                     margin={{
                         left: 12,
                         right: 12,
@@ -93,7 +68,7 @@ const OverviewChart: FC = () => {
                             />
                         }
                     />
-                    <Bar dataKey={"rent"} fill={`var(--color-${"rent"})`} />
+                    <Bar dataKey={"totalBookings"} fill={`var(--color-${"totalBookings"})`} />
                 </BarChart>
             </ChartContainer>
         </div>

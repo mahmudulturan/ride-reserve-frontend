@@ -1,19 +1,19 @@
 import baseApi, { IResponse } from "@/redux/baseApi";
 
 interface IUserBookingStats {
-    total: number,
-    pending: number,
-    approved: number,
-    cancelled: number,
-    completed: number
+    total: number;
+    pending: number;
+    approved: number;
+    cancelled: number;
+    completed: number;
 }
 
 interface IAdminDashboardStats {
-    totalBookings: number
-    totalCars: number
-    availableCars: number
-    totalPayments: number
-    last30DaysBookings: { date: string, totalBookings: number }[]
+    totalBookings: number;
+    totalCars: number;
+    availableCars: number;
+    totalPayments: number;
+    last30DaysBookings: { date: string, totalBookings: number }[];
 }
 
 const dashboardApi = baseApi.injectEndpoints({
