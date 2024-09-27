@@ -137,7 +137,7 @@ const BookingForm: FC<{ selectedCar: ICar | undefined }> = ({ selectedCar }) => 
                                     Email
                                 </Label>
                                 <Input
-                                    id="name"
+                                    id="email"
                                     value={user?.email}
                                     readOnly
                                     placeholder='Your Email'
