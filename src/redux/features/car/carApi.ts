@@ -68,9 +68,24 @@ const carApi = baseApi.injectEndpoints({
                 body
             }),
             invalidatesTags: ["Cars"]
+        }),
+        returnCar: build.mutation<IResponse<ICar>, { bookingId: string, endTime: string }>({
+            query: (body) => ({
+                url: `/cars/return`,
+                method: "PUT",
+                body
+            }),
+            invalidatesTags: ["Bookings", "Cars"]
         })
     })
 })
 
 
-export const { useGetCarsQuery, useCreateCarMutation, useGetHighestPricedCarQuery, useGetACarQuery, useDeleteCarMutation, useUpdateCarMutation } = carApi;
+export const {
+    useGetCarsQuery,
+    useCreateCarMutation,
+    useGetHighestPricedCarQuery,
+    useGetACarQuery,
+    useDeleteCarMutation,
+    useUpdateCarMutation,
+    useReturnCarMutation } = carApi;
