@@ -28,14 +28,16 @@ export interface IBookingRequest {
     paymentMethod: string;
 }
 
+type TStatus = 'pending' | 'approved' | 'cancelled' | 'completed';
+
 const boookingApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        getBookings: builder.query<IResponse<IBooking[]>, void>({
-            query: () => "/bookings",
+        getBookings: builder.query<IResponse<IBooking[]>, { status?: string }>({
+            query: ({ status }) => `/bookings${status ? `?status=${status}` : ''}`,
             providesTags: ["Bookings"]
         }),
-        getMyBookings: builder.query<IResponse<IBooking[]>, { status?: string }>({
-            query: ({ status }) => `/bookings/my-bookings${status && `?status=${status}`}`,
+        getMyBookings: builder.query<IResponse<IBooking[]>, { status?: TStatus }>({
+            query: ({ status }) => `/bookings/my-bookings${status ? `?status=${status}` : ''}`,
             providesTags: ["Bookings"]
         }),
         createABooking: builder.mutation<IResponse<IBooking>, Partial<IBookingRequest>>({
