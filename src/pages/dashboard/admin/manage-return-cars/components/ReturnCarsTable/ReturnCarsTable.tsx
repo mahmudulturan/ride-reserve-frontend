@@ -31,7 +31,9 @@ const ReturnCarsTable: FC = () => {
                         <TableBody>
                             {returnCars?.data.map((booking, index) => (
                                 <TableRow key={booking._id}>
-                                    <TableCell className="font-medium text-center">{index + 1}</TableCell>
+                                    <TableCell className="font-medium text-center">
+                                        {index + 1}
+                                    </TableCell>
                                     <TableCell>
                                         {booking.car.name}
                                         <p className="text-sm text-slate-500 dark:text-slate-300">{booking.car.description.slice(0, 40)}...</p>
@@ -48,7 +50,7 @@ const ReturnCarsTable: FC = () => {
                                     <TableCell className="text-center">45</TableCell>
                                     <TableCell className="text-center">{booking.totalCost}</TableCell>
                                     <TableCell className="text-center space-x-3">
-                                        <ReturnCarModal />
+                                        <ReturnCarModal status={booking.status} _id={booking._id} />
                                     </TableCell>
                                 </TableRow>
                             ))}
