@@ -34,8 +34,8 @@ const boookingApi = baseApi.injectEndpoints({
             query: () => "/bookings",
             providesTags: ["Bookings"]
         }),
-        getMyBookings: builder.query<IResponse<IBooking[]>, void>({
-            query: () => "/bookings/my-bookings",
+        getMyBookings: builder.query<IResponse<IBooking[]>, { status?: string }>({
+            query: ({ status }) => `/bookings/my-bookings${status && `?status=${status}`}`,
             providesTags: ["Bookings"]
         }),
         createABooking: builder.mutation<IResponse<IBooking>, Partial<IBookingRequest>>({

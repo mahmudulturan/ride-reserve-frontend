@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { useGetCarsQuery } from '@/redux/features/car/carApi';
 import { useCreateAPaymentMutation } from '@/redux/features/payment/paymentApi';
+import { useGetMyBookingsQuery } from '@/redux/features/booking/bookingApi';
 
 const PaymentsTable: FC = () => {
-    const { data: cars } = useGetCarsQuery({});
+    const { data: cars } = useGetMyBookingsQuery({ status: "completed" });
 
     const [createPayment, { isLoading }] = useCreateAPaymentMutation();
 
@@ -32,20 +32,20 @@ const PaymentsTable: FC = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {cars?.data?.cars?.map((car, index) => (
-                        <TableRow key={car._id}>
+                    {cars?.data?.map((booking, index) => (
+                        <TableRow key={booking._id}>
                             <TableCell className="font-medium">{index + 1}</TableCell>
                             <TableCell>
-                                {car.name}
-                                <p className="text-sm text-slate-500 dark:text-slate-300">{car.description.slice(0, 50)}...</p>
+                                {booking.car.name}
+                                <p className="text-sm text-slate-500 dark:text-slate-300">{booking.car.description.slice(0, 50)}...</p>
                             </TableCell>
-                            <TableCell>{car.color}</TableCell>
-                            <TableCell>{car.status}</TableCell>
-                            <TableCell>{car.isElectric ? 'Yes' : 'No'}</TableCell>
-                            <TableCell className="text-right">{car.pricePerHour}</TableCell>
+                            <TableCell>{booking.car.color}</TableCell>
+                            <TableCell>{booking.status}</TableCell>
+                            <TableCell>{booking.car.isElectric ? 'Yes' : 'No'}</TableCell>
+                            <TableCell className="text-right">{booking.car.pricePerHour}</TableCell>
                             <TableCell className="text-center space-x-3">
                                 <Button variant={"secondary"} isArrowIcon={false}>Edit</Button>
-                                <Button onClick={() => handlePayment(car._id)} disabled={isLoading} variant={"secondary"} isArrowIcon={false}>Pay</Button>
+                                <Button onClick={() => handlePayment(booking._id)} disabled={isLoading} variant={"secondary"} isArrowIcon={false}>Pay</Button>
                             </TableCell>
                         </TableRow>
                     ))}

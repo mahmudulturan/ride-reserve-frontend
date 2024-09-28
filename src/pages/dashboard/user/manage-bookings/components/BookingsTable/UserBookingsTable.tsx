@@ -6,7 +6,7 @@ import UpdateBookingModal from '../UpdateBookingModal/UpdateBookingModal';
 import { toast } from '@/components/ui/use-toast';
 
 const UserBookingsTable: FC = () => {
-    const { data: bookings } = useGetMyBookingsQuery();
+    const { data: bookings } = useGetMyBookingsQuery({});
 
     const [cancelBooking, { isLoading }] = useCancelBookingMutation();
 
