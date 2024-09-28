@@ -5,7 +5,7 @@ import ReturnCarModal from '../ReturnCarModal/ReturnCarModal';
 import Loader from '@/components/shared/Loader/Loader';
 
 const ReturnCarsTable: FC = () => {
-    const { data: returnCars, isLoading } = useGetBookingsQuery();
+    const { data: returnCars, isLoading } = useGetBookingsQuery({ status: 'approved,completed' });
 
     if (isLoading) {
         return <Loader />
