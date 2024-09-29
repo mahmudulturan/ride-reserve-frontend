@@ -18,7 +18,7 @@ const ReturnCarsTable: FC = () => {
             {
                 returnCars ?
                     <>
-                        <Table className='my-6 border dark:border-gray-600'>
+                        <Table id='data' className='my-6 border dark:border-gray-600'>
                             <TableHeader>
                                 <TableRow>
                                     <TableHead className="w-[100px] text-center">#</TableHead>

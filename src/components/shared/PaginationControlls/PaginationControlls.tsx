@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { goToSpecificSection } from '@/utils/goToSpecificSection';
 import { FC, useEffect, useState } from 'react';
 
 
@@ -27,6 +28,7 @@ const PaginationControlls: FC<IPaginationControllsProps> = ({ searchParams, item
             newParams.set("page", pageNumber);
             return newParams
         })
+        goToSpecificSection("data");
     }
 
     return (

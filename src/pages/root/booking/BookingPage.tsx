@@ -63,7 +63,7 @@ const BookingPage: FC = () => {
             </div>
 
             <div className='flex flex-col-reverse lg:flex-row gap-6 wrapper'>
-                <div className='my-20 w-full'>
+                <div id='data' className='my-20 w-full'>
                     {
                         cars?.data.cars && !isError ?
                             <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>

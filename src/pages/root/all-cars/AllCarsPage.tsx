@@ -48,7 +48,7 @@ const AllCarsPage: FC = () => {
                     <SearchFilterSidebar updateSearchParams={updateSearchParams} searchParams={searchParams} setSearchParams={setSearchParams} />
                 </div>
 
-                <div className='my-20 flex-1'>
+                <div className='my-20 flex-1' id='data'>
                     {
                         cars?.data.cars && !isError ?
                             <>
