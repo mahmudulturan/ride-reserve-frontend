@@ -37,9 +37,12 @@ const LatestBookingsTable: FC = () => {
                     <TableRow>
                         <TableHead className="w-[100px] text-center">#</TableHead>
                         <TableHead className='min-w-[340px]'>Car Name</TableHead>
-                        <TableHead className='text-center'>Start Time - End Time</TableHead>
+                        <TableHead className='text-center min-w-[190px]'>Start Time - End Time</TableHead>
                         <TableHead className="text-center">Date</TableHead>
-                        <TableHead className='text-center'>Total Cost</TableHead>
+                        <TableHead className="text-center min-w-[90px]">Payment Info</TableHead>
+                        <TableHead className="text-center">Driving</TableHead>
+                        <TableHead className="text-center">NID/Passport</TableHead>
+                        <TableHead className='text-center min-w-[100px]'>Total Cost</TableHead>
                         <TableHead className='text-center'>Status</TableHead>
                         <TableHead className="text-center min-w-[290px]">Actions</TableHead>
                     </TableRow>
@@ -50,10 +53,16 @@ const LatestBookingsTable: FC = () => {
                             <TableCell className="font-medium text-center">{index + 1}</TableCell>
                             <TableCell>
                                 {booking.car.name}
-                                <p className="text-sm text-slate-500 dark:text-slate-300">{booking.car.description.slice(0, 50)}...</p>
+                                <p className="text-sm text-slate-500 dark:text-slate-300">{booking.car.description.slice(0, 30)}...</p>
                             </TableCell>
                             <TableCell className='text-center'>{booking.startTime} - {booking.endTime ? booking.endTime : 'Running'}</TableCell>
-                            <TableCell className="text-right">{booking.date}</TableCell>
+                            <TableCell className="text-center">{booking.date}</TableCell>
+                            <TableCell className="">
+                                {booking.accountNo}
+                                <p className="text-sm text-slate-500 dark:text-slate-300">{booking.paymentMethod}</p>
+                            </TableCell>
+                            <TableCell className="text-center">{booking.drivingLicense}</TableCell>
+                            <TableCell className="text-center">{booking.nidOrPassport}</TableCell>
                             <TableCell className="text-center">{booking.totalCost}</TableCell>
                             <TableCell className="text-center">
                                 {booking.status === "pending" && "Pending"}

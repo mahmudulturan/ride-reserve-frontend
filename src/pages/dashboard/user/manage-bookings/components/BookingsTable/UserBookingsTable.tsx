@@ -53,7 +53,7 @@ const UserBookingsTable: FC = () => {
                             <TableCell className="font-medium text-center">{index + 1}</TableCell>
                             <TableCell>
                                 {booking.car.name}
-                                <p className="text-sm text-slate-500 dark:text-slate-300">{booking.car.description.slice(0, 50)}...</p>
+                                <p className="text-sm text-slate-500 dark:text-slate-300">{booking.car.description.slice(0, 30)}...</p>
                             </TableCell>
                             <TableCell className='text-center'>{booking.startTime} - {booking.endTime ? booking.endTime : 'Running'}</TableCell>
                             <TableCell className="text-center">{booking.date}</TableCell>
