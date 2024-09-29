@@ -3,10 +3,14 @@ import OverviewStats from './components/OverviewStats/OverviewStats';
 import OverviewChart from './components/OverviewChart/OverviewChart';
 import OverviewCalender from './components/OverviewCalender/OverviewCalender';
 import { useGetAdminDashboardStatsQuery } from '@/redux/features/dashboard/dashboardApi';
+import Loader from '@/components/shared/Loader/Loader';
 
 const OverviewPage: FC = () => {
-    const { data } = useGetAdminDashboardStatsQuery();
+    const { data, isLoading } = useGetAdminDashboardStatsQuery();
 
+    if (isLoading) {
+        return <Loader />
+    }
     return (
         <div className='dashboard-wrapper'>
             <div className='flex justify-between'>

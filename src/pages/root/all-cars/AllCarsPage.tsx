@@ -6,10 +6,11 @@ import { useGetCarsQuery } from '@/redux/features/car/carApi';
 import { useSearchParams } from 'react-router-dom';
 import PaginationControlls from '@/components/shared/PaginationControlls/PaginationControlls';
 import { Button } from '@/components/ui/button';
+import Loader from '@/components/shared/Loader/Loader';
 
 const AllCarsPage: FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const { data: cars, isError } = useGetCarsQuery({
+    const { data: cars, isError, isLoading } = useGetCarsQuery({
         page: searchParams.get("page") || "1",
         searchKey: searchParams.get("searchKey") || "",
         carType: searchParams.get("carType") || "",
@@ -33,7 +34,10 @@ const AllCarsPage: FC = () => {
     const handleResetSearchParams = () => {
         setSearchParams({});
     }
-    
+
+    if (isLoading) {
+        return <Loader />
+    }
     return (
         <div>
             <PageHeading subHeading='Rent Now'>
