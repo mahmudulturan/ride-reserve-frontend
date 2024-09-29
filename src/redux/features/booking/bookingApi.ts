@@ -33,12 +33,12 @@ type TStatus = 'pending' | 'approved' | 'cancelled' | 'completed';
 
 const boookingApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        getBookings: builder.query<IResponse<IBooking[]>, { status?: string }>({
-            query: ({ status }) => `/bookings${status ? `?status=${status}` : ''}`,
+        getBookings: builder.query<IResponse<{ bookings: IBooking[], bookingsCount: number }>, { status?: string, page?: number }>({
+            query: ({ status, page = 1 }) => `/bookings?page=${page}${status ? `&status=${status}` : ''}`,
             providesTags: ["Bookings"]
         }),
-        getMyBookings: builder.query<IResponse<IBooking[]>, { status?: TStatus }>({
-            query: ({ status }) => `/bookings/my-bookings${status ? `?status=${status}` : ''}`,
+        getMyBookings: builder.query<IResponse<{ bookings: IBooking[], bookingsCount: number }>, { status?: TStatus, page?: number }>({
+            query: ({ status, page = 1 }) => `/bookings/my-bookings?page=${page}${status ? `&status=${status}` : ''}`,
             providesTags: ["Bookings"]
         }),
         createABooking: builder.mutation<IResponse<IBooking>, Partial<IBookingRequest>>({
