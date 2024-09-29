@@ -6,21 +6,20 @@ interface IPaginationControllsProps {
     searchParams: URLSearchParams;
     setSearchParams: React.Dispatch<React.SetStateAction<URLSearchParams>>;
     updateSearchParams: (key: string, val: string) => void;
-    carsCount: number;
+    itemsCount: number;
 }
 
-const PaginationControlls: FC<IPaginationControllsProps> = ({ searchParams, updateSearchParams, carsCount }) => {
+const PaginationControlls: FC<IPaginationControllsProps> = ({ searchParams, updateSearchParams, itemsCount }) => {
     const [currentPage, setCurrentPage] = useState(Number(searchParams.get("page") || "1"));
-    const [totalPages, setTotalPages] = useState<number>(carsCount || 1);
-
+    const [totalPages, setTotalPages] = useState<number>(itemsCount || 1);
 
     useEffect(() => {
-        if (!carsCount) {
+        if (!itemsCount) {
             setTotalPages(1);
         } else {
-            setTotalPages(carsCount % 8 === 0 ? carsCount / 8 : Math.floor(carsCount / 8) + 2);
+            setTotalPages(itemsCount % 8 === 0 ? itemsCount / 8 : Math.floor(itemsCount / 8) + 1);
         }
-    }, [carsCount])
+    }, [itemsCount])
 
     const handlePageChange = (pageNumber: string) => {
         updateSearchParams("page", pageNumber);
