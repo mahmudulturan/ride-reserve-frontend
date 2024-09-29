@@ -6,6 +6,7 @@ import { useGetACarQuery, useGetCarsQuery } from '@/redux/features/car/carApi';
 import Loader from '@/components/shared/Loader/Loader';
 import { useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import PaginationControlls from '@/components/shared/PaginationControlls/PaginationControlls';
 
 const BookingPage: FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -14,7 +15,8 @@ const BookingPage: FC = () => {
     const { data: cars, isLoading, isError } = useGetCarsQuery({
         searchKey: searchParams.get("searchKey") || "",
         carType: searchParams.get("carType") || "",
-        status: "available"
+        status: "available",
+        page: searchParams.get("page") || "1",
     });
     const { data: selectedCar } = useGetACarQuery(carQuery || '66e7a3761db7b5cf1baa1199');
 
@@ -77,6 +79,7 @@ const BookingPage: FC = () => {
                                 <Button onClick={handleResetSearchParams} variant={"secondary"} isArrowIcon={false}>Reset Filters</Button>
                             </div>
                     }
+                    <PaginationControlls searchParams={searchParams} itemsCount={cars?.data.carsCount || 1} setSearchParams={setSearchParams} />
                 </div>
                 <div className='max-w-[356px] w-full'>
                     <BookingForm selectedCar={selectedCar?.data} />
