@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 
 const AllCarsPage: FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const { data: cars } = useGetCarsQuery({
+    const { data: cars, isError } = useGetCarsQuery({
         page: searchParams.get("page") || "1",
         searchKey: searchParams.get("searchKey") || "",
         carType: searchParams.get("carType") || "",
@@ -46,7 +46,7 @@ const AllCarsPage: FC = () => {
 
                 <div className='my-20 flex-1'>
                     {
-                        cars?.data.cars ?
+                        cars?.data.cars && !isError ?
                             <>
                                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
                                     {

@@ -5,12 +5,13 @@ import BookingCarCard from './components/BookingCarCard/BookingCarCard';
 import { useGetACarQuery, useGetCarsQuery } from '@/redux/features/car/carApi';
 import Loader from '@/components/shared/Loader/Loader';
 import { useSearchParams } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 
 const BookingPage: FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [carQuery, setCarQuery] = useState(searchParams.get("car"));
 
-    const { data: cars, isLoading } = useGetCarsQuery({
+    const { data: cars, isLoading, isError } = useGetCarsQuery({
         searchKey: searchParams.get("searchKey") || "",
         carType: searchParams.get("carType") || "",
         status: "available"
@@ -36,6 +37,11 @@ const BookingPage: FC = () => {
         updateSearchParams("car", id);
     }
 
+
+    const handleResetSearchParams = () => {
+        setSearchParams({});
+    }
+
     if (isLoading) {
         return <Loader />
     }
@@ -55,15 +61,22 @@ const BookingPage: FC = () => {
             </div>
 
             <div className='flex flex-col-reverse lg:flex-row gap-6 wrapper'>
-                <div className='my-20'>
-                    {/* <h3 className='text-center my-3'>Search Results :</h3> */}
-                    <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-                        {
-                            cars?.data?.cars?.map((car, index) => (
-                                <BookingCarCard car={car} setSelectedCar={handleUpdateCarParams} key={index} />
-                            ))
-                        }
-                    </div>
+                <div className='my-20 w-full'>
+                    {
+                        cars?.data.cars && !isError ?
+                            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+                                {
+                                    cars?.data?.cars?.map((car, index) => (
+                                        <BookingCarCard car={car} setSelectedCar={handleUpdateCarParams} key={index} />
+                                    ))
+                                }
+                            </div>
+                            :
+                            <div className='min-h-[40vh] flex flex-col items-center justify-center gap-2'>
+                                <h3 className='text-4xl font-bold'>No cars found</h3>
+                                <Button onClick={handleResetSearchParams} variant={"secondary"} isArrowIcon={false}>Reset Filters</Button>
+                            </div>
+                    }
                 </div>
                 <div className='max-w-[356px] w-full'>
                     <BookingForm selectedCar={selectedCar?.data} />
