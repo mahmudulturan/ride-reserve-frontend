@@ -30,6 +30,8 @@ const BookingForm: FC<{ selectedCar: ICar | undefined }> = ({ selectedCar }) => 
     const { register, handleSubmit, reset, formState: { errors }, } = useForm<Partial<IBookingInfo>>();
     const [bookingInfo, setBookingInfo] = useState<IBookingInfo | null>(null)
     const user = useAppSelector((state) => state.authSlice.user);
+
+    // handle form submit
     const onSubmit: SubmitHandler<Partial<IBookingInfo>> = (data) => {
         if (!paymentMethod) {
             return setPaymentMethodError(true);
@@ -126,7 +128,7 @@ const BookingForm: FC<{ selectedCar: ICar | undefined }> = ({ selectedCar }) => 
                                 </Label>
                                 <Input
                                     id="name"
-                                    value={user?.name}
+                                    value={user?.name || ""}
                                     readOnly
                                     placeholder='Your Name'
                                     className="w-full"
@@ -138,7 +140,7 @@ const BookingForm: FC<{ selectedCar: ICar | undefined }> = ({ selectedCar }) => 
                                 </Label>
                                 <Input
                                     id="email"
-                                    value={user?.email}
+                                    value={user?.email || ""}
                                     readOnly
                                     placeholder='Your Email'
                                     className="w-full"
