@@ -55,7 +55,7 @@ const AllCarsPage: FC = () => {
                                         ))
                                     }
                                 </div>
-                                <PaginationControlls itemsCount={cars?.data.carsCount || 1} updateSearchParams={updateSearchParams} searchParams={searchParams} setSearchParams={setSearchParams} />
+                                <PaginationControlls itemsCount={cars?.data.carsCount || 1} searchParams={searchParams} setSearchParams={setSearchParams} />
                             </>
                             :
                             <div className='min-h-[40vh] flex flex-col items-center justify-center gap-2'>
