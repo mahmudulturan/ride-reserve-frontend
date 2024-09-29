@@ -12,6 +12,7 @@ const BookingPage: FC = () => {
 
     const { data: cars, isLoading } = useGetCarsQuery({
         searchKey: searchParams.get("searchKey") || "",
+        carType: searchParams.get("carType") || "",
         status: "available"
     });
     const { data: selectedCar } = useGetACarQuery(carQuery || '66e7a3761db7b5cf1baa1199');
