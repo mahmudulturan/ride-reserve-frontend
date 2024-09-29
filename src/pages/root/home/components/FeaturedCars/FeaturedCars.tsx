@@ -61,7 +61,7 @@ const FeaturedCars: FC = () => {
                     pauseOnMouseEnter: true
 
                 }}
-                loop={true}
+                loop={Number(cars?.data?.cars?.length) > 3 ? true : false}
                 pagination={{
                     clickable: true,
                 }}
