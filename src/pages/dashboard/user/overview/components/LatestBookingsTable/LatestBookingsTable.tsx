@@ -48,7 +48,7 @@ const LatestBookingsTable: FC = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {bookings?.data.slice(0, 5).map((booking, index) => (
+                    {bookings?.data.bookings.slice(0, 5).map((booking, index) => (
                         <TableRow key={booking._id}>
                             <TableCell className="font-medium text-center">{index + 1}</TableCell>
                             <TableCell>
