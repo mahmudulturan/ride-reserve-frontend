@@ -19,7 +19,7 @@ const Navbar: FC = () => {
     const menuToggler = () => setIsMenuOpen(!isMenuOpen);
     return (
         <div className='sticky top-0 backdrop-blur-xl z-50 bg-white/60 dark:bg-black/60'>
-            <div className='wrapper py-6 flex items-center justify-between overflow-hidden'>
+            <div className='wrapper py-3 md:py-6 flex items-center justify-between overflow-hidden'>
                 <div>
                     <Logo />
                 </div>
