@@ -3,15 +3,16 @@ import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useCreateAPaymentMutation } from '@/redux/features/payment/paymentApi';
 import { useGetMyBookingsQuery } from '@/redux/features/booking/bookingApi';
+import { useAppSelector } from '@/redux/hook';
 
 const PaymentsTable: FC = () => {
     const { data: bookings } = useGetMyBookingsQuery({ status: "completed" });
 
     const [createPayment, { isLoading }] = useCreateAPaymentMutation();
+    const user = useAppSelector(state => state.authSlice.user);
 
-    const handlePayment = (carId: string) => {
-        console.log(carId);
-        const paymentInfo = { amount: 1000, currency: "USD", booking: "666da4ab80f3185f260128dc", user: "66d0543c3fe73077dbeffc21" };
+    const handlePayment = (bookingId: string, price: number) => {
+        const paymentInfo = { amount: price, currency: "USD", booking: bookingId, user: user?._id };
         createPayment(paymentInfo).unwrap().then((res) => {
             window.location.replace(res.data.url);
         });
@@ -26,10 +27,10 @@ const PaymentsTable: FC = () => {
                         <TableHead className='min-w-[240px]'>Car Name</TableHead>
                         <TableHead className='text-center min-w-[190px]'>Start Time - End Time</TableHead>
                         <TableHead className="text-center  min-w-[100px]">Date</TableHead>
-                        <TableHead className="text-center min-w-[120px]">Payment Info</TableHead>
                         <TableHead className="text-center">Driving</TableHead>
                         <TableHead className="text-center">NID/Passport</TableHead>
                         <TableHead className='text-center min-w-[100px]'>Total Cost</TableHead>
+                        <TableHead className="text-center min-w-[120px]">Payment Info</TableHead>
                         <TableHead className='text-center'>Status</TableHead>
                         <TableHead className="text-center min-w-[290px]">Actions</TableHead>
                     </TableRow>
@@ -44,23 +45,21 @@ const PaymentsTable: FC = () => {
                             </TableCell>
                             <TableCell className='text-center'>{booking.startTime} - {booking.endTime ? booking.endTime : 'Running'}</TableCell>
                             <TableCell className="text-center">{booking.date}</TableCell>
+                            <TableCell className="text-center">{booking.drivingLicense}</TableCell>
+                            <TableCell className="text-center">{booking.nidOrPassport}</TableCell>
+                            <TableCell className="text-center">{booking.totalCost}</TableCell>
                             <TableCell className="">
                                 {booking.accountNo}
                                 <p className="text-sm text-slate-500 dark:text-slate-300">{booking.paymentMethod}</p>
                             </TableCell>
-                            <TableCell className="text-center">{booking.drivingLicense}</TableCell>
-                            <TableCell className="text-center">{booking.nidOrPassport}</TableCell>
-                            <TableCell className="text-center">{booking.totalCost}</TableCell>
                             <TableCell className="text-center">
-                                {booking.status === "pending" && "Pending"}
-                                {booking.status === "cancelled" && "Cancelled"}
-                                {booking.status === "completed" && "Completed"}
-                                {booking.status === "approved" && "Approved"}
+                                {booking.paymentStatus === "unpaid" && "Unpaid"}
+                                {booking.paymentStatus === "paid" && "Paid"}
                             </TableCell>
                             <TableCell className="text-center space-x-3">
                                 <Button
-                                    onClick={() => handlePayment(booking.car._id)}
-                                    disabled={isLoading || booking.status !== "approved"}
+                                    onClick={() => handlePayment(booking._id, booking.totalCost)}
+                                    disabled={isLoading || booking.paymentStatus === "paid"}
                                     className="btn-primary btn-sm">
                                     Pay Now
                                 </Button>

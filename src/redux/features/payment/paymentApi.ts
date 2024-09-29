@@ -6,6 +6,7 @@ export interface IPayment {
     booking: string
     user: string
 }
+
 const paymentApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         createAPayment: builder.mutation<IResponse<{ url: string }>, Partial<IPayment>>({

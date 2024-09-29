@@ -15,6 +15,7 @@ export interface IBooking {
     drivingLicense: string;
     paymentMethod: string;
     accountNo: string;
+    paymentStatus: string;
 }
 
 export interface IBookingRequest {
