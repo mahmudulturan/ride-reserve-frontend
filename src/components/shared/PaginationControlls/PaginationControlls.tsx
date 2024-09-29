@@ -5,11 +5,10 @@ import { FC, useEffect, useState } from 'react';
 interface IPaginationControllsProps {
     searchParams: URLSearchParams;
     setSearchParams: React.Dispatch<React.SetStateAction<URLSearchParams>>;
-    updateSearchParams: (key: string, val: string) => void;
     itemsCount: number;
 }
 
-const PaginationControlls: FC<IPaginationControllsProps> = ({ searchParams, updateSearchParams, itemsCount }) => {
+const PaginationControlls: FC<IPaginationControllsProps> = ({ searchParams, itemsCount, setSearchParams }) => {
     const [currentPage, setCurrentPage] = useState(Number(searchParams.get("page") || "1"));
     const [totalPages, setTotalPages] = useState<number>(itemsCount || 1);
 
@@ -22,8 +21,12 @@ const PaginationControlls: FC<IPaginationControllsProps> = ({ searchParams, upda
     }, [itemsCount])
 
     const handlePageChange = (pageNumber: string) => {
-        updateSearchParams("page", pageNumber);
         setCurrentPage(Number(pageNumber));
+        setSearchParams(prevParams => {
+            const newParams = new URLSearchParams(prevParams);
+            newParams.set("page", pageNumber);
+            return newParams
+        })
     }
 
     return (
