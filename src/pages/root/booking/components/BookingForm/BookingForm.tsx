@@ -52,7 +52,7 @@ const BookingForm: FC<{ selectedCar: ICar | undefined }> = ({ selectedCar }) => 
     }
 
     return (
-        <div className='sticky top-[128px] -mt-[128px]  rounded-[20px]' >
+        <div id='booking-form' className='sticky top-[128px] lg:-mt-[128px]  rounded-[20px]' >
             <div className='rounded-[20px] rounded-b-none overflow-hidden bg-primaryColorLight dark:bg-primaryColor p-[30px]'>
                 {
                     selectedCar ?
@@ -69,7 +69,7 @@ const BookingForm: FC<{ selectedCar: ICar | undefined }> = ({ selectedCar }) => 
                 onSubmit={handleSubmit(onSubmit)}
                 className='rounded-[20px] rounded-t-none bg-gray-100 dark:bg-[#222222] p-[30px] space-y-8 overflow-y-auto thin-scrollbar flex justify-between flex-col'
             >
-                <div style={{ height: "calc(100vh - 450px)" }} className='overflow-y-auto thin-scrollbar'>
+                <div  className='overflow-y-auto thin-scrollbar lg:h-[calc(100vh-450px)]'>
                     {
                         selectedCar &&
                         <>

@@ -81,7 +81,7 @@ const BookingPage: FC = () => {
                     }
                     <PaginationControlls searchParams={searchParams} itemsCount={cars?.data.carsCount || 1} setSearchParams={setSearchParams} />
                 </div>
-                <div className='max-w-[356px] w-full'>
+                <div className='lg:max-w-[356px] w-full'>
                     <BookingForm selectedCar={selectedCar?.data} />
                 </div>
             </div>
