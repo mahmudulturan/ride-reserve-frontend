@@ -9,17 +9,30 @@ import { useSearchParams } from 'react-router-dom';
 const BookingPage: FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [carQuery, setCarQuery] = useState(searchParams.get("car"));
-    // console.log(carQuery);
-    const { data: cars, isLoading } = useGetCarsQuery({ status: "available" });
-    const { data: selectedCar } = useGetACarQuery(carQuery || '66e7a3761db7b5cf1baa1199');
-    // useEffect(() => {
 
-    // }, [carQuery])
-    console.log(selectedCar);
+    const { data: cars, isLoading } = useGetCarsQuery({
+        searchKey: searchParams.get("searchKey") || "",
+        status: "available"
+    });
+    const { data: selectedCar } = useGetACarQuery(carQuery || '66e7a3761db7b5cf1baa1199');
+
+
+    const updateSearchParams = (key: string, value: string) => {
+        setSearchParams(prevParams => {
+            const newParams = new URLSearchParams(prevParams);
+            if (value) {
+                newParams.set(key, value);
+            } else {
+                newParams.delete(key);
+            }
+            return newParams;
+        });
+    };
+
 
     const handleUpdateCarParams = (id: string) => {
         setCarQuery(id);
-        setSearchParams(new URLSearchParams({ car: id }));
+        updateSearchParams("car", id);
     }
 
     if (isLoading) {
@@ -34,7 +47,7 @@ const BookingPage: FC = () => {
                             Luxury Cars
                         </div>
                         <h5 className={"text-[42px] dark:text-white relative mb-[15px] leading-[1.25em] font-bold"}>Create Booking for <span className='text-primaryColor'>Your Car</span></h5>
-                        <SearchSectionBooking />
+                        <SearchSectionBooking setSearchParams={setSearchParams} />
                     </div>
                     <div className='w-[1px] h-10 bg-primaryColorLight dark:bg-primaryColor absolute -bottom-[19px] left-1/2'></div>
                 </div>
