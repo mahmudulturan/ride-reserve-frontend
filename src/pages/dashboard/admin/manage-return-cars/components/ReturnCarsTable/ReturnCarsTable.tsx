@@ -18,13 +18,14 @@ const ReturnCarsTable: FC = () => {
                         <TableHeader>
                             <TableRow>
                                 <TableHead className="w-[100px] text-center">#</TableHead>
-                                <TableHead className='min-w-[300px]'>Car Name</TableHead>
+                                <TableHead className='min-w-[240px]'>Car Name</TableHead>
                                 <TableHead>Customer Name</TableHead>
                                 <TableHead>Customer Email</TableHead>
                                 <TableHead className="text-center">Date</TableHead>
-                                <TableHead className='text-center'>Start Time</TableHead>
+                                <TableHead className='text-center'>Start Time - End Time</TableHead>
                                 <TableHead className="text-center">Remaining Hours</TableHead>
                                 <TableHead className='text-center'>Total Cost</TableHead>
+                                <TableHead className='text-center'>Status</TableHead>
                                 <TableHead className="text-center">Actions</TableHead>
                             </TableRow>
                         </TableHeader>
@@ -36,7 +37,7 @@ const ReturnCarsTable: FC = () => {
                                     </TableCell>
                                     <TableCell>
                                         {booking.car.name}
-                                        <p className="text-sm text-slate-500 dark:text-slate-300">{booking.car.description.slice(0, 40)}...</p>
+                                        <p className="text-sm text-slate-500 dark:text-slate-300">{booking.car.description.slice(0, 30)}...</p>
                                     </TableCell>
                                     <TableCell>
                                         {booking.user.name}
@@ -46,9 +47,12 @@ const ReturnCarsTable: FC = () => {
                                         {booking.user.email}
                                     </TableCell>
                                     <TableCell className="text-center">{booking.date}</TableCell>
-                                    <TableCell className='text-center'>{booking.startTime}</TableCell>
+                                    <TableCell className='text-center'>{booking.startTime} - {booking.endTime ? booking.endTime : 'Running'}</TableCell>
                                     <TableCell className="text-center">45</TableCell>
                                     <TableCell className="text-center">{booking.totalCost}</TableCell>
+                                    <TableCell className="text-center">
+                                        {booking.status === "pending" ? "Pending" : booking.status === "approved" ? "Approved" : booking.status === "cancelled" ? "Cancelled" : "Completed"}
+                                    </TableCell>
                                     <TableCell className="text-center space-x-3">
                                         <ReturnCarModal status={booking.status} _id={booking._id} />
                                     </TableCell>
