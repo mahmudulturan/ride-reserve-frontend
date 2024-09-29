@@ -60,13 +60,15 @@ const UsersTable: FC = () => {
         });
     }
 
+    if (isLoading) {
+        return <Loader />
+    }
+
     return (
-        <>
+        <div className='overflow-x-auto thin-scrollbar'>
             {
-                isLoading ?
-                    <Loader />
-                    :
-                    <div className='overflow-x-auto thin-scrollbar'>
+                users?.data ?
+                    <>
                         <Table className='my-6 border dark:border-gray-600'>
                             <TableHeader>
                                 <TableRow>
@@ -81,7 +83,7 @@ const UsersTable: FC = () => {
                             <TableBody>
                                 {users?.data?.users.map((user, index) => (
                                     <TableRow key={user._id}>
-                                        <TableCell className="font-medium text-center">{index + 1}</TableCell>
+                                        <TableCell className="font-medium text-center">{((Number(searchParams.get("page")) || 1) * 8 - 8) + (index + 1)}</TableCell>
                                         <TableCell>
                                             {user.name}
                                             <p className="text-sm text-slate-500 dark:text-slate-300">{user.address.slice(0, 50)}...</p>
@@ -133,9 +135,14 @@ const UsersTable: FC = () => {
                             </TableBody>
                         </Table>
                         <PaginationControlls searchParams={searchParams} setSearchParams={setSearchParams} itemsCount={users?.data?.usersCount || 1} />
+                    </>
+                    :
+                    <div className='min-h-[70vh] w-full flex justify-center items-center'>
+                        <h3 className='text-2xl md:text-4xl font-bold'>No users found!</h3>
                     </div>
+
             }
-        </>
+        </div >
     );
 };
 
