@@ -6,10 +6,11 @@ import UpdateBookingModal from '../UpdateBookingModal/UpdateBookingModal';
 import { toast } from '@/components/ui/use-toast';
 import { useSearchParams } from 'react-router-dom';
 import PaginationControlls from '@/components/shared/PaginationControlls/PaginationControlls';
+import Loader from '@/components/shared/Loader/Loader';
 
 const UserBookingsTable: FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const { data: bookings } = useGetMyBookingsQuery({ page: Number(searchParams.get('page')) || 1 });
+    const { data: bookings, isLoading: isDataLoading } = useGetMyBookingsQuery({ page: Number(searchParams.get('page')) || 1 });
 
     const [cancelBooking, { isLoading }] = useCancelBookingMutation();
 
@@ -33,6 +34,11 @@ const UserBookingsTable: FC = () => {
             })
         })
     }
+
+    if (isDataLoading) {
+        return <Loader />
+    }
+
     return (
         <div className='overflow-x-auto thin-scrollbar'>
             {
@@ -56,7 +62,7 @@ const UserBookingsTable: FC = () => {
                             <TableBody>
                                 {bookings?.data.bookings.map((booking, index) => (
                                     <TableRow key={booking._id}>
-                                        <TableCell className="font-medium text-center">{index + 1}</TableCell>
+                                        <TableCell className="font-medium text-center">{((Number(searchParams.get("page")) || 1) * 8 - 8) + (index + 1)}</TableCell>
                                         <TableCell>
                                             {booking.car.name}
                                             <p className="text-sm text-slate-500 dark:text-slate-300">{booking.car.description.slice(0, 30)}...</p>
