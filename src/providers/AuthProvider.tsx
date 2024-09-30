@@ -19,7 +19,7 @@ const AuthProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
         // if the success is true then authenticate the user
         if (userData?.success) {
             const { role }: any = jwtDecode(token || '');
-            if (role != userData.role) {
+            if (role !== userData.data.role) {
                 clearToken();
                 payloadObj.isAuthenticate = false;
                 payloadObj.user = null
