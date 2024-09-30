@@ -20,6 +20,7 @@ import PaymentErrorPage from "@/pages/dashboard/user/payments/PaymentErrorPage";
 import ManageReturnCarsPage from "@/pages/dashboard/admin/manage-return-cars/ManageReturnCarsPage";
 import BookingPage from "@/pages/root/booking/BookingPage";
 import ScrollToTop from "@/components/shared/ScrollToTop";
+import PrivateRoute from "./PrivateRoute";
 
 const MainRoutes = createBrowserRouter([
     {
@@ -44,7 +45,7 @@ const MainRoutes = createBrowserRouter([
             },
             {
                 path: "/booking",
-                element: <BookingPage />
+                element: <PrivateRoute role={["user", "admin"]}><BookingPage /></PrivateRoute>
             },
             {
                 path: "/about",
@@ -69,43 +70,43 @@ const MainRoutes = createBrowserRouter([
         children: [
             {
                 path: 'admin/overview',
-                element: <OverviewPage />
+                element: <PrivateRoute role={["admin"]}><OverviewPage /></PrivateRoute>
             },
             {
                 path: 'admin/manage-cars',
-                element: <ManageCarsPage />
+                element: <PrivateRoute role={["admin"]}><ManageCarsPage /></PrivateRoute>
             },
             {
                 path: 'admin/manage-return-cars',
-                element: <ManageReturnCarsPage />
+                element: <PrivateRoute role={["admin"]}><ManageReturnCarsPage /></PrivateRoute>
             },
             {
                 path: 'admin/manage-bookings',
-                element: <ManageBookingsPage />
+                element: <PrivateRoute role={["admin"]}><ManageBookingsPage /></PrivateRoute>
             },
             {
                 path: 'admin/manage-users',
-                element: <ManageUsersPage />
+                element: <PrivateRoute role={["admin"]}><ManageUsersPage /></PrivateRoute>
             },
             {
                 path: 'user/overview',
-                element: <UserOverviewPage />
+                element: <PrivateRoute role={["user"]}><UserOverviewPage /></PrivateRoute>
             },
             {
                 path: 'user/manage-bookings',
-                element: <UserManageBookingsPage />
+                element: <PrivateRoute role={["user"]}><UserManageBookingsPage /></PrivateRoute>
             },
             {
                 path: 'user/manage-payments',
-                element: <ManagePaymentsPage />
+                element: <PrivateRoute role={["user"]}><ManagePaymentsPage /></PrivateRoute>
             },
             {
                 path: 'user/payment-success/:id',
-                element: <PaymentSuccessPage />
+                element: <PrivateRoute role={["user"]}><PaymentSuccessPage /></PrivateRoute>
             },
             {
                 path: 'user/payment-failed/:id',
-                element: <PaymentErrorPage />
+                element: <PrivateRoute role={["user"]}><PaymentErrorPage /></PrivateRoute>
             },
         ]
     }
