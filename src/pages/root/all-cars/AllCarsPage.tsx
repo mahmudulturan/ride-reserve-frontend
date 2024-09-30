@@ -44,7 +44,7 @@ const AllCarsPage: FC = () => {
                 <span className='text-primaryColor'>Select</span> Luxury Car
             </PageHeading>
             <div className='flex flex-col lg:flex-row gap-6 wrapper'>
-                <div className='max-w-[356px] w-full'>
+                <div className='lg:max-w-[356px] w-full'>
                     <SearchFilterSidebar updateSearchParams={updateSearchParams} searchParams={searchParams} setSearchParams={setSearchParams} />
                 </div>
 

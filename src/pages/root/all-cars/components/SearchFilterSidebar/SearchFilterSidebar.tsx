@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from 'react';
 import { IoSearchOutline } from 'react-icons/io5';
 import PriceRangeSelector from './PriceRangeSelector/PriceRangeSelector';
 import { categories } from '@/constants';
+import { goToSpecificSection } from '@/utils/goToSpecificSection';
 
 interface ISearchFilterSidebarProps {
     searchParams: URLSearchParams;
@@ -28,18 +29,22 @@ const SearchFilterSidebar: FC<ISearchFilterSidebarProps> = ({ searchParams, upda
 
     const handleSearch = () => {
         updateSearchParams('searchKey', searchKey);
+        goToSpecificSection('data');
     };
 
     const handleFilterCategory = (category: string) => {
         updateSearchParams('carType', category);
+        goToSpecificSection('data');
     };
 
     const handleMinPrice = (val: string) => {
         updateSearchParams('minPrice', val);
+        goToSpecificSection('data');
     }
 
     const handleMaxPrice = (val: string) => {
         updateSearchParams('maxPrice', val);
+        goToSpecificSection('data');
     }
     return (
         <div className='sticky top-[139px] -mt-[139px]  rounded-[20px]' >
