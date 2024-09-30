@@ -21,6 +21,7 @@ import ManageReturnCarsPage from "@/pages/dashboard/admin/manage-return-cars/Man
 import BookingPage from "@/pages/root/booking/BookingPage";
 import ScrollToTop from "@/components/shared/ScrollToTop";
 import PrivateRoute from "./PrivateRoute";
+import ProfileSettingsPage from "@/pages/dashboard/admin/profile-settings/ProfileSettingsPage";
 
 const MainRoutes = createBrowserRouter([
     {
@@ -87,6 +88,10 @@ const MainRoutes = createBrowserRouter([
             {
                 path: 'admin/manage-users',
                 element: <PrivateRoute role={["admin"]}><ManageUsersPage /></PrivateRoute>
+            },
+            {
+                path: 'admin/profile-settings',
+                element: <PrivateRoute role={["admin"]}><ProfileSettingsPage /></PrivateRoute>
             },
             {
                 path: 'user/overview',

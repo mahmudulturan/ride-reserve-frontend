@@ -3,7 +3,7 @@ import { FC, useState, useEffect, useRef } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import sidebarStyles from './sidebar.module.css';
 import { MdDashboard, MdDirectionsCarFilled, MdHistory, MdPayments } from 'react-icons/md';
-import { IoCarSportSharp } from "react-icons/io5";
+import { IoCarSportSharp, IoSettingsSharp } from "react-icons/io5";
 import { FaUserGroup } from 'react-icons/fa6';
 import { Button } from '@/components/ui/button';
 import ModeToggle from '../Navbar/ModeToggle';
@@ -37,6 +37,11 @@ const navlinksForSidebarAdmin = [
         name: 'Manage Users',
         path: '/dashboard/admin/manage-users',
         icon: <FaUserGroup className='text-2xl' />
+    },
+    {
+        name: 'Profile Settings',
+        path: '/dashboard/admin/profile-settings',
+        icon: <IoSettingsSharp className='text-2xl' />
     },
 ]
 
