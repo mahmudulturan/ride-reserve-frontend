@@ -75,6 +75,12 @@ const Navbar: FC = () => {
                     }
                 </div>
             </div>
+            {
+                user?.isBlocked &&
+                <div className='text-center py-1 bg-red-500'>
+                    User is blocked! You can't perform any action on this account.
+                </div>
+            }
         </div>
     );
 };
